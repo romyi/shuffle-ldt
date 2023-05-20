@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@templates/*": ["src/templates/*"]
+      "@templates/*": ["src/templates/*"],
+      "@features/*": ["src/features/*"]
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

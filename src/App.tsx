@@ -4,6 +4,9 @@ import { AppHeader, CoreCarousel } from "@components/shell";
 function App() {
   return (
     <AppShell header={<AppHeader />}>
+      {import.meta.env.MODE}
+      <br />
+      {import.meta.env.VITE_ORIGIN}
       <Container size={"lg"}>
         <Stack>
           <CoreCarousel />
