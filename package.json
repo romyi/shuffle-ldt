@@ -15,6 +15,7 @@
     "@mantine/core": "^6.0.11",
     "@mantine/hooks": "^6.0.11",
     "@tabler/icons-react": "^2.19.0",
+    "dotenv": "^16.0.3",
     "embla-carousel-react": "^7.0.0",
     "framer-motion": "^10.12.12",
     "pdfmake": "^0.2.7",
@@ -22,6 +23,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.2",
     "@types/node": "^20.2.1",
     "@types/pdfmake": "^0.2.2",
     "@types/react": "^18.0.28",
