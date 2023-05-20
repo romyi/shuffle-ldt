@@ -1,5 +1,5 @@
-import * as pdfMake from "pdfmake/build/pdfmake";
-import "pdfmake/build/vfs_fonts";
+import { createPdf } from "pdfmake/build/pdfmake";
+// import "pdfmake/build/vfs_fonts";
 
 // export const fonts = {
 //   MCW: {
@@ -16,4 +16,4 @@ import "pdfmake/build/vfs_fonts";
 //   },
 // };
 
-export default pdfMake;
+export default createPdf;
