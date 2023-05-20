@@ -1,43 +1,21 @@
-import {
-  AppShell,
-  Box,
-  Button,
-  Container,
-  Group,
-  Header,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
-import Moscow from "/moscow.svg";
+import { Alert, AppShell, Container, Text } from "@mantine/core";
+import { AppHeader } from "@components/shell";
+import { IconNotification } from "@tabler/icons-react";
 
 function App() {
   return (
-    <AppShell
-      padding={"md"}
-      header={
-        <Header withBorder={false} height={60}>
-          <Container sx={{ height: "100%" }}>
-            <Stack justify={"center"} sx={{ height: "100%" }}>
-              <Group position="left" spacing={"lg"}>
-                <img alt="moscow" src={Moscow} />
-                <Text weight={800}>
-                  Департамент инвестиционной политики Москвы
-                </Text>
-              </Group>
-            </Stack>
-          </Container>
-        </Header>
-      }
-    >
+    <AppShell header={<AppHeader />}>
       <Container>
-        <Box>
-          <Title>Заголовок</Title>
-          <Text>Текст</Text>
-          <Button variant={"outline"} size={"sm"}>
-            Применить
-          </Button>
-        </Box>
+        <Alert
+          color={"cyan"}
+          title="Добро пожаловать"
+          icon={<IconNotification />}
+        >
+          <Text>
+            Очень скоро здесь появятся сервисы для организации промышленного
+            производства в Москве
+          </Text>
+        </Alert>
       </Container>
     </AppShell>
   );
