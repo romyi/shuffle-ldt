@@ -1,7 +1,7 @@
 import { Alert, rem, Text } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import { useMantineTheme } from "@mantine/core";
-import pdfMake, { fonts } from "@features/generate-report/utils/pdfMake";
+import pdfMake from "@features/generate-report/utils/pdfMake";
 
 export const CoreCarousel = () => {
   const theme = useMantineTheme();
@@ -63,19 +63,11 @@ export const CoreCarousel = () => {
           variant="outline"
           title="Выгрузка отчета на PDF"
           onClick={() => {
-            console.log("create");
             pdfMake
-              .createPdf(
-                {
-                  header: "Заголовок",
-                  content: [{ text: "Контент", fontSize: 40 }],
-                  defaultStyle: {
-                    font: "MCW",
-                  },
-                },
-                undefined,
-                fonts
-              )
+              .createPdf({
+                header: "Заголовок",
+                content: [{ text: "Контент", fontSize: 40 }],
+              })
               .open();
           }}
         >
