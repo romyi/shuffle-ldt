@@ -1,15 +1,8 @@
-import * as pdfMake from "pdfmake/build/pdfmake";
-import "pdfmake/build/vfs_fonts";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const definition = {
-  header: "Заголовок",
-  content: [{ text: "Контент", fontSize: 40 }],
-  defaultStyle: {
-    font: "MCW",
-  },
-};
-
-const custom_fonts = {
+export const fonts = {
   MCW: {
     normal: `${import.meta.env.VITE_ORIGIN}/mcw_bold.woff`,
   },
@@ -24,5 +17,4 @@ const custom_fonts = {
   },
 };
 
-export const create_sample = () =>
-  pdfMake.createPdf(definition, { custom: {} }, custom_fonts).open();
+export default pdfMake;
