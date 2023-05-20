@@ -1,18 +1,18 @@
-import { Center, Container, Grid, Header, Text } from "@mantine/core";
+import { Container, Grid, Header, Text, Center } from "@mantine/core";
 import Moscow from "/moscow.svg";
 
 export const AppHeader = () => {
   return (
     <Header withBorder={false} height={100}>
-      <Container>
-        <Grid p={"md"} m={0}>
-          <Grid.Col span={2} xs={2} sm={1}>
-            <Center sx={{ height: "100%" }}>
+      <Container size={"lg"}>
+        <Grid p={"sm"} m={0} align="stretch">
+          <Grid.Col xs={2} sm={1}>
+            <Center mih="100%">
               <img alt="moscow" src={Moscow} />
             </Center>
           </Grid.Col>
-          <Grid.Col span={10} xs={10} sm={6}>
-            <Text>
+          <Grid.Col xs={8} sm={3} md={2}>
+            <Text size={11}>
               Департамент инвестиционной и промышленной политики города Москвы
             </Text>
           </Grid.Col>

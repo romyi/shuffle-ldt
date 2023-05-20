@@ -42,6 +42,17 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       theme={{
         fontFamily: "MCW",
         primaryColor: "pink",
+        breakpoints: {
+          xs: "320",
+          sm: "800",
+        },
+        components: {
+          Text: {
+            defaultProps: {
+              color: "dark",
+            },
+          },
+        },
         headings: {
           sizes: {
             h1: { fontWeight: 800 },
