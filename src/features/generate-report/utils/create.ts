@@ -1,7 +1,5 @@
 import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
-
-(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+import "pdfmake/build/vfs_fonts";
 
 const definition = {
   header: "Заголовок",

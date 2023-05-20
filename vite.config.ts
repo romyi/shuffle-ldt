@@ -8,6 +8,9 @@ import replace from "@rollup/plugin-replace";
 export default defineConfig({
   build: {
     rollupOptions: {
+      moduleContext: {
+        "./node_modules/pdfmake/build/vfs_fonts.js": "window",
+      },
       plugins: [
         process.env.NODE_ENV === "production" &&
           replace({
