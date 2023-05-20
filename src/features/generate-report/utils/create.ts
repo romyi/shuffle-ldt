@@ -25,4 +25,4 @@ const custom_fonts = {
 };
 
 export const create_sample = () =>
-  pdfMake.createPdf(definition, undefined, custom_fonts).open();
+  pdfMake.createPdf(definition, { custom: {} }, custom_fonts).open();
