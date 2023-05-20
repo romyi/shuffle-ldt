@@ -1,7 +1,8 @@
 import { Alert, rem, Text } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import { useMantineTheme } from "@mantine/core";
-import createPdf from "@features/generate-report/utils/pdfMake";
+import { generate } from "@pdfme/generator";
+import { template, inputs, font } from "@features/generate-report";
 
 export const CoreCarousel = () => {
   const theme = useMantineTheme();
@@ -39,7 +40,7 @@ export const CoreCarousel = () => {
           </Text>
         </Alert>
       </Carousel.Slide>
-      <Carousel.Slide p={"8px"} size="70%">
+      <Carousel.Slide p={"8px"} size="60%">
         <Alert
           mih="100%"
           maw={"320px"}
@@ -62,12 +63,12 @@ export const CoreCarousel = () => {
           sx={() => ({ borderWidth: "0.5px", cursor: "pointer" })}
           variant="outline"
           title="Выгрузка отчета на PDF"
-          onClick={() => {
-            createPdf({
-              header: "Заголовок",
-              content: [{ text: "Контент", fontSize: 40 }],
-            }).open();
-          }}
+          onClick={() =>
+            generate({ template, inputs, options: { font } }).then((pdf) => {
+              const blob = new Blob([pdf.buffer], { type: "application/pdf" });
+              window.open(URL.createObjectURL(blob));
+            })
+          }
         >
           <Text>
             После того как будет произведет расчет по вашему предприятию, вы

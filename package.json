@@ -14,11 +14,11 @@
     "@mantine/carousel": "^6.0.11",
     "@mantine/core": "^6.0.11",
     "@mantine/hooks": "^6.0.11",
+    "@pdfme/generator": "^1.1.10",
     "@tabler/icons-react": "^2.19.0",
     "dotenv": "^16.0.3",
     "embla-carousel-react": "^7.0.0",
     "framer-motion": "^10.12.12",
-    "pdfmake": "^0.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

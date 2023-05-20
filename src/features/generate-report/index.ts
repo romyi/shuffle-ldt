@@ -1,1 +1,1 @@
-export * from "./utils/pdfMake";
+export * from "./utils/generate";
