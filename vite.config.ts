@@ -9,11 +9,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       plugins: [
-        replace({
-          "process.env": JSON.stringify(
-            dotenv.config({ path: ".env.production" }).parsed
-          ),
-        }),
+        process.env.NODE_ENV === "production" &&
+          replace({
+            "process.env": JSON.stringify(
+              dotenv.config({ path: ".env.production" }).parsed
+            ),
+          }),
       ],
     },
   },

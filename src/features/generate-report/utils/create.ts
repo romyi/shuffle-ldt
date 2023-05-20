@@ -1,5 +1,7 @@
-import { createPdf } from "pdfmake/build/pdfmake";
-// import pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const definition = {
   header: "Заголовок",
@@ -25,4 +27,4 @@ const custom_fonts = {
 };
 
 export const create_sample = () =>
-  createPdf(definition, undefined, custom_fonts).open();
+  pdfMake.createPdf(definition, undefined, custom_fonts).open();
