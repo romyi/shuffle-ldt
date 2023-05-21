@@ -1,19 +1,20 @@
-import { AppShell, Container, Stack } from "@mantine/core";
-import { AppHeader, CoreCarousel } from "@components/shell";
+import { AppShell } from "@mantine/core";
+import {
+  MobileDrawer,
+  MobileFooter,
+  MobileHeader,
+  MobileNavigation,
+} from "@components/shell";
+import { Outlet } from "react-router-dom";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <AppShell header={<AppHeader />}>
-      {import.meta.env.MODE}
-      <br />
-      {import.meta.env.VITE_ORIGIN}
-      <Container size={"lg"}>
-        <Stack>
-          <CoreCarousel />
-        </Stack>
-      </Container>
+    <AppShell padding={0} header={<MobileHeader />} footer={<MobileFooter />}>
+      <Outlet />
+      <MobileDrawer />
+      <MobileNavigation />
     </AppShell>
   );
-}
+};
 
 export default App;

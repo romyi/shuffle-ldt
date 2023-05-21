@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Global, MantineProvider } from "@mantine/core";
-import App from "./App";
+import { RecoilRoot } from "recoil";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -40,6 +42,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     />
     <MantineProvider
       theme={{
+        focusRing: "never",
         fontFamily: "MCW",
         primaryColor: "pink",
         breakpoints: {
@@ -64,7 +67,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       }}
       withNormalizeCSS
     >
-      <App />
+      <RecoilRoot>
+        <RouterProvider router={router} />
+      </RecoilRoot>
     </MantineProvider>
   </React.StrictMode>
 );

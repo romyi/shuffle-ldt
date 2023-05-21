@@ -26,6 +26,7 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "./src/components"),
       "@templates": path.resolve(__dirname, "./src/templates"),
       "@features": path.resolve(__dirname, "./src/features"),
+      "@states": path.resolve(__dirname, "./src/states")
     },
   },
 });
