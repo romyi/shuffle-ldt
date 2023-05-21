@@ -1,35 +1,58 @@
-import { Card, Container, rem, Stack, Text, Title } from "@mantine/core";
+import {
+  Card,
+  Container,
+  Stack,
+  Text,
+  Title,
+  useMantineTheme,
+  rem,
+} from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
-import { useMantineTheme } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { external_config } from "../../../routes";
+import { useState, useEffect } from "react";
 
 export const CoreCarousel = () => {
   const theme = useMantineTheme();
+  const [activeSlide, setActiveSlide] = useState(1);
   const navigate = useNavigate();
+  const changeRoute = (slide: number) => {
+    if (external_config[slide]) {
+      setActiveSlide(slide + 1);
+      navigate(`/${external_config[slide].path}`);
+    }
+  };
+
   return (
     <Container>
       <Carousel
-        onSlideChange={(i) => (i === 1 ? navigate("/profile") : {})}
+        initialSlide={Number(sessionStorage.getItem("slide")) - 1 || 0}
+        onSlideChange={changeRoute}
         mt={"sm"}
         slideSize="max-content"
         slideGap={"md"}
-        align="start"
+        // align="start"
         withIndicators={true}
         withControls={false}
         height="fit-content"
         breakpoints={[{ maxWidth: "sm", slideSize: "100px" }]}
         styles={{
           indicators: {
-            bottom: "-30px",
-            justifyContent: "flex-start",
+            bottom: "-50px",
+            justifyContent: "center",
             paddingLeft: "10px",
+          },
+          container: {
+            [`& > div:not(:nth-of-type(${activeSlide}))`]: {
+              opacity: "0.6",
+            },
           },
           indicator: {
             backgroundColor: theme.colors.dark[4],
-            width: rem(10),
+            width: rem(5),
             // transition: "width 0.3s ease-out",
             "&[data-active]": {
-              width: rem(20),
+              width: rem(8),
             },
           },
         }}
@@ -52,7 +75,7 @@ export const CoreCarousel = () => {
           <Card p="0px">
             <Title order={4}>Профиль</Title>
             <Text size={"xs"} color="dimmed">
-              Добро пожаловать
+              Настройки
             </Text>
           </Card>
         </Carousel.Slide>

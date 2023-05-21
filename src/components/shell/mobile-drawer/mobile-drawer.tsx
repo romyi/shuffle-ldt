@@ -12,6 +12,9 @@ import { drawer_state } from "../../../states";
 import { IconApps, IconPlant } from "@tabler/icons-react";
 
 const useStyles = createStyles(() => ({
+  root: {
+    alignItems: "center",
+  },
   inner: {
     padding: "10px",
   },
@@ -26,7 +29,11 @@ export const MobileDrawer = () => {
   const { classes } = useStyles();
   return (
     <Drawer
-      classNames={{ inner: classes.inner, content: classes.content }}
+      classNames={{
+        inner: classes.inner,
+        content: classes.content,
+        root: classes.root,
+      }}
       padding={"md"}
       overlayProps={{ opacity: 0.05 }}
       size={"sm"}

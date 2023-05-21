@@ -1,9 +1,14 @@
-import { Container, Title } from "@mantine/core";
+import { Container, Switch } from "@mantine/core";
 
 export const Profile = () => {
   return (
     <Container size={"xl"}>
-      <Title>Profile</Title>
+      <Switch
+        styles={{ body: { alignItems: "center" } }}
+        size={"md"}
+        label="Подсказки"
+        description="Помогаем освоиться в интерфейсе"
+      />
     </Container>
   );
 };
