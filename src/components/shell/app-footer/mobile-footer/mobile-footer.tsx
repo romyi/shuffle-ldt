@@ -1,14 +1,8 @@
 import { Container, createStyles, Footer, Group, Text } from "@mantine/core";
-import { useMemo } from "react";
 import { useRecoilState } from "recoil";
 import { nav_drawer_state } from "@states/ui/navigation";
-import {
-  IconCalculator,
-  IconListDetails,
-  IconMathSymbols,
-  IconX,
-} from "@tabler/icons-react";
-import { m, motion } from "framer-motion";
+import { IconListDetails, IconMathSymbols } from "@tabler/icons-react";
+import { motion } from "framer-motion";
 
 const useFooterStyles = createStyles({
   root: {

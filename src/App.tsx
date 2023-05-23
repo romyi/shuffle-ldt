@@ -1,4 +1,4 @@
-import { useDeferredValue, useEffect } from "react";
+import { useEffect } from "react";
 import { AppShell } from "@mantine/core";
 import {
   MobileFooter,
