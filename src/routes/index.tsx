@@ -2,17 +2,20 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home } from "./home";
 import { Profile } from "./profile";
 import App from "../App";
+import { Reports } from "./reports";
 
 export const external_config = [
   {
     path: "",
     element: <Home />,
-    slideIndex: 0,
   },
   {
     path: "profile",
     element: <Profile />,
-    slideIndex: 1,
+  },
+  {
+    path: "reports",
+    element: <Reports />,
   },
 ];
 

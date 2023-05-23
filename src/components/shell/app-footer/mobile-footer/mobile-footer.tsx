@@ -1,28 +1,53 @@
-import { Flex, Footer } from "@mantine/core";
-import { IconApps, IconHome2, IconMenu2 } from "@tabler/icons-react";
+import { Container, createStyles, Footer, Group, Text } from "@mantine/core";
+import { useMemo } from "react";
 import { useRecoilState } from "recoil";
-import { drawer_state } from "@states/index";
 import { nav_drawer_state } from "@states/ui/navigation";
+import {
+  IconCalculator,
+  IconListDetails,
+  IconMathSymbols,
+  IconX,
+} from "@tabler/icons-react";
+import { m, motion } from "framer-motion";
+
+const useFooterStyles = createStyles({
+  root: {
+    zIndex: 100,
+  },
+});
 
 export const MobileFooter = () => {
-  const [drawer, setDrawer] = useRecoilState(drawer_state);
-  const [, setND] = useRecoilState(nav_drawer_state);
-  const onIconClick = () => {
-    setDrawer({ isOpen: !drawer.isOpen });
-  };
-  const onMenuClick = () => {
-    setND({ isOpen: true });
-  };
+  const [menu, setMenu] = useRecoilState(nav_drawer_state);
+  const { classes } = useFooterStyles();
   return (
-    <Footer height={80} p="sm" withBorder={false}>
-      <Flex justify={"center"} gap={"70px"}>
-        <Flex p="md" justify={"center"} gap={"70px"}>
-          <IconHome2 size={32} />
-          <IconMenu2 size={32} onClick={onMenuClick} />
-          <IconApps size={32} onClick={onIconClick} />
-        </Flex>
-        {/* <img alt="moscow" src={Moscow} /> */}
-      </Flex>
+    <Footer
+      classNames={{ root: classes.root }}
+      withBorder={false}
+      height={70}
+      pt="md"
+    >
+      <Container pr="xl" pl="xl" size={"xs"}>
+        <Group noWrap spacing="63px" position="apart" align="flex-end">
+          <Text color="#DCE0E7" size="xs">
+            Гость
+          </Text>
+          <Group spacing={"xl"} pr={"xl"}>
+            <IconMathSymbols
+              strokeWidth={1.5}
+              size={36}
+              color={menu.isOpen ? "#DCE0E7" : "black"}
+            />
+            <motion.div animate={{ y: menu.isOpen ? -240 : 0 }}>
+              <IconListDetails
+                onClick={() => setMenu({ isOpen: true })}
+                strokeWidth={1.5}
+                size={36}
+                color={menu.isOpen ? "#DCE0E7" : "black"}
+              />
+            </motion.div>
+          </Group>
+        </Group>
+      </Container>
     </Footer>
   );
 };

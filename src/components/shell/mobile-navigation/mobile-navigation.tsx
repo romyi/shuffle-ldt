@@ -2,27 +2,32 @@ import {
   Drawer,
   createStyles,
   Group,
-  Title,
   Container,
   Text,
   Stack,
-  Paper,
+  useMantineTheme,
+  Badge,
 } from "@mantine/core";
 import { nav_drawer_state } from "@states/ui/navigation";
 import {
-  Icon24Hours,
-  Icon3dCubeSphere,
-  IconAffiliateFilled,
+  IconFileCheck,
+  IconListSearch,
+  IconTablePlus,
 } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 const useStyles = createStyles(() => ({
+  overlay: {
+    transitionDuration: "0.5s !important",
+  },
   inner: {
     padding: "0px",
   },
   content: {
-    borderRadius: "12px 12px 0px 0px",
-    height: "fit-content",
+    borderRadius: "24px 24px 0px 0px",
+    boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.25)",
+    transitionDuration: "0.5s !important",
   },
   body: {
     padding: "0px",
@@ -33,73 +38,53 @@ export const MobileNavigation = () => {
   const [nDrawer, setNDrawer] = useRecoilState(nav_drawer_state);
   const onDrawerClose = () => setNDrawer({ isOpen: false });
   const { classes } = useStyles();
+  const theme = useMantineTheme();
+  const navigate = useNavigate();
   return (
     <Drawer
-      overlayProps={{ opacity: 0.05 }}
+      zIndex={80}
+      overlayProps={{ opacity: 0 }}
       classNames={{
         inner: classes.inner,
         content: classes.content,
         body: classes.body,
+        overlay: classes.overlay,
       }}
       closeOnClickOutside
       withCloseButton={false}
       position="bottom"
       size={"xs"}
+      lockScroll={false}
       opened={nDrawer.isOpen}
       onClose={onDrawerClose}
     >
-      <Container size={"sm"} p="md">
-        <Stack mih={"320px"} spacing={"sm"} h={"100%"}>
-          <Group noWrap>
-            <Paper
-              w={"max-content"}
-              shadow="xs"
-              p="sm"
-              radius={"md"}
-              withBorder={false}
-            >
-              <Icon24Hours />
-            </Paper>
-            <Stack spacing={0}>
-              <Text>Главная</Text>
+      <Container mt="md" size={"sm"} p="md" h="400px">
+        <Stack>
+          <>
+            <Text fw={600}>Расчёты</Text>
+            <Stack pl="xl" spacing={"sm"}>
+              <Group>
+                <IconTablePlus color={theme.colors.cyan[8]} size={24} />
+                <Text color={theme.colors.cyan[8]}>Новый</Text>
+              </Group>
+              <Group onClick={() => navigate("/reports")}>
+                <IconListSearch size={26} />
+                <Text>Список</Text>
+                <Badge>1</Badge>
+              </Group>
             </Stack>
-          </Group>
-          <Group noWrap>
-            <Paper
-              w={"min-content"}
-              shadow="xs"
-              p="sm"
-              radius={"md"}
-              withBorder={false}
-              // sx={(theme) => ({ backgroundColor: theme.colors.red[5] })}
-            >
-              <Icon3dCubeSphere />
-            </Paper>
-            <Stack spacing={0}>
-              <Text>Профиль</Text>
-              <Text size={"xs"} color="dimmed">
-                Личные данные
-              </Text>
+          </>
+          <>
+            <Text mt="md" fw={600}>
+              Управление
+            </Text>
+            <Stack pl="xl" spacing={"sm"}>
+              <Group onClick={() => navigate("/")}>
+                <IconFileCheck size={28} />
+                <Text>Завершить регистрацию</Text>
+              </Group>
             </Stack>
-          </Group>
-          <Group noWrap>
-            <Paper
-              w={"min-content"}
-              shadow="xs"
-              p="sm"
-              radius={"md"}
-              withBorder={false}
-              // sx={(theme) => ({ backgroundColor: theme.colors.dark[1] })}
-            >
-              <IconAffiliateFilled />
-            </Paper>
-            <Stack spacing={0}>
-              <Text>PDF report</Text>
-              <Text size={"xs"} color="dimmed">
-                tap to test
-              </Text>
-            </Stack>
-          </Group>
+          </>
         </Stack>
       </Container>
     </Drawer>

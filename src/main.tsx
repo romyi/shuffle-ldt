@@ -49,11 +49,42 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           xs: "320",
           sm: "800",
         },
+        colors: {
+          "brand-red": [
+            "#ffe2e2",
+            "#ffb2b2",
+            "#ff8080",
+            "#fe4e4e",
+            "#fe1f1c",
+            "#e50a03",
+            "#b20301",
+            "#800000",
+            "#4e0000",
+            "#1f0000",
+          ],
+          "brand-hay": [
+            "#fef6e7",
+            "#fae5bc",
+            "#f7d48e",
+            "#f5c360",
+            "#f2b236",
+            "#d89823",
+            "#a8771b",
+            "#785513",
+            "#48320a",
+            "#181101",
+          ],
+        },
         components: {
           Text: {
             defaultProps: {
               color: "dark",
             },
+          },
+          Switch: {
+            defaultProps: (theme) => ({
+              color: theme.colors["brand-hay"][0],
+            }),
           },
         },
         headings: {
