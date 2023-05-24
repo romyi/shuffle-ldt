@@ -58,12 +58,12 @@ export const MobileNavigation = () => {
       opened={nDrawer.isOpen}
       onClose={onDrawerClose}
     >
-      <Container mt="md" size={"sm"} p="md" h="400px">
+      <Container mt="md" size={"xs"} p="md" h="400px">
         <Stack>
           <>
             <Text fw={600}>Расчёты</Text>
             <Stack pl="xl" spacing={"sm"}>
-              <Group>
+              <Group onClick={() => navigate("/calculation")}>
                 <IconTablePlus color={theme.colors.cyan[8]} size={24} />
                 <Text color={theme.colors.cyan[8]}>Новый</Text>
               </Group>

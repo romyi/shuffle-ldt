@@ -1,15 +1,31 @@
-import { Header, Image, Text, Container, Group, Stack } from "@mantine/core";
+import {
+  Header,
+  Image,
+  Text,
+  Container,
+  Group,
+  Stack,
+  createStyles,
+} from "@mantine/core";
 import Moscow from "/moscow.svg";
 
+const headerClasses = createStyles({
+  root: {
+    background:
+      "linear-gradient(180deg, #FFFFFF 40.16%, rgba(255, 255, 255, 0) 666.39%);",
+  },
+});
+
 export const MobileHeader = () => {
+  const { classes } = headerClasses();
   return (
-    <Header withBorder={false} height={120}>
+    <Header classNames={{ root: classes.root }} withBorder={false} height={120}>
       <Container pr="xl" pl="xl" size={"xs"}>
         <Group mt={"lg"} noWrap spacing="63px" position="apart" align="top">
-          <Stack spacing={"4px"}>
-            <Group spacing={10}>
+          <Stack spacing={"0px"}>
+            <Group spacing={6}>
               <Text fw={800} size={"lg"}>
-                Индустрия
+                Моё
               </Text>
               <Text
                 fw={800}
@@ -17,7 +33,7 @@ export const MobileHeader = () => {
                 gradient={{ from: "grape", to: "red", deg: 20 }}
                 size="lg"
               >
-                Москва
+                Предприятие
               </Text>
             </Group>
             <Text color={"#DCE0E7"} maw="240px" size="xs">

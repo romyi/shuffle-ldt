@@ -1,10 +1,45 @@
-import { Container, Stack } from "@mantine/core";
+import { Container, Group, Image, Text, Stack, Title } from "@mantine/core";
 import React from "react";
+import { motion } from "framer-motion";
+import { EmailFetch } from "@features/post-email-for-authen";
+
+/**
+ * Homepage is for:
+ *
+ * authorization of a registered user
+ * product info
+ * user experience picking (diving right to the calculator or info check)
+ * email fetching from an unauthenticated user
+ */
 
 export const Home: React.FC = () => {
   return (
-    <Container mt="xl" mih={"100%"}>
-      <Stack align={"center"} justify="center" h={400}></Stack>
+    <Container mt="xl" size={"xs"} p="lg" mih={"max-content"}>
+      <Stack mih="420px">
+        <Title order={3} mb="xl" maw="240px">
+          Наша задача - определить стоимость вашего запуска
+        </Title>
+
+        <EmailFetch />
+        <Group noWrap mt="xl">
+          <Image
+            sx={{ alignSelf: "center" }}
+            miw={120}
+            maw={200}
+            src="/warehouse-min.jpg"
+            alt="warehouse"
+          />
+          <motion.div
+            animate={{ x: [160, 0] }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          >
+            <Text size="sm">
+              Подтвердите почту и приступайте к работе. Если хотите узнать
+              подробности, то Вы сможете найти их ниже.
+            </Text>
+          </motion.div>
+        </Group>
+      </Stack>
     </Container>
   );
 };

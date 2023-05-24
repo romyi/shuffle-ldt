@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@deck.gl/core": "^8.9.16",
+    "@deck.gl/layers": "^8.9.16",
+    "@deck.gl/react": "^8.9.16",
     "@emotion/react": "^11.11.0",
     "@mantine/carousel": "^6.0.11",
     "@mantine/core": "^6.0.11",

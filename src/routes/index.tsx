@@ -3,6 +3,7 @@ import { Home } from "./home";
 import { Profile } from "./profile";
 import App from "../App";
 import { Reports } from "./reports";
+import { Calculation } from "./calculation";
 
 export const external_config = [
   {
@@ -16,6 +17,10 @@ export const external_config = [
   {
     path: "reports",
     element: <Reports />,
+  },
+  {
+    path: "calculation",
+    element: <Calculation />,
   },
 ];
 

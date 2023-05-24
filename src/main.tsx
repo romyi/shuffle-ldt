@@ -49,6 +49,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           xs: "320",
           sm: "800",
         },
+        fontSizes: {
+          md: "16px",
+        },
         colors: {
           "brand-red": [
             "#ffe2e2",
