@@ -11,7 +11,7 @@ export const external_config = [
     element: <Home />,
   },
   {
-    path: "profile",
+    path: "user",
     element: <Profile />,
   },
   {

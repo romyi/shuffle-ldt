@@ -1,20 +1,16 @@
 import {
   Drawer,
   createStyles,
-  Group,
   Container,
   Text,
   Stack,
   useMantineTheme,
   Badge,
+  NavLink,
 } from "@mantine/core";
 import { nav_drawer_state } from "@states/ui/navigation";
-import {
-  IconFileCheck,
-  IconListSearch,
-  IconTablePlus,
-} from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
+import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
+import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 const useStyles = createStyles(() => ({
@@ -60,31 +56,44 @@ export const MobileNavigation = () => {
     >
       <Container mt="md" size={"xs"} p="md" h="400px">
         <Stack>
-          <>
-            <Text fw={600}>Расчёты</Text>
-            <Stack pl="xl" spacing={"sm"}>
-              <Group onClick={() => navigate("/calculation/geo")}>
-                <IconTablePlus color={theme.colors.cyan[8]} size={24} />
-                <Text color={theme.colors.cyan[8]}>Новый</Text>
-              </Group>
-              <Group onClick={() => navigate("/reports")}>
-                <IconListSearch size={26} />
-                <Text>Список</Text>
-                <Badge>1</Badge>
-              </Group>
-            </Stack>
-          </>
-          <>
-            <Text mt="md" fw={600}>
-              Управление
-            </Text>
-            <Stack pl="xl" spacing={"sm"}>
-              <Group onClick={() => navigate("/")}>
-                <IconFileCheck size={28} />
-                <Text>Завершить регистрацию</Text>
-              </Group>
-            </Stack>
-          </>
+          <Stack spacing={"xs"}>
+            <Text size={"sm"}>Расчёты</Text>
+            <NavLink
+              variant={"subtle"}
+              color="dark"
+              active={Boolean(useMatch("/calculation"))}
+              label="Новый"
+              description="Сделать новый расчет"
+              icon={<IconTablePlus size={24} />}
+              onClick={() => navigate("/calculation")}
+            />
+            <NavLink
+              ml="-12px"
+              maw={320}
+              variant={"subtle"}
+              color="dark"
+              active={Boolean(useMatch("/reports"))}
+              label="Список"
+              description="Просмотреть список расчётов"
+              icon={
+                <Badge color={"cyan"} size={"lg"}>
+                  1
+                </Badge>
+              }
+              // rightSection={<Badge>1</Badge>}
+              onClick={() => navigate("/reports")}
+            />
+          </Stack>
+          <Text size={"sm"}>Управление</Text>
+          <NavLink
+            color={"dark"}
+            variant={"subtle"}
+            active={Boolean(useMatch("/user"))}
+            label="Завершить регистрацию"
+            description="Заполнить ИНН, ФИО и получить подробный отчет"
+            icon={<IconFileCheck size={24} />}
+            onClick={() => navigate("/")}
+          />
         </Stack>
       </Container>
     </Drawer>

@@ -39,11 +39,6 @@ const App: React.FC = () => {
               color: "dark",
             },
           },
-          Switch: {
-            defaultProps: (theme) => ({
-              color: theme.colors["brand-hay"][0],
-            }),
-          },
           Container: {
             defaultProps: {
               sx: {
