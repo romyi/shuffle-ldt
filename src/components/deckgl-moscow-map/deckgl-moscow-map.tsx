@@ -12,7 +12,7 @@ export const MoscowMap: React.FC<{
   const xs = useMediaQuery("(max-height: 700px)");
   const s = useMediaQuery("(max-height: 860px)");
   const md = useMediaQuery("(max-height: 1080px)");
-
+  const offset = useMediaQuery("(min-width: 1080px)");
   const zoom = useMemo(() => {
     if (xs) return 7.6;
     if (s) return 8;
@@ -21,11 +21,8 @@ export const MoscowMap: React.FC<{
   }, [xs, s, md]);
   return (
     <DeckGL
-      width={"100%"}
-      height={"100%"}
-      controller={true}
       viewState={{
-        longitude: 37.418,
+        longitude: offset ? 36.51 : 37.418,
         latitude: 55.7012,
         zoom: zoom,
       }}

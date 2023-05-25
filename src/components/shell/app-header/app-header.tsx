@@ -4,7 +4,7 @@ import Moscow from "/moscow.svg";
 export const AppHeader = () => {
   return (
     <Header withBorder={false} height={100}>
-      <Container size={"lg"}>
+      <Container>
         <Grid p={"sm"} m={0} align="stretch">
           <Grid.Col xs={2} sm={1}>
             <Center mih="100%">

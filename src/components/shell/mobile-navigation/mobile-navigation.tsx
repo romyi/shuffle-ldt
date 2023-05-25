@@ -63,7 +63,7 @@ export const MobileNavigation = () => {
           <>
             <Text fw={600}>Расчёты</Text>
             <Stack pl="xl" spacing={"sm"}>
-              <Group onClick={() => navigate("/calculation")}>
+              <Group onClick={() => navigate("/calculation/geo")}>
                 <IconTablePlus color={theme.colors.cyan[8]} size={24} />
                 <Text color={theme.colors.cyan[8]}>Новый</Text>
               </Group>

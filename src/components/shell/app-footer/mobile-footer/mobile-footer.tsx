@@ -20,7 +20,7 @@ export const MobileFooter = () => {
       height={70}
       pt="md"
     >
-      <Container pr="xl" pl="xl" size={"xs"}>
+      <Container pr="xl" pl="xl">
         <Group noWrap spacing="63px" position="apart" align="flex-end">
           <Text color="#DCE0E7" size="xs">
             Гость
