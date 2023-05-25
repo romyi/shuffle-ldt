@@ -1,5 +1,5 @@
 import { Container, Group, Image, Text, Stack, Title } from "@mantine/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { EmailFetch } from "@features/post-email-for-authen";
 

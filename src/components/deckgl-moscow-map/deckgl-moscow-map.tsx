@@ -23,7 +23,7 @@ export const MoscowMap: React.FC<{
     <DeckGL
       viewState={{
         longitude: offset ? 36.51 : 37.418,
-        latitude: 55.7012,
+        latitude: 55.6012,
         zoom: zoom,
       }}
       layers={[

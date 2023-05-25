@@ -8,16 +8,17 @@ import {
 } from "@components/shell";
 import { Outlet, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { nav_drawer_state } from "@states/ui/navigation";
+import { ui } from "@states/ui_state";
 import { useMediaQuery } from "@mantine/hooks";
+import { MobileCalculationTracker } from "./containers";
 
 const App: React.FC = () => {
   const location = useLocation();
   const smallScreen = useMediaQuery("(max-width: 1080px");
-  const [, setNavigation] = useRecoilState(nav_drawer_state);
+  const [, setuistate] = useRecoilState(ui);
   useEffect(() => {
-    setNavigation({ isOpen: false });
-  }, [location, setNavigation]);
+    setuistate({ navigation_drawer: false, calculation_drawer: false });
+  }, [location, setuistate]);
 
   return (
     <MantineProvider
@@ -68,6 +69,7 @@ const App: React.FC = () => {
       >
         <Outlet />
         <MobileNavigation />
+        <MobileCalculationTracker />
       </AppShell>
     </MantineProvider>
   );

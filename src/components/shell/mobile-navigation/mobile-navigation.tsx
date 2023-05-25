@@ -7,7 +7,7 @@ import {
   Badge,
   NavLink,
 } from "@mantine/core";
-import { nav_drawer_state } from "@states/ui/navigation";
+import { ui } from "@states/ui_state";
 import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -30,8 +30,9 @@ const useStyles = createStyles(() => ({
 }));
 
 export const MobileNavigation = () => {
-  const [nDrawer, setNDrawer] = useRecoilState(nav_drawer_state);
-  const onDrawerClose = () => setNDrawer({ isOpen: false });
+  const [uistate, setuistate] = useRecoilState(ui);
+  const onDrawerClose = () =>
+    setuistate({ ...uistate, navigation_drawer: false });
   const { classes } = useStyles();
   const navigate = useNavigate();
   return (
@@ -49,7 +50,7 @@ export const MobileNavigation = () => {
       position="bottom"
       size={"xs"}
       lockScroll={false}
-      opened={nDrawer.isOpen}
+      opened={uistate.navigation_drawer}
       onClose={onDrawerClose}
     >
       <Container mt="md" size={"xs"} p="md" h="400px">
