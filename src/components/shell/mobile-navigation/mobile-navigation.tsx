@@ -4,7 +4,6 @@ import {
   Container,
   Text,
   Stack,
-  useMantineTheme,
   Badge,
   NavLink,
 } from "@mantine/core";
@@ -34,7 +33,6 @@ export const MobileNavigation = () => {
   const [nDrawer, setNDrawer] = useRecoilState(nav_drawer_state);
   const onDrawerClose = () => setNDrawer({ isOpen: false });
   const { classes } = useStyles();
-  const theme = useMantineTheme();
   const navigate = useNavigate();
   return (
     <Drawer
