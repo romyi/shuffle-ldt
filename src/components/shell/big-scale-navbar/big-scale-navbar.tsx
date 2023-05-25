@@ -32,7 +32,7 @@ export const BigNavbar = () => {
           active={Boolean(useMatch("/calculation"))}
           label="Новый"
           description="Сделать новый расчет"
-          icon={<IconTablePlus size={24} />}
+          icon={<IconTablePlus strokeWidth={1.5} size={28} />}
           onClick={() => navigate("/calculation")}
         />
         <NavLink
@@ -41,7 +41,7 @@ export const BigNavbar = () => {
           active={Boolean(useMatch("/reports"))}
           label="Список"
           description="Просмотреть список расчётов"
-          icon={<IconListSearch size={24} />}
+          icon={<IconListSearch strokeWidth={1.5} size={28} />}
           rightSection={<Badge>1</Badge>}
           onClick={() => navigate("/reports")}
         />
@@ -55,7 +55,7 @@ export const BigNavbar = () => {
           active={Boolean(useMatch("/user"))}
           label="Завершить регистрацию"
           description="Заполнить ИНН, ФИО и получить подробный отчет"
-          icon={<IconFileCheck size={24} />}
+          icon={<IconFileCheck strokeWidth={1.5} size={28} />}
           onClick={() => navigate("/")}
         />
       </Stack>
