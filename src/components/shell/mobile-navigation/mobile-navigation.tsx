@@ -31,8 +31,7 @@ const useStyles = createStyles(() => ({
 
 export const MobileNavigation = () => {
   const [uistate, setuistate] = useRecoilState(ui);
-  const onDrawerClose = () =>
-    setuistate({ ...uistate, navigation_drawer: false });
+  const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const { classes } = useStyles();
   const navigate = useNavigate();
   return (
@@ -50,7 +49,7 @@ export const MobileNavigation = () => {
       position="bottom"
       size={"xs"}
       lockScroll={false}
-      opened={uistate.navigation_drawer}
+      opened={uistate.drawer === "navigation"}
       onClose={onDrawerClose}
     >
       <Container mt="md" size={"xs"} p="md" h="400px">
@@ -64,7 +63,9 @@ export const MobileNavigation = () => {
               label="Новый"
               description="Сделать новый расчет"
               icon={<IconTablePlus size={24} />}
-              onClick={() => navigate("/calculation")}
+              onClick={() => {
+                navigate("/calculation");
+              }}
             />
             <NavLink
               ml="-12px"
@@ -80,7 +81,10 @@ export const MobileNavigation = () => {
                 </Badge>
               }
               // rightSection={<Badge>1</Badge>}
-              onClick={() => navigate("/reports")}
+              onClick={() => {
+                // setuistate({ ...uistate, drawer: null });
+                navigate("/reports");
+              }}
             />
           </Stack>
           <Text size={"sm"}>Управление</Text>
@@ -91,7 +95,10 @@ export const MobileNavigation = () => {
             label="Завершить регистрацию"
             description="Заполнить ИНН, ФИО и получить подробный отчет"
             icon={<IconFileCheck size={24} />}
-            onClick={() => navigate("/")}
+            onClick={() => {
+              // setuistate({ ...uistate, drawer: null });
+              navigate("/");
+            }}
           />
         </Stack>
       </Container>

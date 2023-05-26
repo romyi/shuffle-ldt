@@ -16,9 +16,9 @@ const App: React.FC = () => {
   const location = useLocation();
   const smallScreen = useMediaQuery("(max-width: 1080px");
   const [, setuistate] = useRecoilState(ui);
-  useEffect(() => {
-    setuistate({ navigation_drawer: false, calculation_drawer: false });
-  }, [location, setuistate]);
+  // useEffect(() => {
+  //   setuistate({ navigation_drawer: false, calculation_drawer: false });
+  // }, [location, setuistate]);
 
   return (
     <MantineProvider

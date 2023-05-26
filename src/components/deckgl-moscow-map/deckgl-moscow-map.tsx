@@ -4,11 +4,10 @@ import districts from "../../assets/districts_geo.json";
 import { text_titles } from "./constants";
 import { useMediaQuery } from "@mantine/hooks";
 import { useMemo } from "react";
+import { useOngoingCalculation } from "@features/persist-user-calculation";
 
-export const MoscowMap: React.FC<{
-  onClickCallback: (info: any) => void;
-  regionTitle: string;
-}> = ({ onClickCallback, regionTitle }) => {
+export const MoscowMap = () => {
+  const { calculation, update } = useOngoingCalculation();
   const xs = useMediaQuery("(max-height: 700px)");
   const s = useMediaQuery("(max-height: 860px)");
   const md = useMediaQuery("(max-height: 1080px)");
@@ -32,20 +31,21 @@ export const MoscowMap: React.FC<{
           data: districts,
           filled: true,
           updateTriggers: {
-            getFillColor: { regionTitle },
+            getFillColor: { calculation },
           },
           transitions: {
             getFillColor: { duration: 300 },
           },
           getFillColor: (f: { properties: any }) => {
-            return f.properties.ABBREV_AO === regionTitle
+            return f.properties.ABBREV_AO === calculation?.district
               ? [214, 51, 108, 225] // pink
               : // ?  [59, 201, 219, 225] // cyan
                 [26, 27, 30, 220];
           },
           pickable: true,
           onClick: (info) => {
-            onClickCallback(info);
+            update({ district_display_alias: info.object.properties.NAME_AO });
+            update({ district: info.object.properties.ABBREV_AO });
           },
         }),
         new TextLayer({

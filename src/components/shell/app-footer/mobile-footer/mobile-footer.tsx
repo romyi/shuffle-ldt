@@ -32,23 +32,22 @@ export const MobileFooter = () => {
               onClick={() => navigate("/calculation")}
               strokeWidth={1.5}
               size={36}
-              color={uistate.calculation_drawer ? "#DCE0E7" : "black"}
+              color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
             />
 
-            <motion.div animate={{ y: uistate.navigation_drawer ? -240 : 0 }}>
-              <IconListDetails
-                onClick={() =>
-                  setuistate({
-                    ...uistate,
-                    calculation_drawer: false,
-                    navigation_drawer: true,
-                  })
-                }
-                strokeWidth={1.5}
-                size={36}
-                color={uistate.navigation_drawer ? "#DCE0E7" : "black"}
-              />
-            </motion.div>
+            {/* <motion.div animate={{ y: uistate.navigation_drawer ? -240 : 0 }}> */}
+            <IconListDetails
+              onClick={() =>
+                setuistate({
+                  ...uistate,
+                  drawer: "navigation",
+                })
+              }
+              strokeWidth={1.5}
+              size={36}
+              color={uistate.drawer === "navigation" ? "#D6336C" : "black"}
+            />
+            {/* </motion.div> */}
           </Group>
         </Group>
       </Container>

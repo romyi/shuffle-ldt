@@ -29,15 +29,15 @@ export const Home: React.FC = () => {
             src="/warehouse-min.jpg"
             alt="warehouse"
           />
-          <motion.div
+          {/* <motion.div
             animate={{ x: [160, 0] }}
             transition={{ duration: 1, ease: "easeInOut" }}
-          >
-            <Text size="sm" maw={320}>
-              Подтвердите почту и приступайте к работе. Если хотите узнать
-              подробности, то Вы сможете найти их ниже.
-            </Text>
-          </motion.div>
+          > */}
+          <Text size="sm" maw={320}>
+            Подтвердите почту и приступайте к работе. Если хотите узнать
+            подробности, то Вы сможете найти их ниже.
+          </Text>
+          {/* </motion.div> */}
         </Group>
       </Stack>
     </Container>
