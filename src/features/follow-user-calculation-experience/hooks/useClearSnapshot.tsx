@@ -9,8 +9,13 @@ export const useClearSnapshot = () => {
         district: null,
         district_display_alias: null,
         branch: null,
-        personnel_count: null,
-        area_km: null,
+        personnel: null,
+        squareLand: null,
+        squareFacilities: null,
+        isEnterpreneur: null,
+        equipmentUnits: null,
+        isLandRental: null,
+        isFacilitiesRental: null,
       },
     });
 };

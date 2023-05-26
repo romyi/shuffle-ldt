@@ -1,7 +1,5 @@
 import { Container, Group, Image, Text, Stack, Title } from "@mantine/core";
-import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { ui } from "@states/ui_state";
+import React from "react";
 
 /**
  * Homepage is for:
@@ -13,10 +11,6 @@ import { ui } from "@states/ui_state";
  */
 
 export const Home: React.FC = () => {
-  const [uistate, setuistate] = useRecoilState(ui);
-  useEffect(() => {
-    setuistate({ ...uistate, drawer: null });
-  }, []);
   return (
     <Container mt="xl" p="lg" mih={"max-content"}>
       <Stack mih="420px">

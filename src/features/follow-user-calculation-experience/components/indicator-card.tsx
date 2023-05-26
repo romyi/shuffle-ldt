@@ -3,7 +3,8 @@ import { Calculation } from "@tyles/calculation";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useMatch, useNavigate } from "react-router-dom";
-import { useReveal } from "../hooks";
+import { useCalculationMatch } from "../hooks";
+import { useEffect } from "react";
 
 type IndicatorCardProps = {
   url: string;
@@ -21,9 +22,10 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
   placeholder,
 }) => {
   const matched = useMatch(url);
-  const show = useReveal(showOn);
-  const renderChild = useReveal(contentOn);
+  const show = useCalculationMatch(showOn);
+  const renderChild = useCalculationMatch(contentOn);
   const navigate = useNavigate();
+
   if (show) {
     return (
       <AnimatePresence>
@@ -49,5 +51,7 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
         </motion.div>
       </AnimatePresence>
     );
-  } else return null;
+  } else {
+    return null;
+  }
 };

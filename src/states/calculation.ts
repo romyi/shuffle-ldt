@@ -1,5 +1,6 @@
 import { Calculation } from "@tyles/calculation";
-import { atom } from "recoil";
+import { atom, useRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const isStorageSnapshot = (): Partial<Calculation> => {
   const checked = localStorage.getItem("snapshot");
@@ -9,12 +10,26 @@ export const calculation_state = atom<{ snapshot: Calculation }>({
   key: "calculation-input-snapshot",
   default: {
     snapshot: {
-      district: "",
-      district_display_alias: "",
-      personnel_count: null,
-      area_km: null,
+      district: null,
+      district_display_alias: null,
       branch: null,
+      personnel: null,
+      squareLand: null,
+      squareFacilities: null,
+      isEnterpreneur: null,
+      equipmentUnits: null,
+      isLandRental: null,
+      isFacilitiesRental: null,
       ...isStorageSnapshot(),
     },
   },
 });
+
+export const useRestoreSnapshot = () => {
+  const [calculation, setcalculation] = useRecoilState(calculation_state);
+  useEffect(() => {
+    setcalculation({
+      snapshot: { ...calculation.snapshot, ...isStorageSnapshot() },
+    });
+  }, []);
+};

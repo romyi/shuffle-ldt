@@ -4,26 +4,18 @@ import { useMediaQuery } from "@mantine/hooks";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ui } from "@states/ui_state";
 import { calculation_state } from "@states/calculation";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { useRestoreStep } from "@features/follow-user-calculation-experience/hooks/useRestoreStep";
 
 export const Calculation = () => {
   const wideScreen = useMediaQuery("(min-width: 1080px)");
   const [uistate, setuistate] = useRecoilState(ui);
   const calculation = useRecoilValue(calculation_state);
-  const navigate = useNavigate();
   useEffect(() => {
     if (uistate.drawer !== "navigation")
       setuistate({ ...uistate, drawer: "calculation" });
   }, [uistate.drawer]);
-  useEffect(() => {
-    if (!calculation.snapshot.district_display_alias) {
-      navigate("");
-    } else if (!calculation.snapshot.branch) {
-      navigate("/calculation/facilities");
-    } else if (!calculation.snapshot.personnel_count) {
-      navigate("/calculation/third");
-    }
-  }, []);
+  useRestoreStep();
   return (
     <>
       {wideScreen && (

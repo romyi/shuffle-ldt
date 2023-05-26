@@ -9,21 +9,27 @@ import {
 import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
-import { calculation_state } from "@states/calculation";
+import { calculation_state, useRestoreSnapshot } from "@states/calculation";
 import { CalculationTracker } from "@features/follow-user-calculation-experience";
 
 const App: React.FC = () => {
   const smallScreen = useMediaQuery("(max-width: 1080px");
 
+  useRestoreSnapshot();
+
   const state = useRecoilValue(calculation_state);
   useEffect(() => {
-    window.addEventListener("beforeunload", () =>
-      localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
-    );
+    window.addEventListener("beforeunload", () => {
+      const { snapshot } = state;
+      const serial = JSON.stringify(snapshot);
+      localStorage.setItem("snapshot", serial);
+    });
     return () => {
-      window.removeEventListener("beforeunload", () =>
-        localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
-      );
+      window.removeEventListener("beforeunload", () => {
+        const { snapshot } = state;
+        const serial = JSON.stringify(snapshot);
+        localStorage.setItem("snapshot", serial);
+      });
     };
   }, [state.snapshot]);
   return (

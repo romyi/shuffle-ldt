@@ -31,7 +31,7 @@ export const CalculationTracker = () => {
       <Container mt="md" size={"xs"} p="0px" pr="xs" pl="xs" h="120px">
         <Group noWrap mt="md" position="left" miw="100vw">
           <IndicatorCard
-            url="/calculation/facilities"
+            url="/calculation/stat"
             showOn={["district"]}
             contentOn={["branch"]}
             placeholder="Добавить сведения о площадке"

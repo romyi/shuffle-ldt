@@ -8,6 +8,18 @@ import { FacilitiesInfo } from "./facilities-info";
 import { MoscowMap } from "@components/deckgl-moscow-map";
 import { AreaInfo } from "./personnel";
 
+const calculation_config = [
+  { path: "", element: <MoscowMap /> },
+  {
+    path: "stat",
+    element: <FacilitiesInfo />,
+  },
+  {
+    path: "legal",
+    element: <AreaInfo />,
+  },
+];
+
 export const external_config = [
   {
     path: "",
@@ -24,20 +36,7 @@ export const external_config = [
   {
     path: "calculation",
     element: <Calculation />,
-    children: [
-      {
-        path: "",
-        element: <MoscowMap />,
-      },
-      {
-        path: "facilities",
-        element: <FacilitiesInfo />,
-      },
-      {
-        path: "third",
-        element: <AreaInfo />,
-      },
-    ],
+    children: calculation_config,
   },
 ];
 

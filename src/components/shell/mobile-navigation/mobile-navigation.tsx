@@ -34,7 +34,7 @@ export const MobileNavigation = () => {
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const { classes } = useStyles();
   const navigate = useNavigate();
-  const clear = useClearSnapshot();
+  const clearShapshot = useClearSnapshot();
   return (
     <Drawer
       zIndex={80}
@@ -65,7 +65,7 @@ export const MobileNavigation = () => {
               description="Сделать новый расчет"
               icon={<IconTablePlus size={24} />}
               onClick={() => {
-                clear();
+                clearShapshot();
                 setuistate({ ...uistate, drawer: null });
                 navigate("/calculation");
               }}
@@ -79,7 +79,7 @@ export const MobileNavigation = () => {
               description="Просмотреть список расчётов"
               icon={<IconFileCheck size={24} />}
               onClick={() => {
-                // setuistate({ ...uistate, drawer: null });
+                setuistate({ ...uistate, drawer: null });
                 navigate("/reports");
               }}
             />
@@ -93,7 +93,7 @@ export const MobileNavigation = () => {
             description="Заполнить ИНН, ФИО и получить подробный отчет"
             icon={<IconFileCheck size={24} />}
             onClick={() => {
-              // setuistate({ ...uistate, drawer: null });
+              setuistate({ ...uistate, drawer: null });
               navigate("/");
             }}
           />

@@ -3,7 +3,7 @@ import { Calculation } from "@tyles/calculation";
 import { useRecoilValue } from "recoil";
 import { useMemo } from "react";
 
-export const useReveal = (
+export const useCalculationMatch = (
   attributes: Array<Partial<keyof Calculation>> | null
 ) => {
   const calculation = useRecoilValue(calculation_state);
