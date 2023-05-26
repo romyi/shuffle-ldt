@@ -4,6 +4,9 @@ import { Profile } from "./profile";
 import App from "../App";
 import { Reports } from "./reports";
 import { Calculation } from "./calculation";
+import { FacilitiesInfo } from "./facilities-info";
+import { MoscowMap } from "@components/deckgl-moscow-map";
+import { Personnel } from "./personnel";
 
 export const external_config = [
   {
@@ -21,6 +24,20 @@ export const external_config = [
   {
     path: "calculation",
     element: <Calculation />,
+    children: [
+      {
+        path: "",
+        element: <MoscowMap />,
+      },
+      {
+        path: "facilities",
+        element: <FacilitiesInfo />,
+      },
+      {
+        path: "third",
+        element: <Personnel />,
+      },
+    ],
   },
 ];
 

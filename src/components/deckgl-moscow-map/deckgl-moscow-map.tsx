@@ -4,12 +4,13 @@ import districts from "../../assets/districts_geo.json";
 import { text_titles } from "./constants";
 import { useMediaQuery } from "@mantine/hooks";
 import { useMemo } from "react";
-import { useOngoingCalculation } from "@features/persist-user-calculation";
+import { useRecoilState } from "recoil";
+import { calculation_state } from "@states/calculation";
 
 export const MoscowMap = () => {
-  const { calculation, update } = useOngoingCalculation();
+  const [calculation, setcalculation] = useRecoilState(calculation_state);
   const xs = useMediaQuery("(max-height: 700px)");
-  const s = useMediaQuery("(max-height: 860px)");
+  const s = useMediaQuery("(max-height: 915px)");
   const md = useMediaQuery("(max-height: 1080px)");
   const offset = useMediaQuery("(min-width: 1080px)");
   const zoom = useMemo(() => {
@@ -22,7 +23,7 @@ export const MoscowMap = () => {
     <DeckGL
       viewState={{
         longitude: offset ? 36.51 : 37.418,
-        latitude: 55.6012,
+        latitude: 55.5312,
         zoom: zoom,
       }}
       layers={[
@@ -37,15 +38,22 @@ export const MoscowMap = () => {
             getFillColor: { duration: 300 },
           },
           getFillColor: (f: { properties: any }) => {
-            return f.properties.ABBREV_AO === calculation?.district
+            return f.properties.ABBREV_AO === calculation?.snapshot.district
               ? [214, 51, 108, 225] // pink
               : // ?  [59, 201, 219, 225] // cyan
                 [26, 27, 30, 220];
           },
           pickable: true,
           onClick: (info) => {
-            update({ district_display_alias: info.object.properties.NAME_AO });
-            update({ district: info.object.properties.ABBREV_AO });
+            setcalculation({
+              snapshot: {
+                ...calculation.snapshot,
+                district_display_alias: info.object.properties.NAME_AO,
+                district: info.object.properties.ABBREV_AO,
+              },
+            });
+            // update({ district_display_alias: info.object.properties.NAME_AO });
+            // update({ district: info.object.properties.ABBREV_AO });
           },
         }),
         new TextLayer({

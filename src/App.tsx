@@ -6,20 +6,26 @@ import {
   MobileHeader,
   MobileNavigation,
 } from "@components/shell";
-import { Outlet, useLocation } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { ui } from "@states/ui_state";
+import { Outlet } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
 import { MobileCalculationTracker } from "./containers";
+import { calculation_state } from "@states/calculation";
 
 const App: React.FC = () => {
-  const location = useLocation();
   const smallScreen = useMediaQuery("(max-width: 1080px");
-  const [, setuistate] = useRecoilState(ui);
-  // useEffect(() => {
-  //   setuistate({ navigation_drawer: false, calculation_drawer: false });
-  // }, [location, setuistate]);
 
+  const state = useRecoilValue(calculation_state);
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", () =>
+  //     localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
+  //   );
+  //   return () => {
+  //     window.removeEventListener("beforeunload", () =>
+  //       localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
+  //     );
+  //   };
+  // }, [state.snapshot]);
   return (
     <MantineProvider
       theme={{

@@ -2,6 +2,8 @@ import { Container, Group, Image, Text, Stack, Title } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { EmailFetch } from "@features/post-email-for-authen";
+import { useRecoilState } from "recoil";
+import { ui } from "@states/ui_state";
 
 /**
  * Homepage is for:
@@ -13,6 +15,10 @@ import { EmailFetch } from "@features/post-email-for-authen";
  */
 
 export const Home: React.FC = () => {
+  const [uistate, setuistate] = useRecoilState(ui);
+  useEffect(() => {
+    setuistate({ ...uistate, drawer: null });
+  }, []);
   return (
     <Container mt="xl" p="lg" mih={"max-content"}>
       <Stack mih="420px">
