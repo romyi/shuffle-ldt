@@ -7,7 +7,6 @@ import { calculation_state } from "@states/calculation";
 import { Outlet, useNavigate } from "react-router-dom";
 
 export const Calculation = () => {
-  // const { calculation } = useOngoingCalculation();
   const wideScreen = useMediaQuery("(min-width: 1080px)");
   const [uistate, setuistate] = useRecoilState(ui);
   const calculation = useRecoilValue(calculation_state);
