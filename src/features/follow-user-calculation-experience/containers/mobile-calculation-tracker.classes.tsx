@@ -11,7 +11,7 @@ export const useClasses = createStyles(() => ({
     background: "transparent",
   },
   content: {
-    height: "220px",
+    height: "240px",
     background: "transparent",
     transitionDuration: "0.5s !important",
   },
