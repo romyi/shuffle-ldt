@@ -7,7 +7,6 @@ import {
   Stack,
   NavLink,
 } from "@mantine/core";
-import { calculation_state } from "@states/calculation";
 import { ui } from "@states/ui_state";
 import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
 import { useMatch, useNavigate } from "react-router-dom";
@@ -35,7 +34,6 @@ export const MobileNavigation = () => {
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const { classes } = useStyles();
   const navigate = useNavigate();
-  const [calculation, setcalculation] = useRecoilState(calculation_state);
   const clear = useClearSnapshot();
   return (
     <Drawer

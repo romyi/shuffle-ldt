@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Container, Group, Header, Text } from "@mantine/core";
-import { MoscowMap } from "@components/deckgl-moscow-map";
 import { useMediaQuery } from "@mantine/hooks";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ui } from "@states/ui_state";

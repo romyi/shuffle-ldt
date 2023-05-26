@@ -22,7 +22,7 @@ export const MobileFooter = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const { classes } = useFooterStyles();
   const navigate = useNavigate();
-  const [calculation, setcalculation] = useRecoilState(calculation_state);
+  const [calculation] = useRecoilState(calculation_state);
   return (
     <Footer
       classNames={{ root: classes.root }}
