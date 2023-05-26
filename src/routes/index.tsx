@@ -4,19 +4,18 @@ import { Profile } from "./profile";
 import App from "../App";
 import { Reports } from "./reports";
 import { Calculation } from "./calculation";
-import { FacilitiesInfo } from "./facilities-info";
 import { MoscowMap } from "@components/deckgl-moscow-map";
-import { AreaInfo } from "./personnel";
+import { Legal, Stat } from "./calculation-form-subpages";
 
 const calculation_config = [
   { path: "", element: <MoscowMap /> },
   {
     path: "stat",
-    element: <FacilitiesInfo />,
+    element: <Stat />,
   },
   {
     path: "legal",
-    element: <AreaInfo />,
+    element: <Legal />,
   },
 ];
 

@@ -15,7 +15,7 @@ export const calculation_step = selector({
     ) {
       return "/calculation/stat";
     } else {
-      return "/calculation/form";
+      return "/calculation/legal";
     }
   },
 });

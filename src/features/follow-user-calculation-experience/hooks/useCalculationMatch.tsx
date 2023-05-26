@@ -10,7 +10,11 @@ export const useCalculationMatch = (
   return useMemo(() => {
     let mount = false;
     if (attributes) {
-      if (!attributes.find((attribute) => !calculation.snapshot[attribute]))
+      if (
+        !attributes.find(
+          (attribute) => calculation.snapshot[attribute] === null
+        )
+      )
         mount = true;
     } else {
       mount = true;
