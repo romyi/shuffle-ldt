@@ -10,7 +10,6 @@ import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state, useRestoreSnapshot } from "@states/calculation";
-import { CalculationTracker } from "@features/follow-user-calculation-experience";
 
 const App: React.FC = () => {
   const smallScreen = useMediaQuery("(max-width: 1080px");
@@ -81,7 +80,6 @@ const App: React.FC = () => {
       >
         <Outlet />
         <MobileNavigation />
-        <CalculationTracker />
       </AppShell>
     </MantineProvider>
   );

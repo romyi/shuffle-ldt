@@ -49,7 +49,7 @@ export const CalculationTracker = () => {
       onClose={onDrawerClose}
     >
       <Container mt="md" size={"xs"} p="0px" pr="xs" pl="xs" h="120px">
-        <Group noWrap mt="md" position="left" miw="100vw">
+        <Group noWrap mt="md" position="left">
           <IndicatorCard
             url="/calculation/legal"
             showOn={finish_access_checks}
@@ -111,9 +111,9 @@ export const CalculationTracker = () => {
             <SimpleGrid cols={2}>
               <Stack spacing={"0px"}>
                 <Text size="sm" color="dimmed">
-                  {calculation.snapshot.squareLand} м²
+                  Земля
                 </Text>{" "}
-                <Text>Земля</Text>
+                <Text>{calculation.snapshot.squareLand} м²</Text>
                 {calculation.snapshot.isLandRental && (
                   <Badge radius={"sm"} mt="md" ml="-5px" color={"cyan"}>
                     Аренда
@@ -122,9 +122,9 @@ export const CalculationTracker = () => {
               </Stack>
               <Stack align={"flex-start"} spacing={"0px"}>
                 <Text size="sm" color="dimmed">
-                  {calculation.snapshot.squareFacilities} м²
+                  Здания
                 </Text>{" "}
-                <Text>Здания</Text>
+                <Text>{calculation.snapshot.squareFacilities} м²</Text>
                 {calculation.snapshot.isFacilitiesRental && (
                   <Badge radius={"sm"} mt="md" color={"cyan"}>
                     Аренда
