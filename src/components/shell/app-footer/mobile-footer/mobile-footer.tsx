@@ -1,8 +1,16 @@
-import { Container, createStyles, Footer, Group, Text } from "@mantine/core";
+import {
+  Container,
+  createStyles,
+  Footer,
+  Group,
+  Indicator,
+  Text,
+} from "@mantine/core";
 import { useRecoilState } from "recoil";
-import { nav_drawer_state } from "@states/ui/navigation";
-import { IconListDetails, IconMathSymbols } from "@tabler/icons-react";
-import { motion } from "framer-motion";
+import { ui } from "@states/ui_state";
+import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
+import { calculation_state } from "@states/calculation";
 
 const useFooterStyles = createStyles({
   root: {
@@ -11,8 +19,10 @@ const useFooterStyles = createStyles({
 });
 
 export const MobileFooter = () => {
-  const [menu, setMenu] = useRecoilState(nav_drawer_state);
+  const [uistate, setuistate] = useRecoilState(ui);
   const { classes } = useFooterStyles();
+  const navigate = useNavigate();
+  const [calculation] = useRecoilState(calculation_state);
   return (
     <Footer
       classNames={{ root: classes.root }}
@@ -26,19 +36,29 @@ export const MobileFooter = () => {
             Гость
           </Text>
           <Group spacing={"xl"} pr={"xl"}>
-            <IconMathSymbols
+            {calculation.snapshot.district_display_alias && (
+              <Indicator>
+                <IconTablePlus
+                  onClick={() => {
+                    navigate("/calculation");
+                  }}
+                  strokeWidth={1.5}
+                  size={36}
+                  color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
+                />
+              </Indicator>
+            )}
+            <IconListDetails
+              onClick={() =>
+                setuistate({
+                  ...uistate,
+                  drawer: "navigation",
+                })
+              }
               strokeWidth={1.5}
               size={36}
-              color={menu.isOpen ? "#DCE0E7" : "black"}
+              color={uistate.drawer === "navigation" ? "#D6336C" : "black"}
             />
-            <motion.div animate={{ y: menu.isOpen ? -240 : 0 }}>
-              <IconListDetails
-                onClick={() => setMenu({ isOpen: true })}
-                strokeWidth={1.5}
-                size={36}
-                color={menu.isOpen ? "#DCE0E7" : "black"}
-              />
-            </motion.div>
           </Group>
         </Group>
       </Container>

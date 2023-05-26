@@ -1,34 +1,41 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Container, Group, Header, Text } from "@mantine/core";
-import { MoscowMap } from "@components/deckgl-moscow-map";
 import { useMediaQuery } from "@mantine/hooks";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { ui } from "@states/ui_state";
+import { calculation_state } from "@states/calculation";
+import { Outlet } from "react-router-dom";
+import { useRestoreStep } from "@features/follow-user-calculation-experience/hooks/useRestoreStep";
 
 export const Calculation = () => {
-  const [region, setRegion] = useState<string>("");
-  const [displayDistrict, setDisplayDistrict] = useState<string>("");
-  const isSummary = useMediaQuery("(min-width: 1080px)");
+  const wideScreen = useMediaQuery("(min-width: 1080px)");
+  const [uistate, setuistate] = useRecoilState(ui);
+  const calculation = useRecoilValue(calculation_state);
+  useEffect(() => {
+    if (uistate.drawer !== "navigation")
+      setuistate({ ...uistate, drawer: "calculation" });
+  }, [uistate.drawer]);
+  useRestoreStep();
   return (
     <>
-      <MoscowMap
-        regionTitle={region}
-        onClickCallback={(info) => {
-          setDisplayDistrict(info.object.properties.NAME_AO);
-          setRegion(info.object.properties.ABBREV_AO);
-        }}
-      />
-      {isSummary && (
+      {wideScreen && (
         <Header fixed height={80} withBorder={false}>
           <Container p="xl">
-            {displayDistrict && (
+            {calculation?.snapshot.district_display_alias && (
               <Group>
                 <Text>Округ:</Text>
-                <Text color="dimmed"> {displayDistrict}</Text>
+                <Text color="dimmed">
+                  {" "}
+                  {calculation?.snapshot.district_display_alias}
+                </Text>
               </Group>
             )}
           </Container>
         </Header>
       )}
-      <Container p="xl" h="1200px"></Container>
+      <Container p="xl" pt="xs">
+        <Outlet />
+      </Container>
     </>
   );
 };

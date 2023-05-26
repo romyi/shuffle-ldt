@@ -6,19 +6,32 @@ import {
   MobileHeader,
   MobileNavigation,
 } from "@components/shell";
-import { Outlet, useLocation } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { nav_drawer_state } from "@states/ui/navigation";
+import { Outlet } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
+import { calculation_state, useRestoreSnapshot } from "@states/calculation";
+import { CalculationTracker } from "@features/follow-user-calculation-experience";
 
 const App: React.FC = () => {
-  const location = useLocation();
   const smallScreen = useMediaQuery("(max-width: 1080px");
-  const [, setNavigation] = useRecoilState(nav_drawer_state);
-  useEffect(() => {
-    setNavigation({ isOpen: false });
-  }, [location, setNavigation]);
 
+  useRestoreSnapshot();
+
+  const state = useRecoilValue(calculation_state);
+  useEffect(() => {
+    window.addEventListener("beforeunload", () => {
+      const { snapshot } = state;
+      const serial = JSON.stringify(snapshot);
+      localStorage.setItem("snapshot", serial);
+    });
+    return () => {
+      window.removeEventListener("beforeunload", () => {
+        const { snapshot } = state;
+        const serial = JSON.stringify(snapshot);
+        localStorage.setItem("snapshot", serial);
+      });
+    };
+  }, [state.snapshot]);
   return (
     <MantineProvider
       theme={{
@@ -68,6 +81,7 @@ const App: React.FC = () => {
       >
         <Outlet />
         <MobileNavigation />
+        <CalculationTracker />
       </AppShell>
     </MantineProvider>
   );

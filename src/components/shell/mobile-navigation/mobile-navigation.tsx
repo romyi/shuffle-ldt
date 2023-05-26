@@ -1,13 +1,13 @@
+import { useClearSnapshot } from "@features/follow-user-calculation-experience/hooks/useClearSnapshot";
 import {
   Drawer,
   createStyles,
   Container,
   Text,
   Stack,
-  Badge,
   NavLink,
 } from "@mantine/core";
-import { nav_drawer_state } from "@states/ui/navigation";
+import { ui } from "@states/ui_state";
 import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -30,10 +30,11 @@ const useStyles = createStyles(() => ({
 }));
 
 export const MobileNavigation = () => {
-  const [nDrawer, setNDrawer] = useRecoilState(nav_drawer_state);
-  const onDrawerClose = () => setNDrawer({ isOpen: false });
+  const [uistate, setuistate] = useRecoilState(ui);
+  const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const { classes } = useStyles();
   const navigate = useNavigate();
+  const clearShapshot = useClearSnapshot();
   return (
     <Drawer
       zIndex={80}
@@ -49,7 +50,7 @@ export const MobileNavigation = () => {
       position="bottom"
       size={"xs"}
       lockScroll={false}
-      opened={nDrawer.isOpen}
+      opened={uistate.drawer === "navigation"}
       onClose={onDrawerClose}
     >
       <Container mt="md" size={"xs"} p="md" h="400px">
@@ -63,23 +64,24 @@ export const MobileNavigation = () => {
               label="Новый"
               description="Сделать новый расчет"
               icon={<IconTablePlus size={24} />}
-              onClick={() => navigate("/calculation")}
+              onClick={() => {
+                clearShapshot();
+                setuistate({ ...uistate, drawer: null });
+                navigate("/calculation");
+              }}
             />
             <NavLink
-              ml="-12px"
               maw={320}
               variant={"subtle"}
               color="dark"
               active={Boolean(useMatch("/reports"))}
               label="Список"
               description="Просмотреть список расчётов"
-              icon={
-                <Badge color={"cyan"} size={"lg"}>
-                  1
-                </Badge>
-              }
-              // rightSection={<Badge>1</Badge>}
-              onClick={() => navigate("/reports")}
+              icon={<IconFileCheck size={24} />}
+              onClick={() => {
+                setuistate({ ...uistate, drawer: null });
+                navigate("/reports");
+              }}
             />
           </Stack>
           <Text size={"sm"}>Управление</Text>
@@ -90,7 +92,10 @@ export const MobileNavigation = () => {
             label="Завершить регистрацию"
             description="Заполнить ИНН, ФИО и получить подробный отчет"
             icon={<IconFileCheck size={24} />}
-            onClick={() => navigate("/")}
+            onClick={() => {
+              setuistate({ ...uistate, drawer: null });
+              navigate("/");
+            }}
           />
         </Stack>
       </Container>

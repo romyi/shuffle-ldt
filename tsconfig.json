@@ -5,7 +5,8 @@
       "@components/*": ["src/components/*"],
       "@templates/*": ["src/templates/*"],
       "@features/*": ["src/features/*"],
-      "@states/*": ["src/states/*"]
+      "@states/*": ["src/states/*"],
+      "@tyles/*": ["src/types/*"]
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

@@ -4,6 +4,21 @@ import { Profile } from "./profile";
 import App from "../App";
 import { Reports } from "./reports";
 import { Calculation } from "./calculation";
+import { FacilitiesInfo } from "./facilities-info";
+import { MoscowMap } from "@components/deckgl-moscow-map";
+import { AreaInfo } from "./personnel";
+
+const calculation_config = [
+  { path: "", element: <MoscowMap /> },
+  {
+    path: "stat",
+    element: <FacilitiesInfo />,
+  },
+  {
+    path: "legal",
+    element: <AreaInfo />,
+  },
+];
 
 export const external_config = [
   {
@@ -21,6 +36,7 @@ export const external_config = [
   {
     path: "calculation",
     element: <Calculation />,
+    children: calculation_config,
   },
 ];
 

@@ -1,7 +1,5 @@
 import { Container, Group, Image, Text, Stack, Title } from "@mantine/core";
 import React from "react";
-import { motion } from "framer-motion";
-import { EmailFetch } from "@features/post-email-for-authen";
 
 /**
  * Homepage is for:
@@ -20,7 +18,7 @@ export const Home: React.FC = () => {
           Наша задача - определить стоимость вашего запуска
         </Title>
 
-        <EmailFetch />
+        {/* <EmailFetch /> */}
         <Group noWrap mt="xl">
           <Image
             sx={{ alignSelf: "center" }}
@@ -29,15 +27,11 @@ export const Home: React.FC = () => {
             src="/warehouse-min.jpg"
             alt="warehouse"
           />
-          <motion.div
-            animate={{ x: [160, 0] }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-          >
-            <Text size="sm" maw={320}>
-              Подтвердите почту и приступайте к работе. Если хотите узнать
-              подробности, то Вы сможете найти их ниже.
-            </Text>
-          </motion.div>
+
+          <Text size="sm" maw={320}>
+            Приступайте к работе прямо сейчас. Если хотите узнать подробности,
+            то Вы сможете найти их ниже.
+          </Text>
         </Group>
       </Stack>
     </Container>
