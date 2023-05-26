@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import { ui } from "@states/ui_state";
 import { Outlet } from "react-router-dom";
 import { useRestoreStep } from "@features/follow-user-calculation-experience/hooks/useRestoreStep";
+import { CalculationTracker } from "@features/follow-user-calculation-experience";
 
 export const Calculation = () => {
   const [uistate, setuistate] = useRecoilState(ui);
@@ -16,8 +17,11 @@ export const Calculation = () => {
   useRestoreStep();
 
   return (
-    <Container mih="800px" p="xs">
-      <Outlet />
-    </Container>
+    <>
+      <Container mih="640px" p="xs">
+        <Outlet />
+      </Container>
+      <CalculationTracker />
+    </>
   );
 };

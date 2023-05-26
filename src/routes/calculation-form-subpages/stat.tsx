@@ -20,7 +20,7 @@ export const Stat = () => {
               })
             }
             label="Площадь земельных участков"
-            description="от 250 до 25.000 кв.м"
+            description="от 250 до 25.000 м²"
             placeholder="1000"
             stepHoldDelay={500}
             stepHoldInterval={100}
@@ -54,7 +54,7 @@ export const Stat = () => {
               })
             }
             label="Площадь производственных сооружений"
-            description="от 100 до 10.000 кв.м"
+            description="от 100 до 10.000 м²"
             placeholder="1000"
             stepHoldDelay={500}
             stepHoldInterval={100}
