@@ -8,11 +8,10 @@ export const Personnel = () => {
     <Card shadow={"md"} radius="md">
       <Title>Штат</Title>
       <Select
-        value={calculation.snapshot.district}
+        value={calculation.snapshot?.district}
         onChange={(option) => {
-          console.log(option);
           setcalculation({
-            snapshot: { ...calculation.snapshot, district: option },
+            snapshot: { district: option },
           });
         }}
         label="Отрасль"

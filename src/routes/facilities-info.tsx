@@ -10,7 +10,6 @@ export const FacilitiesInfo = () => {
       <Select
         value={calculation.snapshot.branch}
         onChange={(option) => {
-          console.log(option);
           setcalculation({
             snapshot: { ...calculation.snapshot, branch: option },
           });

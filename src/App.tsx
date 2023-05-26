@@ -16,16 +16,16 @@ const App: React.FC = () => {
   const smallScreen = useMediaQuery("(max-width: 1080px");
 
   const state = useRecoilValue(calculation_state);
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", () =>
-  //     localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
-  //   );
-  //   return () => {
-  //     window.removeEventListener("beforeunload", () =>
-  //       localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
-  //     );
-  //   };
-  // }, [state.snapshot]);
+  useEffect(() => {
+    window.addEventListener("beforeunload", () =>
+      localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
+    );
+    return () => {
+      window.removeEventListener("beforeunload", () =>
+        localStorage.setItem("snapshot", JSON.stringify(state.snapshot))
+      );
+    };
+  }, [state.snapshot]);
   return (
     <MantineProvider
       theme={{

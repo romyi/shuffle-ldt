@@ -7,6 +7,7 @@ import {
   Badge,
   NavLink,
 } from "@mantine/core";
+import { calculation_state } from "@states/calculation";
 import { ui } from "@states/ui_state";
 import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
 import { useMatch, useNavigate } from "react-router-dom";
@@ -34,6 +35,7 @@ export const MobileNavigation = () => {
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const { classes } = useStyles();
   const navigate = useNavigate();
+  const [calculation, setcalculation] = useRecoilState(calculation_state);
   return (
     <Drawer
       zIndex={80}
@@ -64,23 +66,19 @@ export const MobileNavigation = () => {
               description="Сделать новый расчет"
               icon={<IconTablePlus size={24} />}
               onClick={() => {
+                setcalculation({ snapshot: {} });
+                setuistate({ ...uistate, drawer: null });
                 navigate("/calculation");
               }}
             />
             <NavLink
-              ml="-12px"
               maw={320}
               variant={"subtle"}
               color="dark"
               active={Boolean(useMatch("/reports"))}
               label="Список"
               description="Просмотреть список расчётов"
-              icon={
-                <Badge color={"cyan"} size={"lg"}>
-                  1
-                </Badge>
-              }
-              // rightSection={<Badge>1</Badge>}
+              icon={<IconFileCheck size={24} />}
               onClick={() => {
                 // setuistate({ ...uistate, drawer: null });
                 navigate("/reports");
