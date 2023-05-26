@@ -2,7 +2,7 @@ import { Card, Select, Title } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
 import { useRecoilState } from "recoil";
 
-export const Personnel = () => {
+export const AreaInfo = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   return (
     <Card shadow={"md"} radius="md">
@@ -11,7 +11,7 @@ export const Personnel = () => {
         value={calculation.snapshot?.district}
         onChange={(option) => {
           setcalculation({
-            snapshot: { district: option },
+            snapshot: { ...calculation.snapshot, district: option },
           });
         }}
         label="Отрасль"

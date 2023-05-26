@@ -6,7 +6,7 @@ import {
   Indicator,
   Text,
 } from "@mantine/core";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { ui } from "@states/ui_state";
 import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";

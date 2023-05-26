@@ -6,7 +6,7 @@ import { Reports } from "./reports";
 import { Calculation } from "./calculation";
 import { FacilitiesInfo } from "./facilities-info";
 import { MoscowMap } from "@components/deckgl-moscow-map";
-import { Personnel } from "./personnel";
+import { AreaInfo } from "./personnel";
 
 export const external_config = [
   {
@@ -35,7 +35,7 @@ export const external_config = [
       },
       {
         path: "third",
-        element: <Personnel />,
+        element: <AreaInfo />,
       },
     ],
   },

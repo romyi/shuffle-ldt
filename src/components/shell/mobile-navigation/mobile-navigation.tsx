@@ -1,10 +1,10 @@
+import { useClearSnapshot } from "@features/follow-user-calculation-experience/hooks/useClearSnapshot";
 import {
   Drawer,
   createStyles,
   Container,
   Text,
   Stack,
-  Badge,
   NavLink,
 } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
@@ -36,6 +36,7 @@ export const MobileNavigation = () => {
   const { classes } = useStyles();
   const navigate = useNavigate();
   const [calculation, setcalculation] = useRecoilState(calculation_state);
+  const clear = useClearSnapshot();
   return (
     <Drawer
       zIndex={80}
@@ -66,7 +67,7 @@ export const MobileNavigation = () => {
               description="Сделать новый расчет"
               icon={<IconTablePlus size={24} />}
               onClick={() => {
-                setcalculation({ snapshot: {} });
+                clear();
                 setuistate({ ...uistate, drawer: null });
                 navigate("/calculation");
               }}

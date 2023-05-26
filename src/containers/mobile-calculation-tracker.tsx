@@ -76,10 +76,10 @@ export const MobileCalculationTracker = () => {
                   p="sm"
                   onClick={() => navigate("/calculation/third")}
                 >
-                  <Text size={"xs"}>Предприятие</Text>
+                  <Text size={"xs"}>Площадка</Text>
                   <Group mt="sm">
                     {!calculation.snapshot.personnel_count ? (
-                      <Badge color={"dark"}>Заполните информацию</Badge>
+                      <Badge color={"dark"}>Добавить информацию</Badge>
                     ) : (
                       <>
                         <Badge>{calculation.snapshot.personnel_count}</Badge>
@@ -108,7 +108,7 @@ export const MobileCalculationTracker = () => {
                     {!calculation.snapshot.branch &&
                     !calculation.snapshot.area_km &&
                     !calculation.snapshot.personnel_count ? (
-                      <Badge color={"dark"}>Заполните информацию</Badge>
+                      <Badge color={"dark"}>Добавить информацию</Badge>
                     ) : (
                       <>
                         <Badge>{calculation.snapshot.branch}</Badge>
