@@ -48,17 +48,14 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
               children
             ) : matched ? (
               <Stack align={"center"}>
-                <Text color={"gray"} size="xs">
-                  Справка
-                </Text>
-
                 <Button
                   leftIcon={<IconInfoCircle />}
                   color={"gray"}
                   size="xs"
+                  mt="36px"
                   variant={"outline"}
                 >
-                  Ознакомиться
+                  Справка
                 </Button>
               </Stack>
             ) : (

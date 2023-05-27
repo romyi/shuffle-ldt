@@ -28,6 +28,7 @@ export default defineConfig({
       "@features": path.resolve(__dirname, "./src/features"),
       "@states": path.resolve(__dirname, "./src/states"),
       "@types": path.resolve(__dirname, "./src/types"),
+      "@network": path.resolve(__dirname, "./src/network"),
     },
   },
 });

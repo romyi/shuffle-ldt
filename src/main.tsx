@@ -4,6 +4,16 @@ import { Global } from "@mantine/core";
 import { RecoilRoot } from "recoil";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -40,9 +50,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         },
       ]}
     />
-
-    <RecoilRoot>
-      <RouterProvider router={router} />
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <RouterProvider router={router} />
+      </RecoilRoot>
+    </QueryClientProvider>
   </React.StrictMode>
 );

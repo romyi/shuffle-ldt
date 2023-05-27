@@ -85,7 +85,7 @@ export const CalculationTracker = () => {
           <IndicatorCard
             url="/calculation/legal"
             showOn={["squareFacilities", "squareLand"]}
-            contentOn={["equipmentUnits", "branch"]}
+            contentOn={["equipmentUnits", "branch", "personnel"]}
             follower="Заполните данные о предприятии"
           >
             <SimpleGrid cols={2}>

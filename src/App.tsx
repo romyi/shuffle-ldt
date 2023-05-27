@@ -15,7 +15,6 @@ const App: React.FC = () => {
   const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);
 
   useRestoreSnapshot();
-
   const state = useRecoilValue(calculation_state);
   useEffect(() => {
     window.addEventListener("beforeunload", () => {

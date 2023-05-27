@@ -53,7 +53,7 @@ export const DesktopContent = () => {
             icon={<IconFileCheck size={24} />}
             onClick={() => {
               setuistate({ ...uistate, drawer: null });
-              navigate("/");
+              navigate("/user");
             }}
           />
         </Stack>

@@ -6,7 +6,8 @@
       "@templates/*": ["src/templates/*"],
       "@features/*": ["src/features/*"],
       "@states/*": ["src/states/*"],
-      "@tyles/*": ["src/types/*"]
+      "@tyles/*": ["src/types/*"],
+      "@network/*": ["src/network/*"]
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
