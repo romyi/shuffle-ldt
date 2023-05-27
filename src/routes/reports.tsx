@@ -13,19 +13,18 @@ import {
   Title,
 } from "@mantine/core";
 import { keys } from "@network/keystore";
-import { requestCalculation } from "@network/mutations";
-import { calculation_state } from "@states/calculation";
+// import { calculation_state } from "@states/calculation";
 import { useUserRegistered } from "@states/ui";
 import { IconPdf } from "@tabler/icons-react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+// import { useRecoilValue } from "recoil";
 
 export const Reports = () => {
   const { isError, isFetching, isFetched } = useQuery(keys.user.me());
   const { isRegistered } = useUserRegistered();
-  const calculation = useRecoilValue(calculation_state);
+  // const calculation = useRecoilValue(calculation_state);
   const navigate = useNavigate();
   // const doneCalculation = useMutation({
   //   mutationKey: [requestCalculation.key],

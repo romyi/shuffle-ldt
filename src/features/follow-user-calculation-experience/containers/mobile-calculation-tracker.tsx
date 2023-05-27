@@ -15,10 +15,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { IndicatorCard } from "@features/follow-user-calculation-experience/components";
 import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IconFlag2Filled } from "@tabler/icons-react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { requestCalculation } from "@network/mutations";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { keys } from "@network/index";
 

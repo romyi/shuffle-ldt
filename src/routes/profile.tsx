@@ -1,13 +1,9 @@
 import {
-  Badge,
   Button,
-  Card,
   Container,
-  Overlay,
   PinInput,
   SimpleGrid,
   Stack,
-  Text,
   TextInput,
   Title,
 } from "@mantine/core";
@@ -30,7 +26,7 @@ export const Profile = () => {
     onSettled: () => setsent(false),
   });
 
-  const { data } = useQuery({
+  useQuery({
     ...keys.auth.token({ email: mail, code: code }),
     enabled: sentcode,
     onSettled: () => setsendcode(false),
