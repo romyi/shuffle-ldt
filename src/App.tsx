@@ -9,9 +9,10 @@ import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state, useRestoreSnapshot } from "@states/calculation";
+import { SMALL_SCREEN_EXTENT } from "./consts";
 
 const App: React.FC = () => {
-  const smallScreen = useMediaQuery("(max-width: 1080px");
+  const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);
 
   useRestoreSnapshot();
 
@@ -53,6 +54,18 @@ const App: React.FC = () => {
           Container: {
             defaultProps: {
               size: smallScreen ? "xs" : "md",
+              p: "sm",
+            },
+          },
+          SimpleGrid: {
+            defaultProps: {
+              cols: smallScreen ? 1 : 2,
+            },
+          },
+          Title: {
+            defaultProps: {
+              order: 3,
+              mb: "xl",
             },
           },
         },

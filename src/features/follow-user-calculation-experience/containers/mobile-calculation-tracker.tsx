@@ -15,6 +15,7 @@ import { IndicatorCard } from "@features/follow-user-calculation-experience/comp
 import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
 import { useState } from "react";
+import { IconFlag2Filled } from "@tabler/icons-react";
 
 const finish_access_checks = [
   "branch",
@@ -28,12 +29,12 @@ const finish_access_checks = [
 export const CalculationTracker = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
-  const { classes } = useClasses();
   const calculation = useRecoilValue(calculation_state);
   const [oncheck, setoncheck] = useState(false);
+  const { classes } = useClasses();
   return (
     <Drawer
-      zIndex={80}
+      zIndex={oncheck ? 120 : 110}
       classNames={{
         inner: classes.inner,
         content: classes.content,
@@ -48,13 +49,12 @@ export const CalculationTracker = () => {
       opened={uistate.drawer === "calculation"}
       onClose={onDrawerClose}
     >
-      <Container mt="md" size={"xs"} p="0px" pr="xs" pl="xs" h="120px">
+      <Container m="auto" mt="md" size={"xs"} p="0px" pr="xs" pl="xs" h="120px">
         <Group noWrap mt="md" position="left">
           <IndicatorCard
             url="/calculation/legal"
             showOn={finish_access_checks}
             contentOn={finish_access_checks}
-            placeholder=""
           >
             <Stack>
               {oncheck && (
@@ -75,13 +75,26 @@ export const CalculationTracker = () => {
               >
                 {oncheck ? "Отправить" : "Проверить"}
               </Button>
+              {!oncheck && (
+                <Text size="xs">
+                  Взгляните на информацию и отправьте её, если все верно
+                </Text>
+              )}
             </Stack>
           </IndicatorCard>
           <IndicatorCard
             url="/calculation/legal"
             showOn={["squareFacilities", "squareLand"]}
             contentOn={["equipmentUnits", "branch"]}
-            placeholder="Предприятие"
+            placeholder={
+              <>
+                <Text>Справка по заполнению</Text>
+                <Button mt="md" color={"cyan"} size="xs" variant={"outline"}>
+                  Почитать
+                </Button>
+              </>
+            }
+            follower="Заполните данные о предприятии"
           >
             <SimpleGrid cols={2}>
               <Stack spacing={"0px"}>
@@ -92,21 +105,31 @@ export const CalculationTracker = () => {
               </Stack>
               <Stack align={"flex-start"} spacing={"0px"}>
                 <Text size="sm" color="dimmed">
-                  Машин
+                  Техники
                 </Text>{" "}
-                <Text>{calculation.snapshot.equipmentUnits}</Text>
+                <Text>{calculation.snapshot.equipmentUnits} ед</Text>
               </Stack>
               <Text size="xs">{calculation.snapshot.branch}</Text>
-              <Badge radius={"sm"} color="cyan">
-                ИП
-              </Badge>
+              {calculation.snapshot.isEnterpreneur && (
+                <Badge radius={"sm"} color="cyan">
+                  ИП
+                </Badge>
+              )}
             </SimpleGrid>
           </IndicatorCard>
           <IndicatorCard
             url="/calculation/stat"
             showOn={["district"]}
             contentOn={["squareFacilities", "squareLand"]}
-            placeholder="Площадки"
+            follower="Заполните данные о площадях"
+            placeholder={
+              <>
+                <Text>Справка по заполнению</Text>
+                <Button mt="md" color={"cyan"} size="xs" variant={"outline"}>
+                  Почитать
+                </Button>
+              </>
+            }
           >
             <SimpleGrid cols={2}>
               <Stack spacing={"0px"}>
@@ -140,11 +163,14 @@ export const CalculationTracker = () => {
             placeholder="Выберите округ"
           >
             <SimpleGrid>
-              <Stack>
-                <Text color="dimmed">Выбранный округ</Text>
-                <Text mt="xl">
+              <Stack spacing={"0px"}>
+                <Text color="dimmed" size="sm">
+                  Выбранный округ
+                </Text>
+                <Text mb="12px">
                   {calculation.snapshot.district_display_alias}
                 </Text>
+                <IconFlag2Filled />
               </Stack>
             </SimpleGrid>
           </IndicatorCard>

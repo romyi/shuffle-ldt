@@ -11,7 +11,7 @@ export const DesktopContent = () => {
   const clearShapshot = useClearSnapshot();
   return (
     <Container mt="md" size={"md"} p="md" h="400px">
-      <SimpleGrid cols={2}>
+      <SimpleGrid cols={3}>
         <Stack>
           <Text size={"sm"}>Расчёты</Text>
           <NavLink
