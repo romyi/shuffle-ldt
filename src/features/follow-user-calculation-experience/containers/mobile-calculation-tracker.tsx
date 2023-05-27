@@ -63,13 +63,13 @@ export const CalculationTracker = () => {
                   variant={"outline"}
                   radius={"md"}
                   size={"md"}
+                  color="dark"
                 >
                   Поправить
                 </Button>
               )}
               <Button
                 onClick={() => setoncheck(true)}
-                variant={"gradient"}
                 radius={"md"}
                 size={"md"}
               >

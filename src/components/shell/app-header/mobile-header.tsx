@@ -1,6 +1,5 @@
 import { Logo } from "@components/ui-containers";
 import { Header, Image, Container, Group, createStyles } from "@mantine/core";
-import { useLocation } from "react-router-dom";
 import Moscow from "/moscow.svg";
 
 const headerClasses = createStyles({
@@ -12,8 +11,6 @@ const headerClasses = createStyles({
 
 export const MobileHeader = () => {
   const { classes } = headerClasses();
-  const location = useLocation();
-  if (location.pathname.split("/").includes("calculation")) return null;
   return (
     <Header classNames={{ root: classes.root }} withBorder={false} height={100}>
       <Container pr="xl" pl="xl">

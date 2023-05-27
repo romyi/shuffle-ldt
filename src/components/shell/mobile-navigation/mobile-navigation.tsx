@@ -1,16 +1,9 @@
-import { useClearSnapshot } from "@features/follow-user-calculation-experience/hooks/useClearSnapshot";
-import {
-  Drawer,
-  createStyles,
-  Container,
-  Text,
-  Stack,
-  NavLink,
-} from "@mantine/core";
+import { Drawer, createStyles } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { ui } from "@states/ui_state";
-import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
-import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { DesktopContent } from "./desktop-content";
+import { MobileContent } from "./mobile-content";
 
 const useStyles = createStyles(() => ({
   overlay: {
@@ -32,9 +25,9 @@ const useStyles = createStyles(() => ({
 export const MobileNavigation = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
+  const smallScreen = useMediaQuery("(max-width: 1280px)");
+
   const { classes } = useStyles();
-  const navigate = useNavigate();
-  const clearShapshot = useClearSnapshot();
   return (
     <Drawer
       zIndex={80}
@@ -53,52 +46,7 @@ export const MobileNavigation = () => {
       opened={uistate.drawer === "navigation"}
       onClose={onDrawerClose}
     >
-      <Container mt="md" size={"xs"} p="md" h="400px">
-        <Stack>
-          <Stack spacing={"xs"}>
-            <Text size={"sm"}>Расчёты</Text>
-            <NavLink
-              variant={"subtle"}
-              color="dark"
-              active={Boolean(useMatch("/calculation"))}
-              label="Новый"
-              description="Сделать новый расчет"
-              icon={<IconTablePlus size={24} />}
-              onClick={() => {
-                clearShapshot();
-                setuistate({ ...uistate, drawer: null });
-                navigate("/calculation");
-              }}
-            />
-            <NavLink
-              maw={320}
-              variant={"subtle"}
-              color="dark"
-              active={Boolean(useMatch("/reports"))}
-              label="Список"
-              description="Просмотреть список расчётов"
-              icon={<IconFileCheck size={24} />}
-              onClick={() => {
-                setuistate({ ...uistate, drawer: null });
-                navigate("/reports");
-              }}
-            />
-          </Stack>
-          <Text size={"sm"}>Управление</Text>
-          <NavLink
-            color={"dark"}
-            variant={"subtle"}
-            active={Boolean(useMatch("/user"))}
-            label="Завершить регистрацию"
-            description="Заполнить ИНН, ФИО и получить подробный отчет"
-            icon={<IconFileCheck size={24} />}
-            onClick={() => {
-              setuistate({ ...uistate, drawer: null });
-              navigate("/");
-            }}
-          />
-        </Stack>
-      </Container>
+      {smallScreen ? <MobileContent /> : <DesktopContent />}
     </Drawer>
   );
 };
