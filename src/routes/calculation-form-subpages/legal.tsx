@@ -1,6 +1,5 @@
 import { Container, NumberInput, Select, Stack, Switch } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
-import { IconInfoCircle } from "@tabler/icons-react";
 import { useRecoilState } from "recoil";
 
 export const Legal = () => {
@@ -8,8 +7,7 @@ export const Legal = () => {
 
   return (
     <Container size={"xs"}>
-      <IconInfoCircle />
-      <Stack mt="md" spacing={"24px"}>
+      <Stack spacing={"24px"}>
         <Select
           searchable
           size={"md"}

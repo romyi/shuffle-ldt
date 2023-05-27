@@ -15,7 +15,7 @@ import { IndicatorCard } from "@features/follow-user-calculation-experience/comp
 import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
 import { useState } from "react";
-import { IconFlag2Filled } from "@tabler/icons-react";
+import { IconFlag2Filled, IconInfoCircle } from "@tabler/icons-react";
 
 const finish_access_checks = [
   "branch",
@@ -86,14 +86,6 @@ export const CalculationTracker = () => {
             url="/calculation/legal"
             showOn={["squareFacilities", "squareLand"]}
             contentOn={["equipmentUnits", "branch"]}
-            placeholder={
-              <>
-                <Text>Справка по заполнению</Text>
-                <Button mt="md" color={"cyan"} size="xs" variant={"outline"}>
-                  Почитать
-                </Button>
-              </>
-            }
             follower="Заполните данные о предприятии"
           >
             <SimpleGrid cols={2}>
@@ -122,14 +114,6 @@ export const CalculationTracker = () => {
             showOn={["district"]}
             contentOn={["squareFacilities", "squareLand"]}
             follower="Заполните данные о площадях"
-            placeholder={
-              <>
-                <Text>Справка по заполнению</Text>
-                <Button mt="md" color={"cyan"} size="xs" variant={"outline"}>
-                  Почитать
-                </Button>
-              </>
-            }
           >
             <SimpleGrid cols={2}>
               <Stack spacing={"0px"}>
@@ -160,7 +144,6 @@ export const CalculationTracker = () => {
             url="/calculation"
             showOn={null}
             contentOn={["district"]}
-            placeholder="Выберите округ"
           >
             <SimpleGrid>
               <Stack spacing={"0px"}>

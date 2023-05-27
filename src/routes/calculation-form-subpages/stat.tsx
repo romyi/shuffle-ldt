@@ -1,14 +1,12 @@
 import { Container, NumberInput, Stack, Switch } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
-import { IconInfoCircle } from "@tabler/icons-react";
 import { useRecoilState } from "recoil";
 
 export const Stat = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   return (
     <Container size={"xs"}>
-      <IconInfoCircle />
-      <Stack mt="md" spacing={"48px"}>
+      <Stack spacing={"48px"}>
         <Stack spacing={"md"}>
           <NumberInput
             size={"md"}

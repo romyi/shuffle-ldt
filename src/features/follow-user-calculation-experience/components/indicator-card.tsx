@@ -1,4 +1,5 @@
 import { Button, Card, Stack, Text } from "@mantine/core";
+import { IconInfoCircle } from "@tabler/icons-react";
 import { Calculation } from "@tyles/calculation";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { ReactNode } from "react";
@@ -9,7 +10,6 @@ type IndicatorCardProps = {
   url: string;
   showOn: Array<Partial<keyof Calculation>> | null;
   contentOn: Array<Partial<keyof Calculation>>;
-  placeholder?: ReactNode;
   children: React.ReactNode;
   follower?: string;
 };
@@ -19,7 +19,6 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
   showOn,
   contentOn,
   children,
-  placeholder,
   follower,
 }) => {
   const matched = useMatch(url);
@@ -48,13 +47,29 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
             {renderChild ? (
               children
             ) : matched ? (
-              placeholder || null
-            ) : (
-              <Stack align={"left"}>
-                <Button radius={"md"} size={"sm"} color="cyan">
-                  Следующий шаг
+              <Stack align={"center"}>
+                <Text color={"gray"} size="xs">
+                  Справка
+                </Text>
+
+                <Button
+                  leftIcon={<IconInfoCircle />}
+                  color={"gray"}
+                  size="xs"
+                  variant={"outline"}
+                >
+                  Ознакомиться
                 </Button>
-                <Text color={"dimmed"}>{follower}</Text>
+              </Stack>
+            ) : (
+              <Stack align={"center"}>
+                <Text ta="center" size="xs">
+                  {follower}
+                </Text>
+
+                <Button color={"cyan"} size="xs" variant={"outline"}>
+                  Перейти
+                </Button>
               </Stack>
             )}
           </Card>

@@ -19,7 +19,7 @@ export const DesktopContent = () => {
             color="dark"
             active={Boolean(useMatch("/calculation"))}
             label="Новый"
-            description="Сделать новый расчет"
+            description="Если Вы начинали заполнять данные в калькуляторе, они будут утеряны"
             icon={<IconTablePlus size={24} />}
             onClick={() => {
               clearShapshot();
