@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { AppShell, MantineProvider } from "@mantine/core";
 import {
-  BigNavbar,
   MobileFooter,
   MobileHeader,
   MobileNavigation,
@@ -53,9 +52,6 @@ const App: React.FC = () => {
           },
           Container: {
             defaultProps: {
-              sx: {
-                marginLeft: smallScreen ? "auto" : "180px",
-              },
               size: smallScreen ? "xs" : "md",
             },
           },
@@ -73,10 +69,9 @@ const App: React.FC = () => {
     >
       <AppShell
         layout="alt"
-        padding={0}
-        navbar={<BigNavbar />}
-        header={smallScreen ? <MobileHeader /> : <></>}
-        footer={smallScreen ? <MobileFooter /> : <></>}
+        padding={12}
+        header={<MobileHeader />}
+        footer={<MobileFooter />}
       >
         <Outlet />
         <MobileNavigation />

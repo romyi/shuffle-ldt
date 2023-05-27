@@ -13,7 +13,7 @@ const headerClasses = createStyles({
 export const MobileHeader = () => {
   const { classes } = headerClasses();
   const location = useLocation();
-  if (location.pathname.split("/").includes("calculation")) return null;
+  // if (location.pathname.split("/").includes("calculation")) return null;
   return (
     <Header classNames={{ root: classes.root }} withBorder={false} height={100}>
       <Container pr="xl" pl="xl">

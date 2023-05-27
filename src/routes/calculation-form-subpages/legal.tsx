@@ -6,7 +6,7 @@ export const Legal = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
 
   return (
-    <Container size={"sm"} pt="sm">
+    <Container size={"xs"} pt="sm">
       <Stack spacing={"48px"} mt="xl">
         <Select
           searchable
