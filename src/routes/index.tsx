@@ -22,15 +22,11 @@ const calculation_config = [
 export const external_config = [
   {
     path: "",
-    element: <Home />,
+    element: <Reports />,
   },
   {
     path: "user",
     element: <Profile />,
-  },
-  {
-    path: "reports",
-    element: <Reports />,
   },
   {
     path: "calculation",

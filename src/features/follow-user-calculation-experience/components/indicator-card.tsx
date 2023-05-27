@@ -25,7 +25,6 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
   const show = useCalculationMatch(showOn);
   const renderChild = useCalculationMatch(contentOn);
   const navigate = useNavigate();
-
   if (show) {
     return (
       <AnimatePresence>

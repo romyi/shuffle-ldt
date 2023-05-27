@@ -11,12 +11,12 @@ export const Stat = () => {
           <NumberInput
             size={"md"}
             required
-            value={calculation.snapshot.squareLand || 250}
+            value={calculation.snapshot.landSquare || 250}
             onChange={(value) =>
               setcalculation({
                 snapshot: {
                   ...calculation.snapshot,
-                  squareLand: value === "" ? null : Number(value),
+                  landSquare: value === "" ? null : Number(value),
                 },
               })
             }
@@ -45,12 +45,12 @@ export const Stat = () => {
           <NumberInput
             required
             size={"md"}
-            value={calculation.snapshot.squareFacilities || 100}
+            value={calculation.snapshot.facilitySquare || 100}
             onChange={(value) =>
               setcalculation({
                 snapshot: {
                   ...calculation.snapshot,
-                  squareFacilities: value === "" ? null : Number(value),
+                  facilitySquare: value === "" ? null : Number(value),
                 },
               })
             }
@@ -64,12 +64,12 @@ export const Stat = () => {
           />
           <Switch
             label="Есть арендованные здания"
-            checked={calculation.snapshot.isFacilitiesRental || false}
+            checked={calculation.snapshot.isFacilityRental || false}
             onChange={(event) =>
               setcalculation({
                 snapshot: {
                   ...calculation.snapshot,
-                  isFacilitiesRental: event.currentTarget.checked,
+                  isFacilityRental: event.currentTarget.checked,
                 },
               })
             }

@@ -1,12 +1,6 @@
-import axios from "axios";
 import { createQueryKeyStore } from "@lukemorales/query-key-factory";
-
-const HOST = "https://api.xn--d1abbla2bcfdv6l.xn--80adxhks";
-
-const instance = axios.create({
-  baseURL: HOST,
-  transformResponse: (data) => data.response,
-});
+import { ErrorResponse } from "@remix-run/router";
+import { instance } from ".";
 
 export const keys = createQueryKeyStore({
   auth: {
@@ -35,7 +29,24 @@ export const keys = createQueryKeyStore({
   user: {
     me: () => ({
       queryKey: ["me"],
-      queryFn: () => instance({ url: "/user/me" }).then().catch(),
+      queryFn: () => {
+        return instance({ url: "/users/me" })
+          .then((response) => {
+            return response;
+          })
+          .catch(() => {
+            return Promise.reject(new Error());
+          });
+      },
+    }),
+  },
+  static: {
+    industries: () => ({
+      queryKey: ["industries"],
+      queryFn: (): Promise<Array<{ id: number; name: string }>> =>
+        instance({ url: "/static/industries" })
+          .then((response) => response.data)
+          .catch(),
     }),
   },
 });

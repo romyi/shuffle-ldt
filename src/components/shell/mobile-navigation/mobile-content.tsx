@@ -31,13 +31,13 @@ export const MobileContent = () => {
             maw={320}
             variant={"subtle"}
             color="dark"
-            active={Boolean(useMatch("/reports"))}
+            active={Boolean(useMatch("/"))}
             label="Список"
             description="Просмотреть список расчётов"
             icon={<IconFileCheck size={24} />}
             onClick={() => {
               setuistate({ ...uistate, drawer: null });
-              navigate("/reports");
+              navigate("/");
             }}
           />
         </Stack>
@@ -46,7 +46,7 @@ export const MobileContent = () => {
           color={"dark"}
           variant={"subtle"}
           active={Boolean(useMatch("/user"))}
-          label="Завершить регистрацию"
+          label="Регистрация"
           description="Заполнить ИНН, ФИО и получить подробный отчет"
           icon={<IconFileCheck size={24} />}
           onClick={() => {

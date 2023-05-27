@@ -10,12 +10,12 @@ export const useClearSnapshot = () => {
         district_display_alias: null,
         branch: null,
         personnel: null,
-        squareLand: null,
-        squareFacilities: null,
-        isEnterpreneur: null,
-        equipmentUnits: null,
-        isLandRental: null,
-        isFacilitiesRental: null,
+        landSquare: null,
+        facilitySquare: null,
+        isIndividual: false,
+        equipment: null,
+        isFacilityRental: false,
+        isLandRental: false,
       },
     });
 };

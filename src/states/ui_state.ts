@@ -1,14 +1,21 @@
-import { atom } from "recoil";
+import { useEffect } from "react";
+import { atom, useRecoilState } from "recoil";
 
 export const ui = atom<{
-  navigation_drawer: boolean;
-  calculation_drawer: boolean;
   drawer: "calculation" | "navigation" | null;
+  visited: boolean;
 }>({
   key: "ui-state",
   default: {
-    navigation_drawer: false,
-    calculation_drawer: false,
     drawer: null,
+    visited: false,
   },
 });
+
+export const useRestoreVisitInfo = () => {
+  const [uistate, setuistate] = useRecoilState(ui);
+  useEffect(() => {
+    const visited = localStorage.getItem("visited");
+    setuistate({ ...uistate, visited: Boolean(visited) });
+  }, []);
+};
