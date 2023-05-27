@@ -4,7 +4,7 @@ export const Logo = () => (
   <Stack spacing={"0px"}>
     <Group spacing={6}>
       <Text fw={800} size={"lg"}>
-        Моё
+        Предприятие
       </Text>
       <Text
         fw={800}
@@ -12,10 +12,10 @@ export const Logo = () => (
         gradient={{ from: "grape", to: "red", deg: 20 }}
         size="lg"
       >
-        Предприятие
+        Москва
       </Text>
     </Group>
-    <Text color={"#DCE0E7"} maw="240px" size="xs">
+    <Text color={"#DCE0E7"} fw={400} maw="240px" size="xs">
       Департамент инвестиционной и промышленной политики Москвы
     </Text>
   </Stack>

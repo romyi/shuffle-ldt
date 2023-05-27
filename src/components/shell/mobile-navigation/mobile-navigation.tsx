@@ -2,6 +2,7 @@ import { Drawer, createStyles } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { ui } from "@states/ui_state";
 import { useRecoilState } from "recoil";
+import { SMALL_SCREEN_EXTENT } from "../../../consts";
 import { DesktopContent } from "./desktop-content";
 import { MobileContent } from "./mobile-content";
 
@@ -25,7 +26,7 @@ const useStyles = createStyles(() => ({
 export const MobileNavigation = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
-  const smallScreen = useMediaQuery("(max-width: 1280px)");
+  const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);
 
   const { classes } = useStyles();
   return (

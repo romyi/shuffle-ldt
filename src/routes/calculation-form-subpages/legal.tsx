@@ -1,13 +1,15 @@
 import { Container, NumberInput, Select, Stack, Switch } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
+import { IconInfoCircle } from "@tabler/icons-react";
 import { useRecoilState } from "recoil";
 
 export const Legal = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
 
   return (
-    <Container size={"xs"} pt="sm">
-      <Stack spacing={"48px"} mt="xl">
+    <Container size={"xs"}>
+      <IconInfoCircle />
+      <Stack mt="md" spacing={"24px"}>
         <Select
           searchable
           size={"md"}
@@ -60,15 +62,16 @@ export const Legal = () => {
         />
         <Switch
           label="Я индивидуальный предприниматель"
-          checked={calculation.snapshot.isEnterpreneur || false}
-          onChange={(event) =>
+          checked={Boolean(calculation.snapshot.isEnterpreneur)}
+          onChange={(event) => {
+            console.log(event.currentTarget.checked);
             setcalculation({
               snapshot: {
                 ...calculation.snapshot,
                 isEnterpreneur: event.currentTarget.checked,
               },
-            })
-          }
+            });
+          }}
         />
       </Stack>
     </Container>

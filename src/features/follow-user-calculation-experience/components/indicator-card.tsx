@@ -1,8 +1,7 @@
-import { Card, Stack, Text, Title } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
+import { Button, Card, Stack, Text } from "@mantine/core";
 import { Calculation } from "@tyles/calculation";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { ReactNode } from "react";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useCalculationMatch } from "../hooks";
 
@@ -10,8 +9,9 @@ type IndicatorCardProps = {
   url: string;
   showOn: Array<Partial<keyof Calculation>> | null;
   contentOn: Array<Partial<keyof Calculation>>;
-  placeholder: string;
+  placeholder?: ReactNode;
   children: React.ReactNode;
+  follower?: string;
 };
 
 export const IndicatorCard: React.FC<IndicatorCardProps> = ({
@@ -20,6 +20,7 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
   contentOn,
   children,
   placeholder,
+  follower,
 }) => {
   const matched = useMatch(url);
   const show = useCalculationMatch(showOn);
@@ -36,7 +37,7 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
           exit={{ y: 400 }}
         >
           <Card
-            miw={200}
+            miw={180}
             withBorder={Boolean(matched?.pathname)}
             h={140}
             shadow={matched?.pathname ? "xl" : "xs"}
@@ -47,13 +48,13 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
             {renderChild ? (
               children
             ) : matched ? (
-              <Title order={4}>{placeholder}</Title>
+              placeholder || null
             ) : (
-              <Stack align={"center"}>
-                <Text ta="center" color={"dimmed"}>
+              <Stack align={"left"}>
+                <Button radius={"md"} size={"sm"} color="cyan">
                   Следующий шаг
-                </Text>
-                <IconPlus size={36} />
+                </Button>
+                <Text color={"dimmed"}>{follower}</Text>
               </Stack>
             )}
           </Card>

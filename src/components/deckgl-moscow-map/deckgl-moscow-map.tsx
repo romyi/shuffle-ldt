@@ -11,18 +11,15 @@ export const MoscowMap = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   const xs = useMediaQuery("(max-height: 700px)");
   const s = useMediaQuery("(max-height: 915px)");
-  const md = useMediaQuery("(max-height: 1080px)");
+  const md = useMediaQuery("(max-width: 1080px)");
   const zoom = useMemo(() => {
-    if (xs) return 7.6;
-    if (s) return 8;
-    if (md) return 8.4;
-    return 9.4;
+    return 8.4;
   }, [xs, s, md]);
   return (
     <DeckGL
       viewState={{
         longitude: 37.418,
-        latitude: 55.4612,
+        latitude: 55.6312,
         zoom: zoom,
       }}
       layers={[

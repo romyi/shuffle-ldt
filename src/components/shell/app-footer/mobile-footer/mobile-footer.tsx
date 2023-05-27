@@ -1,38 +1,19 @@
-import {
-  Container,
-  createStyles,
-  Footer,
-  Group,
-  Indicator,
-  Text,
-} from "@mantine/core";
+import { Container, Footer, Group, Indicator, Text } from "@mantine/core";
 import { useRecoilState } from "recoil";
 import { ui } from "@states/ui_state";
 import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { calculation_state } from "@states/calculation";
 
-const useFooterStyles = createStyles({
-  root: {
-    zIndex: 100,
-  },
-});
-
 export const MobileFooter = () => {
   const [uistate, setuistate] = useRecoilState(ui);
-  const { classes } = useFooterStyles();
   const navigate = useNavigate();
   const [calculation] = useRecoilState(calculation_state);
   return (
-    <Footer
-      classNames={{ root: classes.root }}
-      withBorder={false}
-      height={70}
-      pt="md"
-    >
-      <Container pr="xl" pl="xl">
+    <Footer withBorder={false} height={70} zIndex={115}>
+      <Container>
         <Group noWrap spacing="63px" position="apart" align="flex-end">
-          <Text color="#DCE0E7" size="xs">
+          <Text color="dimmed" size="xs">
             Гость
           </Text>
           <Group spacing={"xl"} pr={"xl"}>
