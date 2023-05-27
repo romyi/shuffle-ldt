@@ -14,6 +14,7 @@ import { SMALL_SCREEN_EXTENT } from "./consts";
 const App: React.FC = () => {
   const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);
 
+  // useRestoreVisitInfo();
   useRestoreSnapshot();
 
   const state = useRecoilValue(calculation_state);

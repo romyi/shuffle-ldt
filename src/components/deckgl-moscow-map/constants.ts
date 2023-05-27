@@ -37,7 +37,7 @@ export const text_titles = [
   },
   {
     text: "ЗелАО",
-    position: [37.08426, 55.98],
+    position: [37.31426, 55.98],
     color: [0, 0, 0],
   },
   {

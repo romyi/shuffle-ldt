@@ -7,31 +7,52 @@ import {
   Stack,
   SimpleGrid,
   Button,
+  LoadingOverlay,
 } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
-import { ui } from "@states/ui_state";
+import { ui } from "@states/ui";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { IndicatorCard } from "@features/follow-user-calculation-experience/components";
 import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
 import { useState } from "react";
 import { IconFlag2Filled } from "@tabler/icons-react";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { keys } from "@network/index";
 
 const finish_access_checks = [
   "branch",
   "district",
-  "equipmentUnits",
+  "equipment",
   "personnel",
-  "squareFacilities",
-  "squareLand",
+  "facilitySquare",
+  "landSquare",
 ] satisfies Array<Partial<keyof Calculation>>;
 
 export const CalculationTracker = () => {
   const [uistate, setuistate] = useRecoilState(ui);
+  const navigate = useNavigate();
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const calculation = useRecoilValue(calculation_state);
   const [oncheck, setoncheck] = useState(false);
   const { classes } = useClasses();
+  const [start, setstart] = useState(false);
+  const { isFetching } = useQuery({
+    ...keys.reports.create({
+      ...calculation.snapshot,
+      branch: Number(calculation.snapshot.branch),
+    }),
+    enabled: start,
+    onSuccess: (data) => {
+      localStorage.setItem(
+        "report",
+        JSON.stringify({ from: data.from, to: data.to })
+      );
+      navigate("/");
+    },
+  });
+
   return (
     <Drawer
       zIndex={oncheck ? 120 : 110}
@@ -56,6 +77,7 @@ export const CalculationTracker = () => {
             showOn={finish_access_checks}
             contentOn={finish_access_checks}
           >
+            <LoadingOverlay zIndex={300} visible={isFetching} />
             <Stack>
               {oncheck && (
                 <Button
@@ -69,7 +91,17 @@ export const CalculationTracker = () => {
                 </Button>
               )}
               <Button
-                onClick={() => setoncheck(true)}
+                onClick={
+                  oncheck
+                    ? () => {
+                        // requestCalculationData.mutate({
+                        //   ...calculation.snapshot,
+                        //   branch: Number(calculation.snapshot.branch),
+                        // });
+                        setstart(true);
+                      }
+                    : () => setoncheck(true)
+                }
                 radius={"md"}
                 size={"md"}
               >
@@ -84,16 +116,8 @@ export const CalculationTracker = () => {
           </IndicatorCard>
           <IndicatorCard
             url="/calculation/legal"
-            showOn={["squareFacilities", "squareLand"]}
-            contentOn={["equipmentUnits", "branch"]}
-            placeholder={
-              <>
-                <Text>Справка по заполнению</Text>
-                <Button mt="md" color={"cyan"} size="xs" variant={"outline"}>
-                  Почитать
-                </Button>
-              </>
-            }
+            showOn={["facilitySquare", "landSquare"]}
+            contentOn={["equipment", "branch", "personnel"]}
             follower="Заполните данные о предприятии"
           >
             <SimpleGrid cols={2}>
@@ -107,10 +131,10 @@ export const CalculationTracker = () => {
                 <Text size="sm" color="dimmed">
                   Техники
                 </Text>{" "}
-                <Text>{calculation.snapshot.equipmentUnits} ед</Text>
+                <Text>{calculation.snapshot.equipment} ед</Text>
               </Stack>
               <Text size="xs">{calculation.snapshot.branch}</Text>
-              {calculation.snapshot.isEnterpreneur && (
+              {calculation.snapshot.isIndividual && (
                 <Badge radius={"sm"} color="cyan">
                   ИП
                 </Badge>
@@ -120,23 +144,15 @@ export const CalculationTracker = () => {
           <IndicatorCard
             url="/calculation/stat"
             showOn={["district"]}
-            contentOn={["squareFacilities", "squareLand"]}
+            contentOn={["facilitySquare", "landSquare"]}
             follower="Заполните данные о площадях"
-            placeholder={
-              <>
-                <Text>Справка по заполнению</Text>
-                <Button mt="md" color={"cyan"} size="xs" variant={"outline"}>
-                  Почитать
-                </Button>
-              </>
-            }
           >
             <SimpleGrid cols={2}>
               <Stack spacing={"0px"}>
                 <Text size="sm" color="dimmed">
                   Земля
                 </Text>{" "}
-                <Text>{calculation.snapshot.squareLand} м²</Text>
+                <Text>{calculation.snapshot.landSquare} м²</Text>
                 {calculation.snapshot.isLandRental && (
                   <Badge radius={"sm"} mt="md" ml="-5px" color={"cyan"}>
                     Аренда
@@ -147,8 +163,8 @@ export const CalculationTracker = () => {
                 <Text size="sm" color="dimmed">
                   Здания
                 </Text>{" "}
-                <Text>{calculation.snapshot.squareFacilities} м²</Text>
-                {calculation.snapshot.isFacilitiesRental && (
+                <Text>{calculation.snapshot.facilitySquare} м²</Text>
+                {calculation.snapshot.isFacilityRental && (
                   <Badge radius={"sm"} mt="md" color={"cyan"}>
                     Аренда
                   </Badge>
@@ -160,9 +176,8 @@ export const CalculationTracker = () => {
             url="/calculation"
             showOn={null}
             contentOn={["district"]}
-            placeholder="Выберите округ"
           >
-            <SimpleGrid>
+            <SimpleGrid cols={1}>
               <Stack spacing={"0px"}>
                 <Text color="dimmed" size="sm">
                   Выбранный округ
@@ -170,8 +185,8 @@ export const CalculationTracker = () => {
                 <Text mb="12px">
                   {calculation.snapshot.district_display_alias}
                 </Text>
-                <IconFlag2Filled />
               </Stack>
+              <IconFlag2Filled />
             </SimpleGrid>
           </IndicatorCard>
         </Group>

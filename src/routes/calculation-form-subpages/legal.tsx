@@ -1,28 +1,37 @@
 import { Container, NumberInput, Select, Stack, Switch } from "@mantine/core";
+import { keys } from "@network/keystore";
 import { calculation_state } from "@states/calculation";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { useQuery } from "@tanstack/react-query";
 import { useRecoilState } from "recoil";
 
 export const Legal = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
-
+  const { data, isFetching } = useQuery(keys.static.industries());
   return (
     <Container size={"xs"}>
-      <IconInfoCircle />
-      <Stack mt="md" spacing={"24px"}>
+      <Stack spacing={"24px"}>
         <Select
+          disabled={isFetching}
           searchable
           size={"md"}
           clearable
           description="Выберите из списка"
-          value={calculation.snapshot.branch}
+          value={String(calculation.snapshot.branch)}
           onChange={(value) =>
             setcalculation({
               snapshot: { ...calculation.snapshot, branch: value },
             })
           }
           label={"Отрасль"}
-          data={["Рыболовное хоз-во"]}
+          placeholder={data ? data[0].name : "Данные загружаются"}
+          data={
+            data
+              ? data.map((display) => ({
+                  label: display.name,
+                  value: String(display.id),
+                }))
+              : []
+          }
         />
 
         <NumberInput
@@ -43,12 +52,12 @@ export const Legal = () => {
         />
         <NumberInput
           size={"md"}
-          value={calculation.snapshot.equipmentUnits || 30}
+          value={calculation.snapshot.equipment || 30}
           onChange={(value) =>
             setcalculation({
               snapshot: {
                 ...calculation.snapshot,
-                equipmentUnits: Number(value),
+                equipment: Number(value),
               },
             })
           }
@@ -62,13 +71,12 @@ export const Legal = () => {
         />
         <Switch
           label="Я индивидуальный предприниматель"
-          checked={Boolean(calculation.snapshot.isEnterpreneur)}
+          checked={Boolean(calculation.snapshot.isIndividual)}
           onChange={(event) => {
-            console.log(event.currentTarget.checked);
             setcalculation({
               snapshot: {
                 ...calculation.snapshot,
-                isEnterpreneur: event.currentTarget.checked,
+                isIndividual: event.currentTarget.checked,
               },
             });
           }}

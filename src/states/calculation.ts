@@ -14,12 +14,12 @@ export const calculation_state = atom<{ snapshot: Calculation }>({
       district_display_alias: null,
       branch: null,
       personnel: null,
-      squareLand: null,
-      squareFacilities: null,
-      isEnterpreneur: null,
-      equipmentUnits: null,
+      landSquare: null,
+      facilitySquare: null,
+      isIndividual: null,
+      equipment: null,
       isLandRental: null,
-      isFacilitiesRental: null,
+      isFacilityRental: null,
       ...isStorageSnapshot(),
     },
   },
@@ -27,6 +27,7 @@ export const calculation_state = atom<{ snapshot: Calculation }>({
 
 export const useRestoreSnapshot = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
+
   useEffect(() => {
     setcalculation({
       snapshot: { ...calculation.snapshot, ...isStorageSnapshot() },

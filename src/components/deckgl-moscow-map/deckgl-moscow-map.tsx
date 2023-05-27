@@ -7,25 +7,37 @@ import { useMemo } from "react";
 import { useRecoilState } from "recoil";
 import { calculation_state } from "@states/calculation";
 
+const filter_districts = (
+  districts_geojson: typeof districts
+): typeof districts => {
+  const filtered_features = districts_geojson.features.filter(
+    (feature) =>
+      feature.properties.NAME_AO !== "Новомосковский" &&
+      feature.properties.NAME_AO !== "Троицкий"
+  );
+  return { type: districts_geojson.type, features: filtered_features };
+};
+
+const target_districts = filter_districts(districts);
+
 export const MoscowMap = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
-  const xs = useMediaQuery("(max-height: 700px)");
-  const s = useMediaQuery("(max-height: 915px)");
-  const md = useMediaQuery("(max-width: 1080px)");
+  const md = useMediaQuery("(max-height: 1080px)");
   const zoom = useMemo(() => {
-    return 8.4;
-  }, [xs, s, md]);
+    if (md) return 8.5;
+    return 9;
+  }, [md]);
   return (
     <DeckGL
       viewState={{
-        longitude: 37.418,
+        longitude: 37.558,
         latitude: 55.6312,
         zoom: zoom,
       }}
       layers={[
         new GeoJsonLayer({
           id: "districts",
-          data: districts,
+          data: target_districts,
           filled: true,
           updateTriggers: {
             getFillColor: { calculation },

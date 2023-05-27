@@ -9,9 +9,9 @@ export const calculation_step = selector({
       return "/calculation";
     } else if (
       !snapshot.personnel ||
-      !snapshot.squareLand ||
-      !snapshot.squareFacilities ||
-      !snapshot.equipmentUnits
+      !snapshot.landSquare ||
+      !snapshot.facilitySquare ||
+      !snapshot.equipment
     ) {
       return "/calculation/stat";
     } else {

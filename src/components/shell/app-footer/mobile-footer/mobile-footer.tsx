@@ -1,20 +1,31 @@
-import { Container, Footer, Group, Indicator, Text } from "@mantine/core";
+import {
+  Container,
+  Footer,
+  Group,
+  Indicator,
+  Loader,
+  Text,
+} from "@mantine/core";
 import { useRecoilState } from "recoil";
-import { ui } from "@states/ui_state";
+import { ui } from "@states/ui";
 import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { calculation_state } from "@states/calculation";
+import { useQuery } from "@tanstack/react-query";
+import { keys } from "@network/keystore";
 
 export const MobileFooter = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const navigate = useNavigate();
   const [calculation] = useRecoilState(calculation_state);
+  const { isError, isFetching } = useQuery(keys.user.me());
   return (
     <Footer withBorder={false} height={70} zIndex={115}>
       <Container>
         <Group noWrap spacing="63px" position="apart" align="flex-end">
-          <Text color="dimmed" size="xs">
-            Гость
+          {isFetching && <Loader size={"xs"} />}
+          <Text color="dimmed" size="sm">
+            {isError && "Гость"}
           </Text>
           <Group spacing={"xl"} pr={"xl"}>
             {calculation.snapshot.district_display_alias && (
