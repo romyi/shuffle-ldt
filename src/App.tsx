@@ -10,7 +10,6 @@ import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state, useRestoreSnapshot } from "@states/calculation";
 import { SMALL_SCREEN_EXTENT } from "./consts";
-import { useRestoreVisitInfo } from "@states/ui_state";
 
 const App: React.FC = () => {
   const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);

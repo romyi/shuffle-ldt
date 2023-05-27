@@ -1,6 +1,6 @@
 import { useClearSnapshot } from "@features/follow-user-calculation-experience/hooks/useClearSnapshot";
 import { Container, Text, Stack, NavLink, SimpleGrid } from "@mantine/core";
-import { ui } from "@states/ui_state";
+import { ui } from "@states/ui";
 import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";

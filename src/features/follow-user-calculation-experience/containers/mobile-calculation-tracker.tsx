@@ -7,17 +7,20 @@ import {
   Stack,
   SimpleGrid,
   Button,
+  LoadingOverlay,
 } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
-import { ui } from "@states/ui_state";
+import { ui } from "@states/ui";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { IndicatorCard } from "@features/follow-user-calculation-experience/components";
 import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconFlag2Filled } from "@tabler/icons-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { requestCalculation } from "@network/mutations";
+import { useNavigate } from "react-router-dom";
+import { keys } from "@network/index";
 
 const finish_access_checks = [
   "branch",
@@ -30,14 +33,27 @@ const finish_access_checks = [
 
 export const CalculationTracker = () => {
   const [uistate, setuistate] = useRecoilState(ui);
+  const navigate = useNavigate();
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const calculation = useRecoilValue(calculation_state);
   const [oncheck, setoncheck] = useState(false);
   const { classes } = useClasses();
-  const requestCalculationData = useMutation(
-    [requestCalculation.key],
-    requestCalculation
-  );
+  const [start, setstart] = useState(false);
+  const { isFetching } = useQuery({
+    ...keys.reports.create({
+      ...calculation.snapshot,
+      branch: Number(calculation.snapshot.branch),
+    }),
+    enabled: start,
+    onSuccess: (data) => {
+      localStorage.setItem(
+        "report",
+        JSON.stringify({ from: data.from, to: data.to })
+      );
+      navigate("/");
+    },
+  });
+
   return (
     <Drawer
       zIndex={oncheck ? 120 : 110}
@@ -62,6 +78,7 @@ export const CalculationTracker = () => {
             showOn={finish_access_checks}
             contentOn={finish_access_checks}
           >
+            <LoadingOverlay zIndex={300} visible={isFetching} />
             <Stack>
               {oncheck && (
                 <Button
@@ -78,10 +95,11 @@ export const CalculationTracker = () => {
                 onClick={
                   oncheck
                     ? () => {
-                        requestCalculationData.mutate({
-                          ...calculation.snapshot,
-                          branch: Number(calculation.snapshot.branch),
-                        });
+                        // requestCalculationData.mutate({
+                        //   ...calculation.snapshot,
+                        //   branch: Number(calculation.snapshot.branch),
+                        // });
+                        setstart(true);
                       }
                     : () => setoncheck(true)
                 }

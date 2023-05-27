@@ -1,15 +1,15 @@
 import { createQueryKeyStore } from "@lukemorales/query-key-factory";
-import { ErrorResponse } from "@remix-run/router";
+import { Calculation } from "@tyles/calculation";
 import { instance } from ".";
 
 export const keys = createQueryKeyStore({
   auth: {
-    token: () => ({
+    token: ({ email, code }: { email: string; code: string }) => ({
       queryKey: ["token"],
-      queryFn: (ctx: { email: string; code: string }) =>
+      queryFn: () =>
         instance({
           url: "/auth/token",
-          params: { email: ctx.email, code: ctx.code },
+          params: { email: email, code: code },
         })
           .then((response) => response)
           .catch(),
@@ -18,10 +18,10 @@ export const keys = createQueryKeyStore({
       queryKey: ["refresh"],
       queryFn: () => instance({ url: "/auth/token/refresh" }).then().catch(),
     }),
-    sendAuthCode: () => ({
+    sendAuthCode: (email: string) => ({
       queryKey: ["send-code"],
-      queryFn: (ctx: { email: string }) =>
-        instance({ url: "/auth/token", params: { email: ctx.email } })
+      queryFn: () =>
+        instance({ url: "/auth/otp-code", params: { email: email } })
           .then()
           .catch(),
     }),
@@ -47,6 +47,22 @@ export const keys = createQueryKeyStore({
         instance({ url: "/static/industries" })
           .then((response) => response.data)
           .catch(),
+    }),
+  },
+  reports: {
+    create: (calculation: Calculation) => ({
+      queryKey: ["create"],
+      queryFn: (): Promise<{ from: string; to: string }> =>
+        instance({
+          url: "/reports",
+          method: "POST",
+          data: calculation,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.data)
+          .catch((error) => error),
     }),
   },
 });

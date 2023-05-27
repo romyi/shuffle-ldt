@@ -7,7 +7,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useRecoilState } from "recoil";
-import { ui } from "@states/ui_state";
+import { ui } from "@states/ui";
 import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { calculation_state } from "@states/calculation";
