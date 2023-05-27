@@ -2,7 +2,7 @@ import { Button, Card, Stack, Text } from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { Calculation } from "@tyles/calculation";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { ReactNode } from "react";
+import React from "react";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useCalculationMatch } from "../hooks";
 

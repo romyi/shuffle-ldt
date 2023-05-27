@@ -15,7 +15,7 @@ import { IndicatorCard } from "@features/follow-user-calculation-experience/comp
 import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
 import { useState } from "react";
-import { IconFlag2Filled, IconInfoCircle } from "@tabler/icons-react";
+import { IconFlag2Filled } from "@tabler/icons-react";
 
 const finish_access_checks = [
   "branch",
