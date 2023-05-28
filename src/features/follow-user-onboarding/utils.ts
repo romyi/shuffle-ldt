@@ -7,7 +7,6 @@ export const useStoragedCalc = ():
   | ({ from: string; to: string } & Calculation)
   | null => {
   const calc = localStorage.getItem("report");
-  const data = localStorage.getItem("snapshot");
   const calculation = useRecoilValue(calculation_state);
   const [storaged, setStoraged] = useState<
     null | ({ from: string; to: string } & Calculation)
