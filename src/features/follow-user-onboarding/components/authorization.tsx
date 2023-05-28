@@ -1,8 +1,12 @@
 import {
   Accordion,
+  Alert,
   Button,
+  Card,
+  Container,
   LoadingOverlay,
   PinInput,
+  SimpleGrid,
   Stack,
   TextInput,
 } from "@mantine/core";
@@ -20,7 +24,11 @@ export const Authorization = () => {
   const [hasTokenAsked, setHasTokenAsked] = useState(false);
 
   // надо подумать что лучше использовать: квери или мутацию
-  const { isSuccess: isEmailCodeSent, isFetching: mailPending } = useQuery({
+  const {
+    isSuccess: isEmailCodeSent,
+    isError,
+    isFetching: mailPending,
+  } = useQuery({
     ...keys.auth.askEmailCode(mail),
     enabled: hasAuthCodeAsked,
     onSettled: () => setHasAuthCodeAsked(false),
@@ -47,37 +55,39 @@ export const Authorization = () => {
     },
   });
   return (
-    <Accordion
-      sx={{ maxWidth: "400px", margin: "32px auto" }}
-      value={isEmailCodeSent ? "code" : "mail"}
-    >
+    <SimpleGrid>
+      <Alert color={"cyan"}>
+        Мы отправим 6-ти значный код на указанный адрес.
+        {hasTokenAsked && "Введите его в поле ниже"}
+      </Alert>
       <LoadingOverlay visible={mailPending || tokenPending} />
-      <Accordion.Item value="mail">
-        <Accordion.Control>Введите e-mail:</Accordion.Control>
-        <Accordion.Panel>
-          <Stack>
-            <TextInput
-              onChange={(event) => setmail(event.currentTarget.value)}
-              value={mail}
-              placeholder="промышленность@internet.ru"
-            />
-            <Button onClick={() => setHasAuthCodeAsked(true)}>Отправить</Button>
-          </Stack>
-        </Accordion.Panel>
-      </Accordion.Item>
-      <Accordion.Item value="code">
-        <Accordion.Control>Полученный код:</Accordion.Control>
-        <Accordion.Panel>
+      <Card>
+        <Stack>
+          <TextInput
+            onChange={(event) => setmail(event.currentTarget.value)}
+            value={mail}
+            placeholder="промышленность@internet.ru"
+          />
+          <Button variant={"outline"} onClick={() => setHasAuthCodeAsked(true)}>
+            Получить код авторизации
+          </Button>
+        </Stack>
+      </Card>
+      {isEmailCodeSent && (
+        <Card>
           <Stack>
             <PinInput
               onChange={(value) => setcode(value)}
-              size={"xl"}
+              size={"sm"}
               length={6}
             />
             <Button onClick={() => setHasTokenAsked(true)}>Войти</Button>
           </Stack>
-        </Accordion.Panel>
-      </Accordion.Item>
-    </Accordion>
+        </Card>
+      )}
+      {isError && (
+        <Alert color={"yellow"}>Пожалуйста, введите корректный адрес</Alert>
+      )}
+    </SimpleGrid>
   );
 };

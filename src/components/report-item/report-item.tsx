@@ -15,13 +15,13 @@ export const CalculationReportItem: React.FC<{
           <Group>
             <Text size={"xs"}>мин.</Text>
             <Text color={"pink"} fw={800}>
-              {item?.from}
+              {Number(item?.from).toFixed(2)} тыс
             </Text>
           </Group>
           <Group>
             <Text size={"xs"}>макc.</Text>
             <Text color={"pink"} fw={800}>
-              {item?.to}
+              {Number(item?.to).toFixed(2)} тыс
             </Text>
           </Group>
         </Group>

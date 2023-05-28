@@ -1,5 +1,7 @@
 import { createQueryKeyStore } from "@lukemorales/query-key-factory";
 import { Calculation } from "@tyles/calculation";
+import { User } from "@tyles/user";
+import { m } from "framer-motion";
 import { instance } from ".";
 
 export const keys = createQueryKeyStore({
@@ -26,7 +28,7 @@ export const keys = createQueryKeyStore({
       queryFn: () =>
         instance({ url: "/auth/otp-code", params: { email: email } })
           .then()
-          .catch(),
+          .catch(() => Promise.reject(new Error())),
     }),
   },
   user: {

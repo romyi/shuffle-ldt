@@ -30,20 +30,20 @@ export const CalculationItemDemo: React.FC<{
       variant="separated"
     >
       <Accordion.Item value="demo">
-        <Indicator>
+        <Indicator processing>
           <Accordion.Control>
             <Group position="apart">
               <Text size={"xs"}>Прогнозируемая стоимость</Text>
               <Group>
                 <Text size={"xs"}>мин.</Text>
                 <Text color={"pink"} fw={800}>
-                  {item?.from}
+                  {Number(item?.from).toFixed(2)} тыс
                 </Text>
               </Group>
               <Group>
                 <Text size={"xs"}>макc.</Text>
                 <Text color={"pink"} fw={800}>
-                  {item?.to}
+                  {Number(item?.to).toFixed(2)} тыс
                 </Text>
               </Group>
             </Group>
@@ -54,6 +54,7 @@ export const CalculationItemDemo: React.FC<{
             <Text>{item.personnel} человек</Text>
             <Text>{item.landSquare} м² участок</Text>
             <Text>{item.facilitySquare} м² строения</Text>
+            <Text>{item.branch_display_alias}</Text>
             <Button
               mt="xl"
               size={"xs"}
