@@ -11,7 +11,9 @@ export const keys = createQueryKeyStore({
           url: "/auth/token",
           params: { email: email, code: code },
         })
-          .then((response) => response)
+          .then((response) => {
+            localStorage.setItem("auth", response.data.access.token);
+          })
           .catch(),
     }),
     refresh: () => ({
@@ -30,7 +32,10 @@ export const keys = createQueryKeyStore({
     me: () => ({
       queryKey: ["me"],
       queryFn: () => {
-        return instance({ url: "/users/me" })
+        return instance({
+          url: "/users/me",
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        })
           .then((response) => {
             return response;
           })
