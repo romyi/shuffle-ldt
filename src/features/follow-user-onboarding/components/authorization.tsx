@@ -36,7 +36,7 @@ export const Authorization = () => {
       client.invalidateQueries({ queryKey: keys.reports.list().queryKey }),
   });
   const stashed = useStoragedCalc();
-  const { isFetching: tokenPending } = useQuery({
+  const { isFetching: tokenPending, isError: errorWhileTokenFecth } = useQuery({
     ...keys.auth.token({ email: mail, code: code }),
     enabled: hasTokenAsked,
     onSettled: () => {
@@ -85,6 +85,11 @@ export const Authorization = () => {
       )}
       {isError && (
         <Alert color={"yellow"}>Пожалуйста, введите корректный адрес</Alert>
+      )}
+      {errorWhileTokenFecth && (
+        <Alert color={"yellow"}>
+          Код некорректен, пожалуйста, запросите ноый
+        </Alert>
       )}
     </SimpleGrid>
   );
