@@ -18,7 +18,7 @@ export const MobileFooter = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const navigate = useNavigate();
   const [calculation] = useRecoilState(calculation_state);
-  const { isError, isFetching } = useQuery(keys.user.me());
+  const { isError, isFetching, data: me } = useQuery(keys.user.me());
   return (
     <Footer withBorder={false} height={70} zIndex={115}>
       <Container>
@@ -26,6 +26,7 @@ export const MobileFooter = () => {
           {isFetching && <Loader size={"xs"} />}
           <Text color="dimmed" size="sm">
             {isError && "Гость"}
+            {me && me.email}
           </Text>
           <Group spacing={"xl"} pr={"xl"}>
             {calculation.snapshot.district_display_alias && (

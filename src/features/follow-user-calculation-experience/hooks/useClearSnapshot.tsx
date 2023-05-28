@@ -16,6 +16,7 @@ export const useClearSnapshot = () => {
         equipment: null,
         isFacilityRental: false,
         isLandRental: false,
+        branch_display_alias: null,
       },
     });
 };

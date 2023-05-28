@@ -1,12 +1,17 @@
 import { useClearSnapshot } from "@features/follow-user-calculation-experience/hooks/useClearSnapshot";
 import { Container, Text, Stack, NavLink, SimpleGrid } from "@mantine/core";
+import { keys } from "@network/index";
 import { ui } from "@states/ui";
 import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export const DesktopContent = () => {
+  const client = useQueryClient();
   const [uistate, setuistate] = useRecoilState(ui);
+
+  const data = client.getQueryData(keys.user.me().queryKey);
   const navigate = useNavigate();
   const clearShapshot = useClearSnapshot();
   return (
@@ -48,8 +53,12 @@ export const DesktopContent = () => {
             color={"dark"}
             variant={"subtle"}
             active={Boolean(useMatch("/user"))}
-            label="Регистрация"
-            description="Заполнить ИНН, ФИО и получить подробный отчет"
+            label={data ? "Ваш профиль" : "Регистрация"}
+            description={
+              data
+                ? "Редактирование личных данных и настройки"
+                : "Заполнить ИНН, ФИО и получить подробный отчет"
+            }
             icon={<IconFileCheck size={24} />}
             onClick={() => {
               setuistate({ ...uistate, drawer: null });

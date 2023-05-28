@@ -17,7 +17,7 @@ export const Calculation = () => {
 
   return (
     <>
-      <Container sx={{ position: "relative" }}>
+      <Container>
         <Outlet />
       </Container>
       <CalculationTracker />

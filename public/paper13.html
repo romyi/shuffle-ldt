@@ -1,0 +1,249 @@
+<html>
+  <head>
+    <title>Document</title>
+    <style>
+      @page {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      @font-face {
+        font-family: "MCW";
+        src: url("mcw_bold.woff");
+        font-weight: bolder;
+      }
+      @font-face {
+        font-family: "MCW";
+        src: url("mcw_medium.woff");
+        font-weight: bold;
+      }
+      @font-face {
+        font-family: "MCW";
+        src: url("mcw_regular.woff");
+        font-weight: normal;
+      }
+      html {
+        font-family: "MCW";
+        box-sizing: border-box;
+        color: #2f2f2f;
+      }
+      h1 {
+        font-weight: bolder;
+        font-size: 1.8em;
+      }
+      h2 {
+        font-weight: bold;
+        font-size: 1.4em;
+      }
+      h3 {
+        font-weight: normal;
+        font-size: 1.2em;
+      }
+      p {
+        font-size: 16px;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+      }
+      .page-header {
+        display: flex;
+        width: 210mm;
+        height: 20mm;
+      }
+      .header-logo-container {
+        flex-grow: 1;
+      }
+      .header-logo {
+        width: 300px;
+      }
+      .date-text {
+        flex-basis: 100px;
+        flex-grow: 0;
+      }
+      .center {
+        height: 265mm;
+        width: 210mm;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+      }
+      .msk-logo {
+        margin: auto;
+      }
+      .page-footer {
+        color: gray;
+        width: 210mm;
+        text-align: center;
+        height: 10mm;
+        text-align: center;
+      }
+      .content {
+        margin: auto;
+        width: 300px;
+        height: auto;
+        text-align: center;
+        display: grid;
+        gap: 14px;
+      }
+      .content-data-grid {
+        margin: auto;
+        width: 500px;
+        height: auto;
+        text-align: center;
+        gap: 14px;
+      }
+      .data-grid-row {
+        width: 500px;
+        height: max-content;
+        margin-bottom: 14px;
+      }
+      .row-attr {
+        display: inline;
+        text-align: right;
+        font-weight: bold;
+        width: 240px;
+        margin-right: 20px;
+      }
+      .row-value {
+        display: inline;
+
+        text-align: left;
+        font-weight: bold;
+        color: #9c0b62;
+        width: 240px;
+      }
+      /* .data-grid {
+        display: grid;
+        grid-template-columns: 250px 250px;
+        grid-auto-rows: auto;
+        column-gap: 32px;
+      }
+      .attr {
+        text-align: right;
+        font-weight: bold;
+      }
+      .value {
+        text-align: left;
+        font-weight: bold;
+        color: #9c0b62;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- PAGE 1 -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-logo-container">
+          <img src="print-logo.png" class="header-logo" />
+        </div>
+        <div class="date-text">
+          <p>{{date}}</p>
+        </div>
+      </div>
+      <div class="center">
+        <div class="content">
+          <p>Департамент инвестиционной промышленной политики города Москвы</p>
+          <img src="moscow.svg" width="36px" class="msk-logo" />
+          <p>Расчёт стоимости запуска промышленного производства в г. Москва</p>
+        </div>
+      </div>
+      <div class="page-footer">
+        <p>Департамент инвестиционной и промышленной политики Москвы</p>
+      </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-logo-container">
+          <img src="print-logo.png" class="header-logo" />
+        </div>
+        <div class="date-text">
+          <p>{{date}}</p>
+        </div>
+      </div>
+      <div class="center">
+        <div class="content">
+          <div>
+            <p>
+              Уважаемый {{user}}, мы рады видеть Вас в кругу промышленников и
+              бизнесменов нашего города. Москва - идеальное место для старта как
+              собственного небольшого предприятия, так и крупной ветви уже
+              развитого холдинга.
+            </p>
+          </div>
+          <img src="moscow.svg" width="36px" class="msk-logo" />
+          <div>
+            <p>
+              Один из лучших в мире уровней образования, развитие и дотирование
+              индустриальных кластеров, мягкая налоговая и миграционная
+              политики, общественное внимание и развитые IT технологии - все это
+              станет отличным подспорьем.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer">
+        <p>Департамент инвестиционной и промышленной политики Москвы</p>
+      </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page">
+      <div class="page-header">
+        <div class="header-logo-container">
+          <img src="print-logo.png" class="header-logo" />
+        </div>
+        <div class="date-text">
+          <p>{{date}}</p>
+        </div>
+      </div>
+      <div class="center">
+        <div class="content-data-grid">
+          <div class="data-grid-row">
+            <div class="row-attr">Аренды</div>
+            <div class="row-value">{{rentalCost}}</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="row-attr">Участок</div>
+            <div class="row-value">{{landCost}}</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="row-attr">Сооружения</div>
+            <div class="row-value">{{facilityCost}}</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="row-attr">Округ</div>
+            <div class="row-value">{{district}}</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="row-attr">Оборудование</div>
+            <div class="row-value">{{equipmentCost}}</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="row-attr">Оплата труда</div>
+            <div class="row-value">{{salaryCost}}</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="row-attr">Оплата страховки</div>
+            <div class="row-value">{{insuranceCost}}</div>
+          </div>
+
+          <img src="moscow.svg" width="36px" class="msk-logo" />
+          <div class="data-grid-row">
+            <div class="row-attr">Оринтировочная минимальная стоимость</div>
+            <div class="row-value">{{from}}</div>
+          </div>
+          <div class="data-grid-row">
+            <div class="row-attr">Оринтировочная минимальная стоимость</div>
+            <div class="row-value">{{to}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="page-footer">
+        <p>Департамент инвестиционной и промышленной политики Москвы</p>
+      </div>
+    </div>
+  </body>
+</html>
