@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Profile } from "./profile";
 import App from "../App";
-import { Reports } from "./reports";
-import { Calculation } from "./calculation";
+import { Reports } from "./calculation-list";
+import { Calculation } from "./calculation-form";
 import { MoscowMap } from "@components/deckgl-moscow-map";
 import { Legal, Stat } from "./calculation-form-subpages";
 

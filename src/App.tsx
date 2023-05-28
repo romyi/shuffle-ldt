@@ -9,11 +9,11 @@ import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state, useRestoreSnapshot } from "@states/calculation";
-import { SMALL_SCREEN_EXTENT } from "./consts";
+import { LARGE_SCREEN_EXTENT, SMALL_SCREEN_EXTENT } from "./consts";
 
 const App: React.FC = () => {
   const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);
-
+  const largeScreen = useMediaQuery(LARGE_SCREEN_EXTENT);
   // useRestoreVisitInfo();
   useRestoreSnapshot();
 
@@ -60,7 +60,7 @@ const App: React.FC = () => {
           },
           SimpleGrid: {
             defaultProps: {
-              cols: smallScreen ? 1 : 2,
+              cols: smallScreen ? 1 : largeScreen ? 3 : 2,
             },
           },
           Title: {

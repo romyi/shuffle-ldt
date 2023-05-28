@@ -94,10 +94,6 @@ export const CalculationTracker = () => {
                 onClick={
                   oncheck
                     ? () => {
-                        // requestCalculationData.mutate({
-                        //   ...calculation.snapshot,
-                        //   branch: Number(calculation.snapshot.branch),
-                        // });
                         setstart(true);
                       }
                     : () => setoncheck(true)
@@ -117,7 +113,12 @@ export const CalculationTracker = () => {
           <IndicatorCard
             url="/calculation/legal"
             showOn={["facilitySquare", "landSquare"]}
-            contentOn={["equipment", "branch", "personnel"]}
+            contentOn={[
+              "equipment",
+              "branch",
+              "personnel",
+              "branch_display_alias",
+            ]}
             follower="Заполните данные о предприятии"
           >
             <SimpleGrid cols={2}>
@@ -133,7 +134,9 @@ export const CalculationTracker = () => {
                 </Text>{" "}
                 <Text>{calculation.snapshot.equipment} ед</Text>
               </Stack>
-              <Text size="xs">{calculation.snapshot.branch}</Text>
+              <Text sx={{ wordBreak: "break-all" }} lineClamp={3} size="xs">
+                {calculation.snapshot.branch_display_alias}
+              </Text>
               {calculation.snapshot.isIndividual && (
                 <Badge radius={"sm"} color="cyan">
                   ИП

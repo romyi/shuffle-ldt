@@ -20,6 +20,7 @@ export const calculation_state = atom<{ snapshot: Calculation }>({
       equipment: null,
       isLandRental: null,
       isFacilityRental: null,
+      branch_display_alias: null,
       ...isStorageSnapshot(),
     },
   },

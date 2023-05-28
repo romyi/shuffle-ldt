@@ -16,3 +16,13 @@ export const requestCalculation = (
     .catch((error) => error);
 
 requestCalculation["key"] = "calculation-request";
+
+export const sendOtp = (email: string): Promise<void> =>
+  instance({ url: "/auth/otp-code", method: "GET", params: { email } });
+
+sendOtp["key"] = "send-otp";
+
+export const askForToken = ({ email, code }: { email: string; code: string }) =>
+  instance({ url: "/auth/token", method: "GET", params: { email, code } });
+
+askForToken["Key"] = "ask-code";

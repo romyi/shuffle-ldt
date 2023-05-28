@@ -1,63 +1,27 @@
-import {
-  Button,
-  Container,
-  PinInput,
-  SimpleGrid,
-  Stack,
-  TextInput,
-  Title,
-} from "@mantine/core";
+import { Authorization } from "@features/follow-user-onboarding";
+import { ProfileGrid } from "@features/user-profile-edit";
+import { Container, LoadingOverlay, Title } from "@mantine/core";
 import { keys } from "@network/index";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const Profile = () => {
-  const { isError } = useQuery(keys.user.me());
-  const [mail, setmail] = useState("");
-  const [code, setcode] = useState("");
+  const client = useQueryClient();
+  const { isFetching, isError: isUserUnauthorized } = useQuery(keys.user.me());
+  const data = client.getQueryData<{ email: string }>(keys.user.me().queryKey);
 
-  const [sent, setsent] = useState(false);
-  const [sentcode, setsendcode] = useState(false);
-
-  // по сути это мутация
-  const { isSuccess } = useQuery({
-    ...keys.auth.sendAuthCode(mail),
-    enabled: sent,
-    onSettled: () => setsent(false),
-  });
-
-  useQuery({
-    ...keys.auth.token({ email: mail, code: code }),
-    enabled: sentcode,
-    onSettled: () => setsendcode(false),
-  });
-
-  return (
-    <Container>
-      <SimpleGrid>
-        {isError && (
-          <Stack>
-            <TextInput
-              onChange={(event) => setmail(event.currentTarget.value)}
-              value={mail}
-              label="Введите почту"
-              placeholder="xxx@yy.tt"
-            />
-            <Button onClick={() => setsent(true)}>Отправить</Button>
-          </Stack>
-        )}
-        {isSuccess && (
-          <Stack>
-            <Title>Код</Title>
-            <PinInput
-              onChange={(value) => setcode(value)}
-              size={"xl"}
-              length={6}
-            />
-            <Button onClick={() => setsendcode(true)}>получить токен</Button>
-          </Stack>
-        )}
-      </SimpleGrid>
-    </Container>
-  );
+  if (isUserUnauthorized) {
+    return (
+      <Container>
+        <Authorization />
+      </Container>
+    );
+  } else {
+    return (
+      <Container>
+        <Title>{data?.email}</Title>
+        <LoadingOverlay visible={isFetching} />
+        <ProfileGrid />
+      </Container>
+    );
+  }
 };

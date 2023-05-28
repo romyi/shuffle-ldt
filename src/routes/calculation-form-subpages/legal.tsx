@@ -19,7 +19,13 @@ export const Legal = () => {
           value={String(calculation.snapshot.branch)}
           onChange={(value) =>
             setcalculation({
-              snapshot: { ...calculation.snapshot, branch: value },
+              snapshot: {
+                ...calculation.snapshot,
+                branch: value,
+                branch_display_alias: data?.find(
+                  (branch) => branch.id === Number(value)
+                )?.name as string,
+              },
             })
           }
           label={"Отрасль"}

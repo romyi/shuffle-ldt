@@ -9,4 +9,5 @@ export type Calculation = {
   isFacilityRental: boolean | null; //legal
   district: string | null; // /
   district_display_alias: string | null; // / display only
+  branch_display_alias: string | null;
 };

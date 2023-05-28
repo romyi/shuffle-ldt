@@ -5,5 +5,13 @@ export const instance = axios.create({
   baseURL: HOST,
 });
 
+instance.interceptors.request.use((config) => {
+  if (localStorage.getItem("auth")) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem("auth")}`;
+    return config;
+  }
+  return config;
+});
+
 export * from "./keystore";
 export * from "./mutations";
