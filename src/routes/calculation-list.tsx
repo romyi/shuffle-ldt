@@ -34,7 +34,11 @@ export const Reports = () => {
           {isError ? (
             <>
               <SimpleGrid mt="xl">
-                <Title>Наша задача - определить стоимость вашего запуска</Title>
+                {!storaged && (
+                  <Title>
+                    Наша задача - определить стоимость вашего запуска
+                  </Title>
+                )}
                 {storaged ? (
                   <Stack>
                     <Text color={"dimmed"}>Ваш последний расчёт</Text>
