@@ -1,12 +1,21 @@
 import { Accordion, Button, Group, Stack, Text } from "@mantine/core";
+import { keys } from "@network/index";
 import { IconPdf } from "@tabler/icons-react";
+import { useQuery } from "@tanstack/react-query";
 import { Calculation } from "@tyles/calculation";
-import { useNavigate } from "react-router-dom";
 
 export const CalculationReportItem: React.FC<{
   item: { from: string; to: string; id: string; request: Calculation };
 }> = ({ item }) => {
-  const navigate = useNavigate();
+  const { refetch } = useQuery({
+    ...keys.reports.pdf({ id: item.id }),
+    enabled: false,
+  });
+  const handleClick = () =>
+    refetch().then((data) => {
+      window.open(data.data.link, "_blank");
+      data.data.revoke();
+    });
   return (
     <Accordion.Item value={item.id}>
       <Accordion.Control>
@@ -37,7 +46,7 @@ export const CalculationReportItem: React.FC<{
             color="cyan"
             variant={"light"}
             leftIcon={<IconPdf />}
-            onClick={() => navigate("/user")}
+            onClick={handleClick}
           >
             Составить и загрузить подробный отчёт
           </Button>

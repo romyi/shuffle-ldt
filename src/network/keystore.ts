@@ -90,5 +90,18 @@ export const keys = createQueryKeyStore({
           .then((response) => response.data)
           .catch(() => Promise.reject(new Error())),
     }),
+    pdf: ({ id }: { id: string }) => ({
+      queryKey: ["pdf-summary"],
+      queryFn: (): any =>
+        instance({
+          url: `/reports/${id}/file`,
+          responseType: "blob",
+        })
+          .then((response) => ({
+            link: URL.createObjectURL(response.data),
+            revoke: () => URL.revokeObjectURL(response.data),
+          }))
+          .catch(() => Promise.reject(new Error())),
+    }),
   },
 });
