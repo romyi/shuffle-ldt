@@ -86,7 +86,7 @@ export const keys = createQueryKeyStore({
           },
         })
           .then((response) => response.data)
-          .catch((error) => Promise.reject(new Error())),
+          .catch(() => Promise.reject(new Error())),
     }),
   },
 });

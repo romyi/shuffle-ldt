@@ -1,16 +1,14 @@
 import {
   Card,
-  Grid,
   Group,
   Indicator,
-  Input,
   NumberInput,
   SimpleGrid,
   Stack,
   Text,
 } from "@mantine/core";
 import { IconCheck, IconPencil } from "@tabler/icons-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export const ProfileGrid = () => {
   const [edit, setedit] = useState(false);
