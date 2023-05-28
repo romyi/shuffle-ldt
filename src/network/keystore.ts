@@ -15,7 +15,7 @@ export const keys = createQueryKeyStore({
             localStorage.setItem("auth", response.data.access.token);
             localStorage.setItem("registered", "true");
           })
-          .catch(),
+          .catch(() => Promise.reject(new Error())),
     }),
     refresh: () => ({
       queryKey: ["refresh"],

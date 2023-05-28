@@ -36,14 +36,12 @@ export const CalculationItemDemo: React.FC<{
               <Text size={"xs"}>Прогнозируемая стоимость</Text>
               <Group>
                 <Text size={"xs"}>мин.</Text>
-                <Text color={"pink"} fw={800}>
-                  {Number(item?.from).toFixed(2)} тыс
-                </Text>
+                <Text fw={800}>{Number(item?.from).toFixed(2)} тыс. ₽</Text>
               </Group>
               <Group>
                 <Text size={"xs"}>макc.</Text>
-                <Text color={"pink"} fw={800}>
-                  {Number(item?.to).toFixed(2)} тыс
+                <Text color={"cyan"} fw={800}>
+                  {Number(item?.to).toFixed(2)} тыс. ₽
                 </Text>
               </Group>
             </Group>
