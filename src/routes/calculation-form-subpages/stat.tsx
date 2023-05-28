@@ -1,9 +1,19 @@
 import { Container, NumberInput, Stack, Switch } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export const Stat = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
+  useEffect(() => {
+    setcalculation({
+      snapshot: {
+        ...calculation.snapshot,
+        landSquare: 250,
+        facilitySquare: 100,
+      },
+    });
+  }, []);
   return (
     <Container size={"xs"}>
       <Stack spacing={"48px"}>
