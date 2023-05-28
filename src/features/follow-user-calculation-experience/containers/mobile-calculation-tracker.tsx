@@ -17,7 +17,7 @@ import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
 import { useState } from "react";
 import { IconFlag2Filled } from "@tabler/icons-react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { keys } from "@network/index";
 
@@ -32,6 +32,7 @@ const finish_access_checks = [
 
 export const CalculationTracker = () => {
   const [uistate, setuistate] = useRecoilState(ui);
+  const client = useQueryClient();
   const navigate = useNavigate();
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
   const calculation = useRecoilValue(calculation_state);
@@ -49,7 +50,9 @@ export const CalculationTracker = () => {
         "report",
         JSON.stringify({ from: data.from, to: data.to })
       );
-      navigate("/");
+      client
+        .invalidateQueries({ queryKey: keys.reports.list().queryKey })
+        .then(() => navigate("/"));
     },
   });
 

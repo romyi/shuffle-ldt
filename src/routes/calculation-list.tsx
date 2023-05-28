@@ -6,6 +6,7 @@ import {
 } from "@features/follow-user-onboarding";
 import {
   Accordion,
+  Button,
   Container,
   LoadingOverlay,
   SimpleGrid,
@@ -33,7 +34,11 @@ export const Reports = () => {
           {isError ? (
             <>
               <SimpleGrid mt="xl">
-                <Title>Наша задача - определить стоимость вашего запуска</Title>
+                {!storaged && (
+                  <Title>
+                    Наша задача - определить стоимость вашего запуска
+                  </Title>
+                )}
                 {storaged ? (
                   <Stack>
                     <Text color={"dimmed"}>Ваш последний расчёт</Text>
@@ -61,6 +66,14 @@ export const Reports = () => {
                     reports.map((reportItem) => (
                       <CalculationReportItem item={reportItem} />
                     ))}
+                  {(!reports || reports.length === 0) && (
+                    <Stack>
+                      <Text size={"sm"}>У вас нет новых расчётов</Text>
+                      <Button size={"sm"} variant="outline">
+                        Создать расчёт
+                      </Button>
+                    </Stack>
+                  )}
                 </Accordion>
               </SimpleGrid>
             </>

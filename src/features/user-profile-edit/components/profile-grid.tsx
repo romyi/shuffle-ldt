@@ -38,7 +38,12 @@ const Field: React.FC<{
         <Stack spacing={"16px"}>
           {edit &&
             (isNumber ? (
-              <NumberInput label={label} onChange={setValue} placeholder="" />
+              <NumberInput
+                maxLength={12}
+                label={label}
+                onChange={setValue}
+                placeholder=""
+              />
             ) : (
               <TextInput
                 value={value}
