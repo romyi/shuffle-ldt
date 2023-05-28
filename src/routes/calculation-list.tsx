@@ -17,11 +17,13 @@ import {
 import { keys } from "@network/keystore";
 // import { calculation_state } from "@states/calculation";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 //
 // Экран расчетов, здесь грязновато
 //
 export const Reports = () => {
+  const navigate = useNavigate();
   const { isError, isFetching, isFetched } = useQuery(keys.user.me());
   const { data: reports } = useQuery(keys.reports.list());
   const storaged = useStoragedCalc();
@@ -69,7 +71,11 @@ export const Reports = () => {
                   {(!reports || reports.length === 0) && (
                     <Stack>
                       <Text size={"sm"}>У вас нет новых расчётов</Text>
-                      <Button size={"sm"} variant="outline">
+                      <Button
+                        size={"sm"}
+                        variant="outline"
+                        onClick={() => navigate("/calculation")}
+                      >
                         Создать расчёт
                       </Button>
                     </Stack>

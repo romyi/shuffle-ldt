@@ -54,7 +54,7 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
                   mt="36px"
                   variant={"outline"}
                 >
-                  Справка
+                  Заполните данные
                 </Button>
               </Stack>
             ) : (
