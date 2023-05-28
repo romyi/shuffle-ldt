@@ -2,11 +2,21 @@ import { Container, NumberInput, Select, Stack, Switch } from "@mantine/core";
 import { keys } from "@network/keystore";
 import { calculation_state } from "@states/calculation";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export const Legal = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   const { data, isFetching } = useQuery(keys.static.industries());
+  useEffect(() => {
+    setcalculation({
+      snapshot: {
+        ...calculation.snapshot,
+        personnel: 30,
+        equipment: 30,
+      },
+    });
+  }, []);
   return (
     <Container size={"xs"}>
       <Stack spacing={"24px"}>
