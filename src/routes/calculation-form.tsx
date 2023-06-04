@@ -17,7 +17,7 @@ export const Calculation = () => {
 
   return (
     <>
-      <Container>
+      <Container pb={"180px"}>
         <Outlet />
       </Container>
       <CalculationTracker />
