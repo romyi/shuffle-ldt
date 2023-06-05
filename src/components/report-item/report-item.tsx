@@ -4,6 +4,10 @@ import { IconPdf } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { Calculation } from "@tyles/calculation";
 
+const prettify = (input: number) => {
+  return input / 1000;
+};
+
 export const CalculationReportItem: React.FC<{
   item: { from: string; to: string; id: string; request: Calculation };
 }> = ({ item }) => {
@@ -23,12 +27,14 @@ export const CalculationReportItem: React.FC<{
           <Text size={"xs"}>Прогнозируемая стоимость</Text>
           <Group>
             <Text size={"xs"}>мин.</Text>
-            <Text fw={800}>{Number(item?.from).toFixed(2)} тыс. ₽</Text>
+            <Text fw={800}>
+              {prettify(Number(item?.from)).toFixed(1)} млн. рублей
+            </Text>
           </Group>
           <Group>
             <Text size={"xs"}>макc.</Text>
             <Text color={"cyan"} fw={800}>
-              {Number(item?.to).toFixed(2)} тыс. ₽
+              {prettify(Number(item?.to)).toFixed(1)} млн. рублей
             </Text>
           </Group>
         </Group>
