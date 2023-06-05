@@ -69,7 +69,7 @@ export const CalculationTracker = () => {
       withOverlay={oncheck}
       withCloseButton={false}
       position="bottom"
-      lockScroll={true}
+      lockScroll={false}
       opened={uistate.drawer === "calculation"}
       onClose={onDrawerClose}
     >

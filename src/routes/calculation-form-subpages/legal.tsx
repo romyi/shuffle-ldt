@@ -42,10 +42,14 @@ export const Legal = () => {
           placeholder={data ? data[0].name : "Данные загружаются"}
           data={
             data
-              ? data.map((display) => ({
-                  label: display.name,
-                  value: String(display.id),
-                }))
+              ? data
+                  .map((display) => ({
+                    label: display.name,
+                    value: String(display.id),
+                  }))
+                  .sort((a, b) =>
+                    a.label < b.label ? -1 : a.label > b.label ? 1 : 0
+                  )
               : []
           }
         />

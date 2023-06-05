@@ -22,13 +22,13 @@ export const MobileFooter = () => {
   return (
     <Footer withBorder={false} height={70} zIndex={115}>
       <Container>
-        <Group noWrap spacing="63px" position="apart" align="flex-end">
+        <Group position="apart" noWrap={true}>
           {isFetching && <Loader size={"xs"} />}
-          <Text color="dimmed" size="sm">
+          <Text color="dimmed" size="sm" truncate>
             {isError && "Гость"}
             {me && me.email}
           </Text>
-          <Group spacing={"xl"} pr={"xl"}>
+          <Group grow={true} position="apart" spacing={"xl"} noWrap={true}>
             {calculation.snapshot.district_display_alias && (
               <Indicator>
                 <IconTablePlus
