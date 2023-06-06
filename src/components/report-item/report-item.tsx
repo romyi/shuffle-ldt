@@ -1,60 +1,35 @@
-import { Accordion, Button, Group, Stack, Text } from "@mantine/core";
-import { keys } from "@network/index";
-import { IconPdf } from "@tabler/icons-react";
-import { useQuery } from "@tanstack/react-query";
+import { Accordion, Group, Stack, Text } from "@mantine/core";
 import { Calculation } from "@tyles/calculation";
-
-const prettify = (input: number) => {
-  return input / 1000;
-};
+import { ControlContent, ItemActions } from "./report-item-blocks";
 
 export const CalculationReportItem: React.FC<{
-  item: { from: string; to: string; id: string; request: Calculation };
+  item: {
+    from: string;
+    to: string;
+    id: string;
+    request: Calculation;
+    date: string;
+  };
 }> = ({ item }) => {
-  const { refetch } = useQuery({
-    ...keys.reports.pdf({ id: item.id }),
-    enabled: false,
-  });
-  const handleClick = () =>
-    refetch().then((data) => {
-      window.open(data.data.link, "_blank");
-      data.data.revoke();
-    });
   return (
-    <Accordion.Item value={item.id}>
-      <Accordion.Control>
-        <Group position="apart">
-          <Text size={"xs"}>Прогнозируемая стоимость</Text>
-          <Group>
-            <Text size={"xs"}>мин.</Text>
-            <Text fw={800}>
-              {prettify(Number(item?.from)).toFixed(1)} млн. рублей
-            </Text>
-          </Group>
-          <Group>
-            <Text size={"xs"}>макc.</Text>
-            <Text color={"cyan"} fw={800}>
-              {prettify(Number(item?.to)).toFixed(1)} млн. рублей
-            </Text>
-          </Group>
-        </Group>
-      </Accordion.Control>
+    <Accordion.Item value={item.id} sx={{ position: "relative" }}>
+      <ControlContent item={item} />
       <Accordion.Panel>
-        <Stack>
-          <Text>{item?.request?.personnel} человек</Text>
-          <Text>{item?.request?.landSquare} м² участок</Text>
-          <Text>{item?.request?.facilitySquare} м² строения</Text>
-          <Button
-            mt="xl"
-            size={"xs"}
-            color="cyan"
-            variant={"light"}
-            leftIcon={<IconPdf />}
-            onClick={handleClick}
-          >
-            Составить и загрузить подробный отчёт
-          </Button>
-        </Stack>
+        <Group m="4px" fz={"xs"} spacing={"xl"}>
+          <Stack spacing={0}>
+            <Text>{item?.request?.personnel}</Text>
+            <Text color="dimmed">человек</Text>
+          </Stack>
+          <Stack spacing={0}>
+            <Text>{item?.request?.landSquare} м²</Text>
+            <Text color="dimmed">участок</Text>
+          </Stack>
+          <Stack spacing={0}>
+            <Text>{item?.request?.facilitySquare} м²</Text>
+            <Text color="dimmed"> постройки</Text>
+          </Stack>
+        </Group>
+        <ItemActions item={item} />
       </Accordion.Panel>
     </Accordion.Item>
   );

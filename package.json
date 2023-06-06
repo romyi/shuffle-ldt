@@ -22,6 +22,8 @@
     "@tabler/icons-react": "^2.19.0",
     "@tanstack/react-query": "^4.29.11",
     "axios": "^1.4.0",
+    "date-and-time": "^3.0.0",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
     "embla-carousel-react": "^7.0.0",
     "framer-motion": "^10.12.12",
