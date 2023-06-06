@@ -39,3 +39,9 @@ export const updateUser = (info: Partial<User>) =>
       return Promise.reject(new Error());
     });
 updateUser["key"] = "update-user";
+
+export const archiveReport = (id: string) =>
+  instance({ url: `/reports/${id}`, method: "delete" })
+    .then((response) => response.data)
+    .catch(() => Promise.reject(new Error()));
+archiveReport["key"] = "archive-report";
