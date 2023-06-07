@@ -1,69 +1,75 @@
+import { ControlContent, ReportInfo } from "@components/report-item";
 import {
   Accordion,
   Button,
   createStyles,
   Group,
   Indicator,
-  Stack,
   Text,
 } from "@mantine/core";
-import { IconPdf } from "@tabler/icons-react";
+import { useMediaQuery } from "@mantine/hooks";
 import { Calculation } from "@tyles/calculation";
 import { useNavigate } from "react-router-dom";
+import { LARGE_SCREEN_EXTENT } from "../../../consts";
 
 const useClasses = createStyles({
   item: {
     backgroundColor: "transparent",
     border: "0.0625rem solid #dee2e6",
   },
+  chevron: {
+    display: "none",
+  },
 });
 
 export const CalculationItemDemo: React.FC<{
-  item: Calculation & { from: string; to: string };
+  item: Calculation & { from: string; to: string; time: string };
 }> = ({ item }) => {
+  const large = useMediaQuery(LARGE_SCREEN_EXTENT);
   const { classes } = useClasses();
   const navigate = useNavigate();
+  const handleClick = () => navigate("/user");
   return (
     <Accordion
-      classNames={{ item: classes.item }}
+      classNames={{ item: classes.item, chevron: classes.chevron }}
       value="demo"
       variant="separated"
+      sx={{ gridColumn: large ? "1/3" : "1/2" }}
     >
       <Accordion.Item value="demo">
         <Indicator processing>
-          <Accordion.Control>
-            <Group position="apart">
-              <Text size={"xs"}>Прогнозируемая стоимость</Text>
-              <Group>
-                <Text size={"xs"}>мин.</Text>
-                <Text fw={800}>{Number(item?.from).toFixed(2)} тыс. ₽</Text>
-              </Group>
-              <Group>
-                <Text size={"xs"}>макc.</Text>
-                <Text color={"cyan"} fw={800}>
-                  {Number(item?.to).toFixed(2)} тыс. ₽
-                </Text>
-              </Group>
-            </Group>
-          </Accordion.Control>
+          <ControlContent
+            from={item.from}
+            to={item.to}
+            branch={item.branch_display_alias}
+            date={item.time}
+          />
         </Indicator>
         <Accordion.Panel>
-          <Stack>
-            <Text>{item.personnel} человек</Text>
-            <Text>{item.landSquare} м² участок</Text>
-            <Text>{item.facilitySquare} м² строения</Text>
-            <Text>{item.branch_display_alias}</Text>
+          <Group m="4px" fz={"xs"} spacing={"xl"}>
+            <ReportInfo>
+              <Text>{item?.personnel}</Text>
+              <Text color="dimmed">человек</Text>
+            </ReportInfo>
+            <ReportInfo>
+              <Text>{item?.landSquare} м²</Text>
+              <Text color="dimmed">участок</Text>
+            </ReportInfo>
+            <ReportInfo>
+              <Text>{item?.facilitySquare} м²</Text>
+              <Text color="dimmed"> постройки</Text>
+            </ReportInfo>
+          </Group>
+          <Group spacing={"xs"} noWrap mt="48px">
             <Button
-              mt="xl"
               size={"xs"}
               color="cyan"
-              variant={"light"}
-              leftIcon={<IconPdf />}
-              onClick={() => navigate("/user")}
+              variant="light"
+              onClick={handleClick}
             >
-              Составить и загрузить подробный отчёт
+              Подтвердить e-mail и загрузить PDF отчет
             </Button>
-          </Stack>
+          </Group>
         </Accordion.Panel>
       </Accordion.Item>
     </Accordion>

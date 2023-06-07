@@ -48,7 +48,11 @@ export const CalculationTracker = () => {
     onSuccess: (data) => {
       localStorage.setItem(
         "report",
-        JSON.stringify({ from: data.from, to: data.to })
+        JSON.stringify({
+          from: data.from,
+          to: data.to,
+          time: new Date().toISOString(),
+        })
       );
       client
         .invalidateQueries({ queryKey: keys.reports.list().queryKey })

@@ -5,7 +5,11 @@ import {
   CalculationItemDemo,
 } from "@features/follow-user-onboarding";
 import { GeneralModelFeedback } from "@features/gather-user-feedback";
-import { CalculationsHint } from "@features/user-ux-hints";
+import { CalculationsHint, SnapshotHint } from "@features/user-ux-hints";
+import {
+  BriefHint,
+  UiSummaryHint,
+} from "@features/user-ux-hints/frontpage-hints";
 import {
   Accordion,
   Button,
@@ -44,17 +48,20 @@ export const Reports = () => {
             <>
               <SimpleGrid mt="xl">
                 {!storaged && (
-                  <Title>
-                    Наша задача - определить стоимость вашего запуска
-                  </Title>
+                  <>
+                    <BriefHint />
+                    <InvitationToCalculation />
+                    <UiSummaryHint />
+                  </>
+                  // <Title>
+                  //   Наша задача - определить стоимость вашего запуска
+                  // </Title>
                 )}
-                {storaged ? (
-                  <Stack>
-                    <Text color={"dimmed"}>Ваш последний расчёт</Text>
+                {storaged && (
+                  <>
+                    <SnapshotHint />
                     <CalculationItemDemo item={storaged} />
-                  </Stack>
-                ) : (
-                  <InvitationToCalculation />
+                  </>
                 )}
               </SimpleGrid>
             </>
