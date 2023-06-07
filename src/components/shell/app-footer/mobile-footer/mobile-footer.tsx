@@ -1,11 +1,4 @@
-import {
-  Container,
-  Footer,
-  Group,
-  Indicator,
-  Loader,
-  Text,
-} from "@mantine/core";
+import { Container, Footer, Group, Loader, Text } from "@mantine/core";
 import { useRecoilState } from "recoil";
 import { ui } from "@states/ui";
 import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
@@ -13,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { calculation_state } from "@states/calculation";
 import { useQuery } from "@tanstack/react-query";
 import { keys } from "@network/keystore";
+import { withIndicator } from "@hocs/index";
+
+const IndicatedCalcIcon = withIndicator(IconTablePlus);
 
 export const MobileFooter = () => {
   const [uistate, setuistate] = useRecoilState(ui);
@@ -29,17 +25,24 @@ export const MobileFooter = () => {
             {me && me.email}
           </Text>
           <Group grow={true} position="apart" spacing={"xl"} noWrap={true}>
-            {calculation.snapshot.district_display_alias && (
-              <Indicator>
-                <IconTablePlus
-                  onClick={() => {
-                    navigate("/calculation");
-                  }}
-                  strokeWidth={1.5}
-                  size={36}
-                  color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
-                />
-              </Indicator>
+            {calculation.snapshot.district_display_alias ? (
+              <IndicatedCalcIcon
+                onClick={() => {
+                  navigate("/calculation");
+                }}
+                strokeWidth={1.5}
+                size={36}
+                color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
+              />
+            ) : (
+              <IconTablePlus
+                onClick={() => {
+                  navigate("/calculation");
+                }}
+                strokeWidth={1.5}
+                size={36}
+                color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
+              />
             )}
             <IconListDetails
               onClick={() =>

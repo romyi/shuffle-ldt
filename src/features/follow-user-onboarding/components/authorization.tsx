@@ -27,7 +27,8 @@ export const Authorization = () => {
     isError,
     isFetching: mailPending,
   } = useQuery({
-    ...keys.auth.askEmailCode(mail),
+    // ...keys.auth.askEmailCode(mail),
+    ...keys.static.industries(),
     enabled: hasAuthCodeAsked,
     onSettled: () => setHasAuthCodeAsked(false),
   });
@@ -37,7 +38,8 @@ export const Authorization = () => {
   });
   const stashed = useStoragedCalc();
   const { isFetching: tokenPending, isError: errorWhileTokenFecth } = useQuery({
-    ...keys.auth.token({ email: mail, code: code }),
+    // ...keys.auth.token({ email: mail, code: code }),
+    ...keys.static.industries(),
     enabled: hasTokenAsked,
     onSettled: () => {
       setHasTokenAsked(false);

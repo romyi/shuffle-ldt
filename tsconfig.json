@@ -8,7 +8,8 @@
       "@states/*": ["src/states/*"],
       "@tyles/*": ["src/types/*"],
       "@network/*": ["src/network/*"],
-      "@const": ["src/consts.ts"]
+      "@const": ["src/consts.ts"],
+      "@hocs/*": ["src/hocs/*"]
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
