@@ -5,7 +5,7 @@ import {
   CalculationItemDemo,
 } from "@features/follow-user-onboarding";
 import { GeneralModelFeedback } from "@features/gather-user-feedback";
-import { CalculationsHint } from "@features/user-ux-hints";
+import { CalculationsHint, SnapshotHint } from "@features/user-ux-hints";
 import {
   Accordion,
   Button,
@@ -32,6 +32,7 @@ export const Reports = () => {
   const { isError, isFetching, isFetched } = useQuery(keys.user.me());
   const { data: reports } = useQuery(keys.reports.list());
   const storaged = useStoragedCalc();
+
   const large = useMediaQuery(LARGE_SCREEN_EXTENT);
   const small = useMediaQuery(SMALL_SCREEN_EXTENT);
   return (
@@ -42,19 +43,22 @@ export const Reports = () => {
           {/** unaithorized user */}
           {isError ? (
             <>
-              <SimpleGrid mt="xl">
+              <SimpleGrid mt="xl" spacing={"xl"}>
                 {!storaged && (
-                  <Title>
-                    Наша задача - определить стоимость вашего запуска
-                  </Title>
+                  <>
+                    <InvitationToCalculation />
+                    <Text size={"xs"}>
+                      В 2021 году Москва экспортировала продукцию в 186 стран
+                      мира. Более 30 процентов всего экспорта приходится на
+                      Казахстан, Белоруссию, Китай, Индию, Турцию.
+                    </Text>
+                  </>
                 )}
-                {storaged ? (
-                  <Stack>
-                    <Text color={"dimmed"}>Ваш последний расчёт</Text>
+                {storaged && (
+                  <>
+                    <SnapshotHint />
                     <CalculationItemDemo item={storaged} />
-                  </Stack>
-                ) : (
-                  <InvitationToCalculation />
+                  </>
                 )}
               </SimpleGrid>
             </>

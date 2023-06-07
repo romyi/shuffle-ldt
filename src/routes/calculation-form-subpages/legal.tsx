@@ -1,3 +1,4 @@
+import { StatsInputsHint } from "@features/user-ux-hints";
 import { Container, NumberInput, Select, Stack, Switch } from "@mantine/core";
 import { keys } from "@network/keystore";
 import { calculation_state } from "@states/calculation";
@@ -12,15 +13,17 @@ export const Legal = () => {
     setcalculation({
       snapshot: {
         ...calculation.snapshot,
-        personnel: 30,
-        equipment: 30,
+        personnel: calculation.snapshot.personnel || 30,
+        equipment: calculation.snapshot.equipment || 30,
       },
     });
   }, []);
   return (
-    <Container size={"xs"}>
-      <Stack spacing={"24px"}>
+    <Container p={0} size={"xs"}>
+      <Stack spacing={"48px"}>
+        <StatsInputsHint initialOpen={false} />
         <Select
+          required
           disabled={isFetching}
           searchable
           size={"md"}
@@ -55,6 +58,7 @@ export const Legal = () => {
         />
 
         <NumberInput
+          required
           size={"md"}
           value={calculation.snapshot.personnel || 30}
           onChange={(value) =>
@@ -71,6 +75,7 @@ export const Legal = () => {
           min={1}
         />
         <NumberInput
+          required
           size={"md"}
           value={calculation.snapshot.equipment || 30}
           onChange={(value) =>

@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { useMemo } from "react";
 
 export const useCalculationMatch = (
-  attributes: Array<Partial<keyof Calculation>> | null
+  attributes?: Array<Partial<keyof Calculation>> | null
 ) => {
   const calculation = useRecoilValue(calculation_state);
   return useMemo(() => {

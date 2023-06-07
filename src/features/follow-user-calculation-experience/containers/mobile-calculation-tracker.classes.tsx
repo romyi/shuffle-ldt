@@ -8,9 +8,7 @@ export const useClasses = createStyles(() => ({
   inner: {
     padding: "0px",
   },
-  root: {
-    background: "transparent",
-  },
+  root: {},
   content: {
     height: "250px",
     background: "transparent",

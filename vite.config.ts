@@ -29,6 +29,7 @@ export default defineConfig({
       "@states": path.resolve(__dirname, "./src/states"),
       "@types": path.resolve(__dirname, "./src/types"),
       "@network": path.resolve(__dirname, "./src/network"),
+      "@const": path.resolve(__dirname, "src/consts.ts"),
     },
   },
 });

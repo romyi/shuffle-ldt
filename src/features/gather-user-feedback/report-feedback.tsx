@@ -1,11 +1,11 @@
-import { Group } from "@mantine/core";
-import { IconMoodSad, IconMoodSmileBeam } from "@tabler/icons-react";
+import { Group, Text } from "@mantine/core";
 
 export const ReportFeedback = () => {
   return (
-    <Group m="auto">
-      <IconMoodSmileBeam stroke={1.5} />
-      <IconMoodSad stroke={1.5} />
+    <Group spacing={"xs"} mt="xl">
+      <Text color={"dimmed"} size="xs">
+        Достаточно ли Вам информации?
+      </Text>
     </Group>
   );
 };

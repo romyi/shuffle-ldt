@@ -1,6 +1,20 @@
 import { Accordion, Group, Stack, Text } from "@mantine/core";
 import { Calculation } from "@tyles/calculation";
+import { ReactNode } from "react";
 import { ControlContent, ItemActions } from "./report-item-blocks";
+import React from "react";
+import { ReportFeedback } from "@features/gather-user-feedback";
+
+export const ReportInfo: React.FC<{ children: [ReactNode, ReactNode] }> = (
+  props
+) => {
+  return (
+    <Stack spacing={0}>
+      {props.children[0]}
+      {props.children[1]}
+    </Stack>
+  );
+};
 
 export const CalculationReportItem: React.FC<{
   item: {
@@ -13,23 +27,29 @@ export const CalculationReportItem: React.FC<{
 }> = ({ item }) => {
   return (
     <Accordion.Item value={item.id} sx={{ position: "relative" }}>
-      <ControlContent item={item} />
+      <ControlContent
+        date={item.date}
+        from={item.from}
+        to={item.to}
+        branch={item.request.branch}
+      />
       <Accordion.Panel>
         <Group m="4px" fz={"xs"} spacing={"xl"}>
-          <Stack spacing={0}>
+          <ReportInfo>
             <Text>{item?.request?.personnel}</Text>
             <Text color="dimmed">человек</Text>
-          </Stack>
-          <Stack spacing={0}>
+          </ReportInfo>
+          <ReportInfo>
             <Text>{item?.request?.landSquare} м²</Text>
             <Text color="dimmed">участок</Text>
-          </Stack>
-          <Stack spacing={0}>
+          </ReportInfo>
+          <ReportInfo>
             <Text>{item?.request?.facilitySquare} м²</Text>
             <Text color="dimmed"> постройки</Text>
-          </Stack>
+          </ReportInfo>
         </Group>
-        <ItemActions item={item} />
+        <ItemActions itemId={item.id} />
+        <ReportFeedback />
       </Accordion.Panel>
     </Accordion.Item>
   );
