@@ -7,8 +7,10 @@ export const createHint = (
   content: ReactNode,
   icon?: ReactNode
 ) => {
-  return ({ cols }: { cols?: string }) => {
-    const [opened, { open, close }] = useDisclosure(true);
+  return ({ cols, initialOpen }: { cols?: string; initialOpen?: boolean }) => {
+    const [opened, { open, close }] = useDisclosure(
+      typeof initialOpen === "boolean" ? initialOpen : true
+    );
     if (opened) {
       return (
         <Card

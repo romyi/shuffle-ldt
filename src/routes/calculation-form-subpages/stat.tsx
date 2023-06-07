@@ -1,3 +1,4 @@
+import { SquareInputsHint } from "@features/user-ux-hints";
 import { Container, NumberInput, Stack, Switch } from "@mantine/core";
 import { calculation_state } from "@states/calculation";
 import { useEffect } from "react";
@@ -9,14 +10,15 @@ export const Stat = () => {
     setcalculation({
       snapshot: {
         ...calculation.snapshot,
-        landSquare: 250,
-        facilitySquare: 100,
+        landSquare: calculation.snapshot.landSquare || 250,
+        facilitySquare: calculation.snapshot.facilitySquare || 100,
       },
     });
   }, []);
   return (
-    <Container size={"xs"}>
+    <Container p={0} size={"xs"}>
       <Stack spacing={"48px"}>
+        <SquareInputsHint initialOpen={false} />
         <Stack spacing={"md"}>
           <NumberInput
             size={"md"}

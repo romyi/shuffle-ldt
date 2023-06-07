@@ -1,4 +1,4 @@
-import { Button, Stack, Text, Title } from "@mantine/core";
+import { Button, Stack, Text } from "@mantine/core";
 import { createHint } from "./hints-factory";
 
 export const BriefHint = createHint(

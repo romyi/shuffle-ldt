@@ -1,8 +1,7 @@
-import { Button, Card, Stack, Text } from "@mantine/core";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { Card } from "@mantine/core";
 import { Calculation } from "@tyles/calculation";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { ReactNode } from "react";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useCalculationMatch } from "../hooks";
 
@@ -10,8 +9,8 @@ type IndicatorCardProps = {
   url: string;
   showOn: Array<Partial<keyof Calculation>> | null;
   contentOn: Array<Partial<keyof Calculation>>;
-  children: React.ReactNode;
-  follower?: string;
+  children?: ReactNode;
+  invite: ReactNode;
 };
 
 export const IndicatorCard: React.FC<IndicatorCardProps> = ({
@@ -19,7 +18,7 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
   showOn,
   contentOn,
   children,
-  follower,
+  invite,
 }) => {
   const matched = useMatch(url);
   const show = useCalculationMatch(showOn);
@@ -43,31 +42,7 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
             padding={"md"}
             onClick={() => navigate(url)}
           >
-            {renderChild ? (
-              children
-            ) : matched ? (
-              <Stack align={"center"}>
-                <Button
-                  leftIcon={<IconInfoCircle />}
-                  color={"gray"}
-                  size="xs"
-                  mt="36px"
-                  variant={"outline"}
-                >
-                  Заполните данные
-                </Button>
-              </Stack>
-            ) : (
-              <Stack align={"center"}>
-                <Text ta="center" size="xs">
-                  {follower}
-                </Text>
-
-                <Button color={"cyan"} size="xs" variant={"outline"}>
-                  Перейти
-                </Button>
-              </Stack>
-            )}
+            {renderChild ? children : invite}
           </Card>
         </motion.div>
       </AnimatePresence>

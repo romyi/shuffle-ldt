@@ -7,17 +7,9 @@ import {
 import { GeneralModelFeedback } from "@features/gather-user-feedback";
 import { CalculationsHint, SnapshotHint } from "@features/user-ux-hints";
 import {
-  BriefHint,
-  UiSummaryHint,
-} from "@features/user-ux-hints/frontpage-hints";
-import {
   Accordion,
-  Box,
   Button,
-  Card,
   Container,
-  Group,
-  Image,
   LoadingOverlay,
   SimpleGrid,
   Stack,
@@ -55,8 +47,6 @@ export const Reports = () => {
                 {!storaged && (
                   <>
                     <InvitationToCalculation />
-                    {/* <Image src={"/indmos1.jpg"} width={320} /> */}
-                    {/* <Image src={"/indmos2.jpg"} width={320} /> */}
                     <Text size={"xs"}>
                       В 2021 году Москва экспортировала продукцию в 186 стран
                       мира. Более 30 процентов всего экспорта приходится на
