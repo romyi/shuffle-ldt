@@ -141,7 +141,7 @@ export const CalculationTracker = () => {
                 </Text>{" "}
                 <Text>{calculation.snapshot.equipment} ед</Text>
               </Stack>
-              <Text sx={{ wordBreak: "break-all" }} lineClamp={3} size="xs">
+              <Text sx={{ wordBreak: "break-all" }} lineClamp={2} size="xs">
                 {calculation.snapshot.branch_display_alias}
               </Text>
               {calculation.snapshot.isIndividual && (

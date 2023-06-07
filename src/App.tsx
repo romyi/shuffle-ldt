@@ -10,6 +10,7 @@ import { useRecoilValue } from "recoil";
 import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state, useRestoreSnapshot } from "@states/calculation";
 import { LARGE_SCREEN_EXTENT, SMALL_SCREEN_EXTENT } from "./consts";
+import { Notifications } from "@mantine/notifications";
 
 const App: React.FC = () => {
   const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);
@@ -87,6 +88,7 @@ const App: React.FC = () => {
         header={<MobileHeader />}
         footer={<MobileFooter />}
       >
+        <Notifications position="top-right" />
         <Outlet />
         <MobileNavigation />
       </AppShell>

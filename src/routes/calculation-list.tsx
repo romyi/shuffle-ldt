@@ -12,8 +12,12 @@ import {
 } from "@features/user-ux-hints/frontpage-hints";
 import {
   Accordion,
+  Box,
   Button,
+  Card,
   Container,
+  Group,
+  Image,
   LoadingOverlay,
   SimpleGrid,
   Stack,
@@ -36,6 +40,7 @@ export const Reports = () => {
   const { isError, isFetching, isFetched } = useQuery(keys.user.me());
   const { data: reports } = useQuery(keys.reports.list());
   const storaged = useStoragedCalc();
+
   const large = useMediaQuery(LARGE_SCREEN_EXTENT);
   const small = useMediaQuery(SMALL_SCREEN_EXTENT);
   return (
@@ -46,16 +51,18 @@ export const Reports = () => {
           {/** unaithorized user */}
           {isError ? (
             <>
-              <SimpleGrid mt="xl">
+              <SimpleGrid mt="xl" spacing={"xl"}>
                 {!storaged && (
                   <>
-                    <BriefHint />
                     <InvitationToCalculation />
-                    <UiSummaryHint />
+                    {/* <Image src={"/indmos1.jpg"} width={320} /> */}
+                    {/* <Image src={"/indmos2.jpg"} width={320} /> */}
+                    <Text size={"xs"}>
+                      В 2021 году Москва экспортировала продукцию в 186 стран
+                      мира. Более 30 процентов всего экспорта приходится на
+                      Казахстан, Белоруссию, Китай, Индию, Турцию.
+                    </Text>
                   </>
-                  // <Title>
-                  //   Наша задача - определить стоимость вашего запуска
-                  // </Title>
                 )}
                 {storaged && (
                   <>

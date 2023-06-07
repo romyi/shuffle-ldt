@@ -3,6 +3,7 @@ import { Calculation } from "@tyles/calculation";
 import { ReactNode } from "react";
 import { ControlContent, ItemActions } from "./report-item-blocks";
 import React from "react";
+import { ReportFeedback } from "@features/gather-user-feedback";
 
 export const ReportInfo: React.FC<{ children: [ReactNode, ReactNode] }> = (
   props
@@ -48,6 +49,7 @@ export const CalculationReportItem: React.FC<{
           </ReportInfo>
         </Group>
         <ItemActions itemId={item.id} />
+        <ReportFeedback />
       </Accordion.Panel>
     </Accordion.Item>
   );
