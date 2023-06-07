@@ -1,11 +1,9 @@
-import { Group, Text } from "@mantine/core";
+import { Button } from "@mantine/core";
 
 export const ReportFeedback = () => {
   return (
-    <Group spacing={"xs"} mt="xl">
-      <Text color={"dimmed"} size="xs">
-        Достаточно ли Вам информации?
-      </Text>
-    </Group>
+    <Button size={"xs"} color="gray" variant={"subtle"}>
+      Сообщить об ошибке
+    </Button>
   );
 };

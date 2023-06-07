@@ -1,8 +1,8 @@
+import { SMALL_SCREEN_EXTENT } from "@const";
 import { Drawer, createStyles } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { ui } from "@states/ui";
 import { useRecoilState } from "recoil";
-import { SMALL_SCREEN_EXTENT } from "../../../consts";
 import { DesktopContent } from "./desktop-content";
 import { MobileContent } from "./mobile-content";
 

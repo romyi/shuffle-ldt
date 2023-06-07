@@ -2,7 +2,12 @@ import { useClearSnapshot } from "@features/follow-user-calculation-experience/h
 import { Container, Text, Stack, NavLink, SimpleGrid } from "@mantine/core";
 import { keys } from "@network/index";
 import { ui } from "@states/ui";
-import { IconFileCheck, IconTablePlus } from "@tabler/icons-react";
+import {
+  IconBellQuestion,
+  IconFileCheck,
+  IconMoodCheck,
+  IconTablePlus,
+} from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMatch, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -15,7 +20,7 @@ export const DesktopContent = () => {
   const navigate = useNavigate();
   const clearShapshot = useClearSnapshot();
   return (
-    <Container mt="md" size={"md"} p="md" h="400px">
+    <Container mt="md" size={"md"} p="md">
       <SimpleGrid cols={3}>
         <Stack>
           <Text size={"sm"}>Расчёты</Text>
@@ -63,6 +68,35 @@ export const DesktopContent = () => {
             onClick={() => {
               setuistate({ ...uistate, drawer: null });
               navigate("/user");
+            }}
+          />
+        </Stack>
+        <Stack>
+          <Text size={"sm"}>Обратная связь</Text>
+          <NavLink
+            maw={320}
+            variant={"subtle"}
+            color="dark"
+            active={Boolean(useMatch("/"))}
+            label="Задать вопрос"
+            description="Хотите что-либо узнать у нас или дать совет? Будем рады"
+            icon={<IconBellQuestion size={24} />}
+            onClick={() => {
+              setuistate({ ...uistate, drawer: null });
+              navigate("/");
+            }}
+          />
+          <NavLink
+            maw={320}
+            variant={"subtle"}
+            color="dark"
+            active={Boolean(useMatch("/"))}
+            label="Дать оценку"
+            description="Узнать Ваше мнение о сервисе будет полезно и интересно для нас"
+            icon={<IconMoodCheck size={24} />}
+            onClick={() => {
+              setuistate({ ...uistate, drawer: null });
+              navigate("/");
             }}
           />
         </Stack>

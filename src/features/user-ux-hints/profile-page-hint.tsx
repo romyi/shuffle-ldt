@@ -3,5 +3,8 @@ import { createHint } from "./hints-factory";
 
 export const ProfilePageHint = createHint(
   "Личные данные",
-  <Text>Здесь Вы можете по своему желанию оставить личные данные</Text>
+  <Text size={"xs"} color="dimmed">
+    Здесь вы по желанию можете оставить данные о себе. Информация используется
+    командой сервиса для аналитики и улучшения функциональности.
+  </Text>
 );

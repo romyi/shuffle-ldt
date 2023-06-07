@@ -1,4 +1,5 @@
 import { CalculationReportItem } from "@components/report-item";
+import { LARGE_SCREEN_EXTENT, SMALL_SCREEN_EXTENT } from "@const";
 import {
   useStoragedCalc,
   InvitationToCalculation,
@@ -21,7 +22,6 @@ import { keys } from "@network/keystore";
 // import { calculation_state } from "@states/calculation";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { LARGE_SCREEN_EXTENT, SMALL_SCREEN_EXTENT } from "../consts";
 
 //
 // Экран расчетов, здесь грязновато
@@ -32,7 +32,6 @@ export const Reports = () => {
   const { isError, isFetching, isFetched } = useQuery(keys.user.me());
   const { data: reports } = useQuery(keys.reports.list());
   const storaged = useStoragedCalc();
-
   const large = useMediaQuery(LARGE_SCREEN_EXTENT);
   const small = useMediaQuery(SMALL_SCREEN_EXTENT);
   return (

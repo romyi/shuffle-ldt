@@ -1,3 +1,4 @@
+import { ReportFeedback } from "@features/gather-user-feedback";
 import { Button, Group, LoadingOverlay } from "@mantine/core";
 import { archiveReport, keys } from "@network/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -43,6 +44,7 @@ export const ItemActions: React.FC<{
       >
         Удалить
       </Button>
+      <ReportFeedback />
     </Group>
   );
 };
