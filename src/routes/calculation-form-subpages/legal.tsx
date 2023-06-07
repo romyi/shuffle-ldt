@@ -1,5 +1,7 @@
+import { SMALL_SCREEN_EXTENT } from "@const";
 import { StatsInputsHint } from "@features/user-ux-hints";
-import { Container, NumberInput, Select, Stack, Switch } from "@mantine/core";
+import { NumberInput, Select, SimpleGrid, Stack, Switch } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { keys } from "@network/keystore";
 import { calculation_state } from "@states/calculation";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +11,8 @@ import { useRecoilState } from "recoil";
 export const Legal = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   const { data, isFetching } = useQuery(keys.static.industries());
+  const small = useMediaQuery(SMALL_SCREEN_EXTENT);
+
   useEffect(() => {
     setcalculation({
       snapshot: {
@@ -19,9 +23,9 @@ export const Legal = () => {
     });
   }, []);
   return (
-    <Container p={0} size={"xs"}>
-      <Stack spacing={"48px"}>
-        <StatsInputsHint initialOpen={false} />
+    <SimpleGrid cols={small ? 1 : 2}>
+      <StatsInputsHint initialOpen={false} />
+      <Stack mt="xl" spacing={"48px"}>
         <Select
           required
           disabled={isFetching}
@@ -107,6 +111,6 @@ export const Legal = () => {
           }}
         />
       </Stack>
-    </Container>
+    </SimpleGrid>
   );
 };

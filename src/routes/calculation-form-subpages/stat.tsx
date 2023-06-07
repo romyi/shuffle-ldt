@@ -1,10 +1,13 @@
+import { SMALL_SCREEN_EXTENT } from "@const";
 import { SquareInputsHint } from "@features/user-ux-hints";
-import { Container, NumberInput, Stack, Switch } from "@mantine/core";
+import { NumberInput, SimpleGrid, Stack, Switch } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state } from "@states/calculation";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export const Stat = () => {
+  const small = useMediaQuery(SMALL_SCREEN_EXTENT);
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   useEffect(() => {
     setcalculation({
@@ -16,9 +19,9 @@ export const Stat = () => {
     });
   }, []);
   return (
-    <Container p={0} size={"xs"}>
-      <Stack spacing={"48px"}>
-        <SquareInputsHint initialOpen={false} />
+    <SimpleGrid cols={small ? 1 : 2}>
+      <SquareInputsHint initialOpen={false} />
+      <Stack mt="xl" spacing={"48px"}>
         <Stack spacing={"md"}>
           <NumberInput
             size={"md"}
@@ -88,6 +91,6 @@ export const Stat = () => {
           />
         </Stack>
       </Stack>
-    </Container>
+    </SimpleGrid>
   );
 };
