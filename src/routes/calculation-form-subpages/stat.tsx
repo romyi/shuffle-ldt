@@ -19,7 +19,7 @@ export const Stat = () => {
     });
   }, []);
   return (
-    <SimpleGrid cols={small ? 1 : 2}>
+    <SimpleGrid spacing={"32px"} cols={small ? 1 : 2}>
       <SquareInputsHint initialOpen={false} />
       <Stack mt="xl" spacing={"48px"}>
         <Stack spacing={"md"}>

@@ -28,13 +28,14 @@ export const IndicatorCard: React.FC<IndicatorCardProps> = ({
     return (
       <AnimatePresence>
         <motion.div
-          initial={{ y: 400 }}
+          initial={{ translateY: 400 }}
           transition={{ duration: 0.6 }}
-          animate={{ y: 0 }}
-          exit={{ y: 400 }}
+          animate={{ translateY: 0 }}
+          exit={{ translateY: 400 }}
         >
           <Card
-            miw={180}
+            sx={{ overflow: "visible" }} // for advanced ux animations
+            miw={200}
             withBorder={Boolean(matched?.pathname)}
             h={140}
             shadow={matched?.pathname ? "xl" : "xs"}

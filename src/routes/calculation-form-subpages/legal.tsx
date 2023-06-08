@@ -12,7 +12,6 @@ export const Legal = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   const { data, isFetching } = useQuery(keys.static.industries());
   const small = useMediaQuery(SMALL_SCREEN_EXTENT);
-
   useEffect(() => {
     setcalculation({
       snapshot: {
@@ -23,7 +22,7 @@ export const Legal = () => {
     });
   }, []);
   return (
-    <SimpleGrid cols={small ? 1 : 2}>
+    <SimpleGrid spacing={"32px"} cols={small ? 1 : 2}>
       <StatsInputsHint initialOpen={false} />
       <Stack mt="xl" spacing={"48px"}>
         <Select

@@ -1,6 +1,6 @@
 import { Drawer, Container, Group, Text } from "@mantine/core";
 import { ui } from "@states/ui";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { IndicatorCard } from "@features/follow-user-calculation-experience/components";
 import { useClasses } from "./mobile-calculation-tracker.classes";
 import { Calculation } from "@tyles/calculation";
@@ -16,6 +16,7 @@ import {
   ProceedSquareInput,
   ProceedStatsInput,
 } from "@features/user-ux-hints";
+import { calculation_state } from "@states/calculation";
 
 const finish_access_checks = [
   "branch",
@@ -29,9 +30,9 @@ const finish_access_checks = [
 export const CalculationTracker = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const onDrawerClose = () => setuistate({ ...uistate, drawer: null });
+  const calculation = useRecoilValue(calculation_state);
   const [oncheck, setoncheck] = useState(false);
-  const { classes } = useClasses();
-
+  const { classes } = useClasses(Boolean(calculation.snapshot.district)); //for animation hint on deckgl card
   return (
     <Drawer
       zIndex={oncheck ? 120 : 110}
@@ -40,7 +41,6 @@ export const CalculationTracker = () => {
         content: classes.content,
         body: classes.body,
         overlay: classes.overlay,
-        root: classes.root,
       }}
       withOverlay={oncheck}
       withCloseButton={false}

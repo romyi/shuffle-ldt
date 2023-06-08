@@ -35,9 +35,7 @@ export const SquareInputsHint = createHint(
     </Text>
   </Stack>,
   <Group>
-    <Text color="dimmed" size={"xs"}>
-      Нажмите, чтобы ознакомиться с пояснением нюансов
-    </Text>
+    <Text size={"xs"}>Нажмите, чтобы ознакомиться с пояснением нюансов</Text>
     <IconHelpCircle color="gray" stroke={1.5} />
   </Group>
 );
@@ -79,9 +77,7 @@ export const StatsInputsHint = createHint(
     </Text>
   </Stack>,
   <Group>
-    <Text color="dimmed" size={"xs"}>
-      Нажмите, чтобы ознакомиться с пояснением нюансов
-    </Text>
+    <Text size={"xs"}>Нажмите, чтобы ознакомиться с пояснением нюансов</Text>
     <IconHelpCircle color="gray" stroke={1.5} />
   </Group>
 );
