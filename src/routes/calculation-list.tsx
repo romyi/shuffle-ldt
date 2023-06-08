@@ -6,7 +6,11 @@ import {
   CalculationItemDemo,
 } from "@features/follow-user-onboarding";
 import { GeneralModelFeedback } from "@features/gather-user-feedback";
-import { CalculationsHint, SnapshotHint } from "@features/user-ux-hints";
+import {
+  CalculationsHint,
+  SnapshotHint,
+  SnapshotMechanicHint,
+} from "@features/user-ux-hints";
 import {
   Accordion,
   Button,
@@ -56,7 +60,9 @@ export const Reports = () => {
                 {storaged && (
                   <>
                     <SnapshotHint />
+                    <SnapshotMechanicHint />
                     <CalculationItemDemo item={storaged} />
+                    <GeneralModelFeedback />
                   </>
                 )}
               </SimpleGrid>

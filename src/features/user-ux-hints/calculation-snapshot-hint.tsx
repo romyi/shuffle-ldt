@@ -17,3 +17,14 @@ export const SnapshotHint = createHint(
   </>,
   <IconInfoCircle stroke={1.5} />
 );
+
+export const SnapshotMechanicHint = createHint(
+  "Список расчётов",
+  <>
+    <Text size="xs" maw="220px">
+      Список расчётов также будет доступен после подтверждения почты. Здесь
+      будет показан последний сделанный расчет.
+    </Text>
+  </>,
+  <IconInfoCircle stroke={1.5} />
+);

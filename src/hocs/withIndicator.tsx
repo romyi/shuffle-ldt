@@ -1,12 +1,14 @@
 import { Indicator } from "@mantine/core";
 
-export const withIndicator = (Component: React.FC) => {
-  const Indicated = Component;
-  return (props: any) => {
+export const withIndicator = <K extends object>(
+  Component: React.ComponentType<K>
+) => {
+  const IndicatedComponent = (props: K) => {
     return (
       <Indicator>
-        <Indicated {...(props as object)} />
+        <Component {...props} />
       </Indicator>
     );
   };
+  return IndicatedComponent;
 };

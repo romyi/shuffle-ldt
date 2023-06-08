@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useClasses = createStyles(() => ({
+export const useClasses = createStyles((_, overflow?: boolean) => ({
   overlay: {
     transitionDuration: "0.5s !important",
     zIndex: 119,
@@ -8,8 +8,8 @@ export const useClasses = createStyles(() => ({
   inner: {
     padding: "0px",
   },
-  root: {},
   content: {
+    overflow: overflow ? "auto" : "visible",
     height: "250px",
     background: "transparent",
     transitionDuration: "0.5s !important",
