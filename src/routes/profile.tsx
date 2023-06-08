@@ -23,7 +23,7 @@ export const Profile = () => {
   } else {
     return (
       <Container p={small ? "0px" : "sm"}>
-        <Title order={4}>Профиль пользователя</Title>
+        <Title>Профиль пользователя</Title>
         <SimpleGrid mt="xl" sx={{ position: "relative" }}>
           <ProfilePageHint />
           <LoadingOverlay visible={isFetching} />

@@ -5,7 +5,6 @@ import { ui } from "@states/ui";
 import {
   IconBellQuestion,
   IconFileCheck,
-  IconMoodCheck,
   IconTablePlus,
 } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -83,20 +82,7 @@ export const DesktopContent = () => {
             icon={<IconBellQuestion size={24} />}
             onClick={() => {
               setuistate({ ...uistate, drawer: null });
-              navigate("/");
-            }}
-          />
-          <NavLink
-            maw={320}
-            variant={"subtle"}
-            color="dark"
-            active={Boolean(useMatch("/"))}
-            label="Дать оценку"
-            description="Узнать Ваше мнение о сервисе будет полезно и интересно для нас"
-            icon={<IconMoodCheck size={24} />}
-            onClick={() => {
-              setuistate({ ...uistate, drawer: null });
-              navigate("/");
+              navigate("/question");
             }}
           />
         </Stack>

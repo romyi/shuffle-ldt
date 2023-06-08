@@ -8,6 +8,7 @@ import {
 import { GeneralModelFeedback } from "@features/gather-user-feedback";
 import {
   CalculationsHint,
+  InviteProfileHint,
   SnapshotHint,
   SnapshotMechanicHint,
 } from "@features/user-ux-hints";
@@ -72,7 +73,7 @@ export const Reports = () => {
               {!small && <Title>Расчёты</Title>}
               <SimpleGrid>
                 <CalculationsHint />
-                <GeneralModelFeedback />
+                <InviteProfileHint />
                 <Accordion
                   onChange={(item) => setparam({ id: item as string })}
                   sx={{ gridColumn: large ? "1/3" : "1/2" }}
@@ -94,8 +95,10 @@ export const Reports = () => {
                         />
                       ))}
                   {(!reports || reports.length === 0) && (
-                    <Stack>
-                      <Text size={"sm"}>У вас нет новых расчётов</Text>
+                    <Stack maw="220px">
+                      <Text mt="xl" size={"sm"}>
+                        У вас нет новых расчётов
+                      </Text>
                       <Button
                         size={"sm"}
                         variant="outline"
@@ -106,6 +109,7 @@ export const Reports = () => {
                     </Stack>
                   )}
                 </Accordion>
+                <GeneralModelFeedback />
               </SimpleGrid>
             </>
           )}

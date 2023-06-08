@@ -11,10 +11,12 @@ import {
 import { keys, requestCalculation } from "@network/index";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useStoragedCalc } from "../utils";
 
 export const Authorization = () => {
   const client = useQueryClient();
+  const navigate = useNavigate();
   const [mail, setmail] = useState("");
   const [code, setcode] = useState("");
 
@@ -50,6 +52,7 @@ export const Authorization = () => {
             }),
         });
       client.invalidateQueries({ queryKey: keys.user.me().queryKey });
+      navigate("/");
     },
   });
   return (
