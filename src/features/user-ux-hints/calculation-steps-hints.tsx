@@ -26,6 +26,7 @@ export const PickRegionHint = () => {
         transition={{
           repeat: Infinity,
           duration: 4,
+          delay: 2,
           repeatDelay: 2,
           ease: "easeInOut",
         }}

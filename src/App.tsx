@@ -11,6 +11,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state, useRestoreSnapshot } from "@states/calculation";
 import { LARGE_SCREEN_EXTENT, SMALL_SCREEN_EXTENT } from "./consts";
 import { Notifications } from "@mantine/notifications";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundaryContent } from "./components";
 
 const App: React.FC = () => {
   const smallScreen = useMediaQuery(SMALL_SCREEN_EXTENT);
@@ -82,16 +84,18 @@ const App: React.FC = () => {
       }}
       withNormalizeCSS
     >
-      <AppShell
-        layout="alt"
-        padding={12}
-        header={<MobileHeader />}
-        footer={<MobileFooter />}
-      >
-        <Notifications position="top-right" />
-        <Outlet />
-        <MobileNavigation />
-      </AppShell>
+      <ErrorBoundary FallbackComponent={ErrorBoundaryContent}>
+        <AppShell
+          layout="alt"
+          padding={12}
+          header={<MobileHeader />}
+          footer={<MobileFooter />}
+        >
+          <Notifications position="top-right" />
+          <Outlet />
+          <MobileNavigation />
+        </AppShell>
+      </ErrorBoundary>
     </MantineProvider>
   );
 };

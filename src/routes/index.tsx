@@ -5,6 +5,7 @@ import { Reports } from "./calculation-list";
 import { Calculation } from "./calculation-form";
 import { MoscowMap } from "@components/deckgl-moscow-map";
 import { Legal, Stat } from "./calculation-form-subpages";
+import { Questions } from "./questions";
 
 const calculation_config = [
   { path: "", element: <MoscowMap /> },
@@ -31,6 +32,10 @@ export const external_config = [
     path: "calculation",
     element: <Calculation />,
     children: calculation_config,
+  },
+  {
+    path: "question",
+    element: <Questions />,
   },
 ];
 

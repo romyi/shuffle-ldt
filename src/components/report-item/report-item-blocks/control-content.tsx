@@ -34,7 +34,7 @@ export const ControlContent: React.FC<{
             </Text>
           </Stack>
         </SimpleGrid>
-        <Text maw="160px" lineClamp={2} size="xs" weight={"400"} color="dimmed">
+        <Text maw="160px" lineClamp={2} size="xs" weight={"400"}>
           {typeof branch === "number" && data?.[branch as number].name}
           {typeof branch === "string" && branch}
         </Text>
@@ -45,7 +45,7 @@ export const ControlContent: React.FC<{
             })}
           </Text>
           <Text size={"10px"} color="dimmed">
-            {format(new Date(date), "hh:mm", {
+            {format(new Date(date), "HH:mm", {
               locale: russian,
             })}
           </Text>
