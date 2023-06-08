@@ -16,17 +16,11 @@ export const requestCalculation = (
     .then()
     .catch((error) => error);
 
-requestCalculation["key"] = "calculation-request";
-
 export const sendOtp = (email: string): Promise<void> =>
   instance({ url: "/auth/otp-code", method: "GET", params: { email } });
 
-sendOtp["key"] = "send-otp";
-
 export const askForToken = ({ email, code }: { email: string; code: string }) =>
   instance({ url: "/auth/token", method: "GET", params: { email, code } });
-
-askForToken["key"] = "ask-code";
 
 export const updateUser = (info: Partial<User>) =>
   instance({
@@ -38,10 +32,39 @@ export const updateUser = (info: Partial<User>) =>
     .catch(() => {
       return Promise.reject(new Error());
     });
-updateUser["key"] = "update-user";
 
 export const archiveReport = (id: string) =>
   instance({ url: `/reports/${id}`, method: "delete" })
     .then((response) => response.data)
     .catch(() => Promise.reject(new Error()));
-archiveReport["key"] = "archive-report";
+
+export const alarmReport = (payload: Calculation) =>
+  instance({
+    url: "/feedbacks/alarm",
+    method: "post",
+    data: { request: payload },
+  })
+    .then((response) => response.data)
+    .catch(() => Promise.reject(new Error()));
+
+export const provideModelFeedback = (feedback: {
+  score: number;
+  comment: string | undefined;
+}) => {
+  if (!feedback.comment) {
+    delete feedback["comment"];
+  }
+  return instance({
+    url: "/feedbacks/calculation",
+    method: "post",
+    data: feedback,
+  })
+    .then((response) => response.data)
+    .catch(() => Promise.reject(new Error()));
+};
+// provideModelFeedback["key"] = "provide-reedback";
+
+export const askQuestion = (question: { comment: string }) =>
+  instance({ url: "/feedbacks/question", method: "post", data: question })
+    .then((response) => response.data)
+    .catch(() => Promise.reject(new Error()));

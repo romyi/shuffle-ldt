@@ -73,7 +73,7 @@ export const Reports = () => {
               {!small && <Title>Расчёты</Title>}
               <SimpleGrid>
                 <CalculationsHint />
-                <InviteProfileHint />
+                <InviteProfileHint initialOpen={false} />
                 <Accordion
                   onChange={(item) => setparam({ id: item as string })}
                   sx={{ gridColumn: large ? "1/3" : "1/2" }}

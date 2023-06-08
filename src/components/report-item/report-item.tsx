@@ -47,7 +47,7 @@ export const CalculationReportItem: React.FC<{
             <Text color="dimmed"> постройки</Text>
           </ReportInfo>
         </Group>
-        <ItemActions itemId={item.id} />
+        <ItemActions item={item} />
       </Accordion.Panel>
     </Accordion.Item>
   );

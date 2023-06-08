@@ -7,6 +7,7 @@ export const useClasses = createStyles((_, overflow?: boolean) => ({
   },
   inner: {
     padding: "0px",
+    marginRight: "12px",
   },
   content: {
     overflow: overflow ? "auto" : "visible",
