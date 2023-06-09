@@ -7,7 +7,7 @@ import { MoscowMap } from "@components/deckgl-moscow-map";
 import { Legal, Stat } from "./calculation-form-subpages";
 import { Questions } from "./questions";
 import { NoPage } from "@components/ui-containers";
-import { Dashboard } from "@routes/administrator-routes/dashboard";
+import { Dashboard } from "./administrator-routes";
 
 const calculation_config = [
   { path: "", element: <MoscowMap /> },
