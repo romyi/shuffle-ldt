@@ -1,15 +1,17 @@
 import { useClearSnapshot } from "@features/follow-user-calculation-experience/hooks/useClearSnapshot";
-import { Container, Text, Stack, NavLink } from "@mantine/core";
+import { Container, Text, Stack } from "@mantine/core";
 import { keys } from "@network/index";
-import { ui } from "@states/ui";
 import {
-  IconBellQuestion,
-  IconFileCheck,
-  IconTablePlus,
-} from "@tabler/icons-react";
+  admin_auth,
+  auth_user_navigation,
+  unauth_user_navigation,
+} from "@routes/configs";
+import { ui } from "@states/ui";
 import { useQueryClient } from "@tanstack/react-query";
-import { useMatch, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+
+import { LinkItem } from "./link-item";
 
 export const MobileContent = () => {
   const client = useQueryClient();
@@ -17,74 +19,49 @@ export const MobileContent = () => {
   const [uistate, setuistate] = useRecoilState(ui);
   const navigate = useNavigate();
   const clearShapshot = useClearSnapshot();
-  const data = client.getQueryData(keys.user.me().queryKey);
+  const data = client.getQueryData<{ role: number }>(keys.user.me().queryKey);
+  const config = data
+    ? data.role === 999
+      ? admin_auth
+      : auth_user_navigation
+    : unauth_user_navigation;
   return (
-    <Container mt="md" size={"xs"} p="md" h="580px">
+    <Container mt="md" size={"xs"} p="md" h="500px">
       <Stack spacing={"0px"}>
-        <Text mb="md" size={"sm"}>
-          Расчёты
-        </Text>
-        <NavLink
-          variant={"subtle"}
-          color="dark"
-          active={Boolean(useMatch("/calculation"))}
-          label="Новый"
-          description="Если Вы начинали заполнять данные в калькуляторе, они будут утеряны"
-          icon={<IconTablePlus size={24} />}
-          onClick={() => {
-            clearShapshot();
-            setuistate({ ...uistate, drawer: null });
-            navigate("/calculation");
-          }}
-        />
-        <NavLink
-          maw={320}
-          variant={"subtle"}
-          color="dark"
-          active={Boolean(useMatch("/"))}
-          label="Список"
-          description="Просмотреть список расчётов"
-          icon={<IconFileCheck size={24} />}
-          onClick={() => {
-            setuistate({ ...uistate, drawer: null });
-            navigate("/");
-          }}
-        />
-        <Text mb="md" mt="md" size={"sm"}>
-          Управление
-        </Text>
-        <NavLink
-          color={"dark"}
-          variant={"subtle"}
-          active={Boolean(useMatch("/user"))}
-          label={data ? "Ваш профиль" : "Регистрация"}
-          description={
-            data
-              ? "Редактирование личных данных и настройки"
-              : "Заполнить ИНН, ФИО и получить подробный отчет"
-          }
-          icon={<IconFileCheck size={24} />}
-          onClick={() => {
-            setuistate({ ...uistate, drawer: null });
-            navigate("/user");
-          }}
-        />
-        <Text mb="md" mt="md" size={"sm"}>
-          Обратная связь
-        </Text>
-        <NavLink
-          maw={320}
-          variant={"subtle"}
-          color="dark"
-          active={Boolean(useMatch("/"))}
-          label="Задать вопрос"
-          description="Хотите что-либо узнать у нас или дать совет? Будем рады"
-          icon={<IconBellQuestion size={24} />}
-          onClick={() => {
-            setuistate({ ...uistate, drawer: null });
-            navigate("/question");
-          }}
-        />
+        {Object.keys(config).map((section) => {
+          return (
+            <>
+              <Text key={section} mb="md" size={"sm"}>
+                {section}
+              </Text>
+              <Stack spacing={0} mb="xl">
+                {config[section].map((link) => {
+                  return (
+                    <LinkItem
+                      key={link.description}
+                      callback={() => {
+                        if (link.path === "/calculation") clearShapshot();
+                        if (link.label === "Выйти") {
+                          localStorage.clear();
+                          navigate(link.path);
+                          client.invalidateQueries({
+                            queryKey: keys.user.me().queryKey,
+                          });
+                        }
+                        setuistate({ ...uistate, drawer: null });
+                        navigate(link.path);
+                      }}
+                      Icon={link.icon}
+                      label={link.label}
+                      description={link.description}
+                      path={link.path}
+                    />
+                  );
+                })}
+              </Stack>
+            </>
+          );
+        })}
       </Stack>
     </Container>
   );

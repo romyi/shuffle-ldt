@@ -1,4 +1,4 @@
-import { SMALL_SCREEN_EXTENT } from "@const";
+import { SMALL_SCREEN_EXTENT } from "src/consts";
 import { Container, Text, Title } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
