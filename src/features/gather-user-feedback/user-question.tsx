@@ -25,7 +25,8 @@ export const UserQuestion = () => {
   const { classes } = useQuestionFieldClasses();
   const [ques, setques] = useState("");
   const { mutate: question, isLoading } = useMutation(askQuestion, {
-    onSuccess: () =>
+    onSuccess: () => {
+      setques("");
       notifications.show({
         sx: { marginTop: "48px" },
         title: "Отравлено",
@@ -33,7 +34,8 @@ export const UserQuestion = () => {
         color: "pink",
         icon: <IconCheck size={16} stroke={1.5} />,
         autoClose: 4000,
-      }),
+      });
+    },
     onError: () => notifications.show(error_notification),
   });
   const onConfirm = () => question({ comment: ques });
