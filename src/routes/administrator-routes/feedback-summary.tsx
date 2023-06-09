@@ -1,4 +1,4 @@
-import { Card, Group, SimpleGrid, Text } from "@mantine/core";
+import { Card, SimpleGrid, Text } from "@mantine/core";
 import { keys } from "@network/index";
 import { useQueryClient } from "@tanstack/react-query";
 import {
