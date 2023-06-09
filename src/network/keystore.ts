@@ -1,5 +1,11 @@
 import { createQueryKeyStore } from "@lukemorales/query-key-factory";
 import { Calculation } from "@tyles/calculation";
+import {
+  FeedAlarm,
+  FeedCalculation,
+  FeedCommon,
+  FeedQuestion,
+} from "@tyles/feedbacks";
 import { instance } from ".";
 
 export const keys = createQueryKeyStore({
@@ -99,6 +105,60 @@ export const keys = createQueryKeyStore({
             link: URL.createObjectURL(response.data),
             revoke: () => URL.revokeObjectURL(response.data),
           }))
+          .catch(() => Promise.reject(new Error())),
+    }),
+  },
+  feedbacks: {
+    common: () => ({
+      queryKey: ["feedback-common"],
+      queryFn: (): Promise<Array<FeedCommon>> =>
+        instance({
+          url: "/feedbacks/common",
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.data)
+          .catch(() => Promise.reject(new Error())),
+    }),
+    alarm: () => ({
+      queryKey: ["feedbkaca-alarm"],
+      queryFn: (): Promise<Array<FeedAlarm>> =>
+        instance({
+          url: "/feedbacks/alarm",
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.data)
+          .catch(() => Promise.reject(new Error())),
+    }),
+    question: () => ({
+      queryKey: ["feedback-question"],
+      queryFn: (): Promise<Array<FeedQuestion>> =>
+        instance({
+          url: "/feedbacks/question",
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.data)
+          .catch(() => Promise.reject(new Error())),
+    }),
+    calculation: () => ({
+      queryKey: ["feedback-calculation"],
+      queryFn: (): Promise<Array<FeedCalculation>> =>
+        instance({
+          url: "/feedbacks/calculation",
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.data)
           .catch(() => Promise.reject(new Error())),
     }),
   },

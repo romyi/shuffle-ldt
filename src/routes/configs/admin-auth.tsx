@@ -7,7 +7,7 @@ export const admin_auth: RouteConfig = {
       path: "/",
       icon: IconDashboard,
       label: "Дашборд",
-      description: "Посмотреть список расчётов",
+      description: "Управление обратной связью",
     },
     {
       path: "/",
