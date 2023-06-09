@@ -9,7 +9,8 @@
       "@tyles/*": ["src/types/*"],
       "@network/*": ["src/network/*"],
       "@const": ["src/consts.ts"],
-      "@hocs/*": ["src/hocs/*"]
+      "@hocs/*": ["src/hocs/*"],
+      "@routes/*": ["src/routes/*"]
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Global } from "@mantine/core";
 import { RecoilRoot } from "recoil";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RoleBasedRouterProvider } from "./routes/role-based-route-tree";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundaryContent } from "./components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,7 +53,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     />
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <RouterProvider router={router} />
+        <ErrorBoundary FallbackComponent={ErrorBoundaryContent}>
+          <RoleBasedRouterProvider />
+        </ErrorBoundary>
       </RecoilRoot>
     </QueryClientProvider>
   </React.StrictMode>

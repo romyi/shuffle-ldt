@@ -32,8 +32,8 @@ export const keys = createQueryKeyStore({
   user: {
     me: () => ({
       queryKey: ["me"],
-      queryFn: (): Promise<{ email: string }> => {
-        return instance({
+      queryFn: () =>
+        instance({
           url: "/users/me",
         })
           .then((response) => {
@@ -41,8 +41,7 @@ export const keys = createQueryKeyStore({
           })
           .catch(() => {
             return Promise.reject(new Error());
-          });
-      },
+          }),
     }),
   },
   static: {

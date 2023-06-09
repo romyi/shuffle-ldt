@@ -1,91 +1,65 @@
 import { useClearSnapshot } from "@features/follow-user-calculation-experience/hooks/useClearSnapshot";
-import { Container, Text, Stack, NavLink, SimpleGrid } from "@mantine/core";
+import { Container, Text, Stack, SimpleGrid } from "@mantine/core";
 import { keys } from "@network/index";
 import { ui } from "@states/ui";
-import {
-  IconBellQuestion,
-  IconFileCheck,
-  IconTablePlus,
-} from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useMatch, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import {
+  admin_auth,
+  auth_user_navigation,
+  unauth_user_navigation,
+} from "@routes/configs";
+import { LinkItem } from "./link-item";
 
 export const DesktopContent = () => {
   const client = useQueryClient();
   const [uistate, setuistate] = useRecoilState(ui);
 
-  const data = client.getQueryData(keys.user.me().queryKey);
+  const data = client.getQueryData<{ role: number }>(keys.user.me().queryKey);
   const navigate = useNavigate();
   const clearShapshot = useClearSnapshot();
+  const config = data
+    ? data.role === 999
+      ? admin_auth
+      : auth_user_navigation
+    : unauth_user_navigation;
   return (
     <Container mt="md" size={"md"} p="md">
       <SimpleGrid cols={3}>
-        <Stack>
-          <Text size={"sm"}>Расчёты</Text>
-          <NavLink
-            variant={"subtle"}
-            color="dark"
-            active={Boolean(useMatch("/calculation"))}
-            label="Новый"
-            description="Если Вы начинали заполнять данные в калькуляторе, они будут утеряны"
-            icon={<IconTablePlus size={24} />}
-            onClick={() => {
-              clearShapshot();
-              setuistate({ ...uistate, drawer: null });
-              navigate("/calculation");
-            }}
-          />
+        {Object.keys(config).map((section) => {
+          return (
+            <Stack key={section}>
+              <Text size={"sm"}>{section}</Text>
+              {config[section].map((link) => {
+                return (
+                  <LinkItem
+                    key={link.description}
+                    callback={() => {
+                      if (link.path === "/calculation") clearShapshot();
+                      if (link.label === "Выйти") {
+                        localStorage.clear();
+                        navigate(link.path);
+                        // window.location.reload();
 
-          <NavLink
-            maw={320}
-            variant={"subtle"}
-            color="dark"
-            active={Boolean(useMatch("/"))}
-            label="Список"
-            description="Просмотреть список расчётов"
-            icon={<IconFileCheck size={24} />}
-            onClick={() => {
-              setuistate({ ...uistate, drawer: null });
-              navigate("/");
-            }}
-          />
-        </Stack>
-        <Stack>
-          <Text size={"sm"}>Управление</Text>
-          <NavLink
-            color={"dark"}
-            variant={"subtle"}
-            active={Boolean(useMatch("/user"))}
-            label={data ? "Ваш профиль" : "Регистрация"}
-            description={
-              data
-                ? "Редактирование личных данных и настройки"
-                : "Заполнить ИНН, ФИО и получить подробный отчет"
-            }
-            icon={<IconFileCheck size={24} />}
-            onClick={() => {
-              setuistate({ ...uistate, drawer: null });
-              navigate("/user");
-            }}
-          />
-        </Stack>
-        <Stack>
-          <Text size={"sm"}>Обратная связь</Text>
-          <NavLink
-            maw={320}
-            variant={"subtle"}
-            color="dark"
-            active={Boolean(useMatch("/"))}
-            label="Задать вопрос"
-            description="Хотите что-либо узнать у нас или дать совет? Будем рады"
-            icon={<IconBellQuestion size={24} />}
-            onClick={() => {
-              setuistate({ ...uistate, drawer: null });
-              navigate("/question");
-            }}
-          />
-        </Stack>
+                        // хороший инвалидейт не смог стабильно прикрутить - работает через раз, буду разбираться
+                        client.invalidateQueries({
+                          queryKey: keys.user.me().queryKey,
+                        });
+                      }
+                      setuistate({ ...uistate, drawer: null });
+                      navigate(link.path);
+                    }}
+                    Icon={link.icon}
+                    label={link.label}
+                    description={link.description}
+                    path={link.path}
+                  />
+                );
+              })}
+            </Stack>
+          );
+        })}
       </SimpleGrid>
     </Container>
   );

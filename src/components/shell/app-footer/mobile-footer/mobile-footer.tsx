@@ -4,7 +4,7 @@ import { ui } from "@states/ui";
 import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { calculation_state } from "@states/calculation";
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { keys } from "@network/keystore";
 import { withIndicator } from "@hocs/index";
 
@@ -12,38 +12,45 @@ const IndicatedCalcIcon = withIndicator(IconTablePlus);
 
 export const MobileFooter = () => {
   const [uistate, setuistate] = useRecoilState(ui);
+  const client = useQueryClient();
   const navigate = useNavigate();
   const [calculation] = useRecoilState(calculation_state);
-  const { isError, isFetching, data: me } = useQuery(keys.user.me());
+  const state = client.getQueryState<{ email: string; role: number }>(
+    keys.user.me().queryKey
+  );
   return (
     <Footer withBorder={false} height={70} zIndex={115}>
       <Container>
         <Group position="apart" noWrap={true}>
-          {isFetching && <Loader size={"xs"} />}
+          {state?.status === "loading" && <Loader size={"xs"} />}
           <Text color="dimmed" size="sm" truncate>
-            {isError && "Гость"}
-            {me && me.email}
+            {state?.status === "error"
+              ? "Гость"
+              : state?.data && state.data?.email}
+            {state?.data?.role === 999 && " - Администратор"}
           </Text>
           <Group grow={true} position="apart" spacing={"xl"} noWrap={true}>
-            {calculation.snapshot.district_display_alias ? (
-              <IndicatedCalcIcon
-                onClick={() => {
-                  navigate("/calculation");
-                }}
-                strokeWidth={1.5}
-                size={36}
-                color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
-              />
-            ) : (
-              <IconTablePlus
-                onClick={() => {
-                  navigate("/calculation");
-                }}
-                strokeWidth={1.5}
-                size={36}
-                color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
-              />
-            )}
+            {state?.data?.role !== 999 ? (
+              calculation.snapshot.district_display_alias ? (
+                <IndicatedCalcIcon
+                  onClick={() => {
+                    navigate("/calculation");
+                  }}
+                  strokeWidth={1.5}
+                  size={36}
+                  color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
+                />
+              ) : (
+                <IconTablePlus
+                  onClick={() => {
+                    navigate("/calculation");
+                  }}
+                  strokeWidth={1.5}
+                  size={36}
+                  color={uistate.drawer === "calculation" ? "#D6336C" : "black"}
+                />
+              )
+            ) : null}
             <IconListDetails
               onClick={() =>
                 setuistate({
