@@ -40,9 +40,6 @@ export const DesktopContent = () => {
                       if (link.label === "Выйти") {
                         localStorage.clear();
                         navigate(link.path);
-                        // window.location.reload();
-
-                        // хороший инвалидейт не смог стабильно прикрутить - работает через раз, буду разбираться
                         client.invalidateQueries({
                           queryKey: keys.user.me().queryKey,
                         });

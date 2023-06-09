@@ -68,3 +68,28 @@ export const askQuestion = (question: { comment: string }) =>
   instance({ url: "/feedbacks/question", method: "post", data: question })
     .then((response) => response.data)
     .catch(() => Promise.reject(new Error()));
+
+export const provideUxFeedback = (feedback: {
+  score: number;
+  comment: string | undefined;
+}) => {
+  if (!feedback.comment) {
+    delete feedback["comment"];
+  }
+  return instance({
+    url: "/feedbacks/common",
+    method: "post",
+    data: feedback,
+  })
+    .then((response) => response.data)
+    .catch(() => Promise.reject(new Error()));
+};
+
+export const deleteFeedback = (id: string) => {
+  return instance({
+    url: `/feedbacks/${id}`,
+    method: "delete",
+  })
+    .then((response) => response.data)
+    .catch(() => Promise.reject(new Error()));
+};

@@ -1,5 +1,11 @@
 import { createQueryKeyStore } from "@lukemorales/query-key-factory";
 import { Calculation } from "@tyles/calculation";
+import {
+  FeedAlarm,
+  FeedCalculation,
+  FeedCommon,
+  FeedQuestion,
+} from "@tyles/feedbacks";
 import { instance } from ".";
 
 export const keys = createQueryKeyStore({
@@ -102,4 +108,78 @@ export const keys = createQueryKeyStore({
           .catch(() => Promise.reject(new Error())),
     }),
   },
+  feedback: {
+    all: () => ({
+      queryKey: ["feed"],
+      queryFn: (): Promise<{
+        common: FeedCommon[];
+        alarm: FeedAlarm[];
+        question: FeedQuestion[];
+        calculation: FeedCalculation[];
+      }> =>
+        instance({
+          url: "/feedbacks",
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.data)
+          .catch(() => Promise.reject(new Error())),
+    }),
+  },
 });
+// feedbacks: {
+//   common: () => ({
+//     queryKey: ["common"],
+//     queryFn: (): Promise<Array<FeedCommon>> =>
+//       instance({
+//         url: "/feedbacks/common",
+//         method: "get",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       })
+//         .then((response) => response.data)
+//         .catch(() => Promise.reject(new Error())),
+//   }),
+//   alarm: () => ({
+//     queryKey: ["alarm"],
+//     queryFn: (): Promise<Array<FeedAlarm>> =>
+//       instance({
+//         url: "/feedbacks/alarm",
+//         method: "get",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       })
+//         .then((response) => response.data)
+//         .catch(() => Promise.reject(new Error())),
+//   }),
+//   question: () => ({
+//     queryKey: ["question"],
+//     queryFn: (): Promise<Array<FeedQuestion>> =>
+//       instance({
+//         url: "/feedbacks/question",
+//         method: "get",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       })
+//         .then((response) => response.data)
+//         .catch(() => Promise.reject(new Error())),
+//   }),
+//   calculation: () => ({
+//     queryKey: ["calculatiofeedback"],
+//     queryFn: (): Promise<Array<FeedCalculation>> =>
+//       instance({
+//         url: "/feedbacks/calculation",
+//         method: "get",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       })
+//         .then((response) => response.data)
+//         .catch(() => Promise.reject(new Error())),
+//   }),
+// },

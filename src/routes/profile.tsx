@@ -1,5 +1,6 @@
 import { SMALL_SCREEN_EXTENT } from "@const";
 import { Authorization } from "@features/follow-user-onboarding";
+import { UxFeedback } from "@features/gather-user-feedback/ux-feedback";
 import { ProfileGrid } from "@features/user-profile-edit";
 import { ProfilePageHint } from "@features/user-ux-hints";
 import { Container, LoadingOverlay, SimpleGrid, Title } from "@mantine/core";
@@ -26,6 +27,7 @@ export const Profile = () => {
         <Title>Профиль пользователя</Title>
         <SimpleGrid mt="xl" sx={{ position: "relative" }}>
           <ProfilePageHint />
+          <UxFeedback />
           <LoadingOverlay visible={isFetching} />
           {data && <ProfileGrid data={data} />}
         </SimpleGrid>

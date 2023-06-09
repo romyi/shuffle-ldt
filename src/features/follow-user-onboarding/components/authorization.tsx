@@ -1,3 +1,4 @@
+import { UxFeedback } from "@features/gather-user-feedback/ux-feedback";
 import {
   Alert,
   Button,
@@ -56,44 +57,50 @@ export const Authorization = () => {
     },
   });
   return (
-    <SimpleGrid>
-      <Alert color={"cyan"}>
-        Мы отправим 6-ти значный код на указанный адрес.
-        {hasTokenAsked && "Введите его в поле ниже"}
-      </Alert>
-      <LoadingOverlay visible={mailPending || tokenPending} />
-      <Card>
-        <Stack>
-          <TextInput
-            onChange={(event) => setmail(event.currentTarget.value)}
-            value={mail}
-            placeholder="промышленность@internet.ru"
-          />
-          <Button variant={"outline"} onClick={() => setHasAuthCodeAsked(true)}>
-            Получить код авторизации
-          </Button>
-        </Stack>
-      </Card>
-      {isEmailCodeSent && (
+    <>
+      <SimpleGrid>
+        {/* <Alert h={"120px"} color={"cyan"}>
+          Мы отправим 6-ти значный код на указанный адрес.
+          {hasTokenAsked && "Введите его в поле ниже"}
+        </Alert> */}
+        <LoadingOverlay visible={mailPending || tokenPending} />
         <Card>
           <Stack>
-            <PinInput
-              onChange={(value) => setcode(value)}
-              size={"sm"}
-              length={6}
+            <TextInput
+              onChange={(event) => setmail(event.currentTarget.value)}
+              value={mail}
+              placeholder="промышленность@internet.ru"
             />
-            <Button onClick={() => setHasTokenAsked(true)}>Войти</Button>
+            <Button
+              variant={"outline"}
+              onClick={() => setHasAuthCodeAsked(true)}
+            >
+              Получить код авторизации
+            </Button>
           </Stack>
         </Card>
-      )}
-      {isError && (
-        <Alert color={"yellow"}>Пожалуйста, введите корректный адрес</Alert>
-      )}
-      {errorWhileTokenFecth && (
-        <Alert color={"yellow"}>
-          Код некорректен, пожалуйста, запросите ноый
-        </Alert>
-      )}
-    </SimpleGrid>
+        {isEmailCodeSent && (
+          <Card>
+            <Stack>
+              <PinInput
+                onChange={(value) => setcode(value)}
+                size={"sm"}
+                length={6}
+              />
+              <Button onClick={() => setHasTokenAsked(true)}>Войти</Button>
+            </Stack>
+          </Card>
+        )}
+        {isError && (
+          <Alert color={"yellow"}>Пожалуйста, введите корректный адрес</Alert>
+        )}
+        {errorWhileTokenFecth && (
+          <Alert color={"yellow"}>
+            Код некорректен, пожалуйста, запросите ноый
+          </Alert>
+        )}
+        <UxFeedback />
+      </SimpleGrid>
+    </>
   );
 };

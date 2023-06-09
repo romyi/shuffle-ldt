@@ -11,6 +11,16 @@ export const InvitationToCalculation = () => {
     navigate("/calculation");
   };
   return (
+    // <Accordion defaultValue={"invitation"}>
+    //   <Accordion.Item value="invitation">
+    //     <Accordion.Control>
+    //       <Text>У вас нет расчётов</Text>
+    //     </Accordion.Control>
+    //     <Accordion.Panel>
+    //       <Text>Сделать расчёт</Text>
+    //     </Accordion.Panel>
+    //   </Accordion.Item>
+    // </Accordion>
     <Alert color={"cyan"}>
       <Stack>
         <Text>Заполните данные ФИО, ИНН чтобы просматривать все отчеты</Text>

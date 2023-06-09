@@ -33,6 +33,7 @@ export const MobileFooter = () => {
             {state?.data?.role !== 999 ? (
               calculation.snapshot.district_display_alias ? (
                 <IndicatedCalcIcon
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     navigate("/calculation");
                   }}
@@ -42,6 +43,7 @@ export const MobileFooter = () => {
                 />
               ) : (
                 <IconTablePlus
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     navigate("/calculation");
                   }}
@@ -52,6 +54,7 @@ export const MobileFooter = () => {
               )
             ) : null}
             <IconListDetails
+              style={{ cursor: "pointer" }}
               onClick={() =>
                 setuistate({
                   ...uistate,

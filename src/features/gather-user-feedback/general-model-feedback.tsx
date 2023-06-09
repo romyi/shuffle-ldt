@@ -29,7 +29,10 @@ const useCommentClasses = createStyles({
   },
 });
 
-const Front: React.FC<{ open: () => void }> = ({ open }) => {
+export const Front: React.FC<{ open: () => void; text: string }> = ({
+  open,
+  text,
+}) => {
   const theme = useMantineTheme();
   return (
     <AnimatePresence>
@@ -41,7 +44,7 @@ const Front: React.FC<{ open: () => void }> = ({ open }) => {
         {/* <Center sx={{ cursor: "pointer" }} onClick={open}> */}
         <Stack align={"center"} onClick={open}>
           <Text variant={"gradient"} ta="center" maw="120px" size="xs">
-            Нажмите, чтобы оценить полноту данных
+            {text}
           </Text>
           <IconThumbUp color={theme.colors.cyan[8]} stroke={1.5} />
         </Stack>
@@ -51,11 +54,12 @@ const Front: React.FC<{ open: () => void }> = ({ open }) => {
   );
 };
 
-const Feedback: React.FC<{
+export const Feedback: React.FC<{
   close: () => void;
   feedback: (feedback: { score: number; comment: string | undefined }) => void;
   isLoading: boolean;
-}> = ({ close, feedback, isLoading }) => {
+  metric: string;
+}> = ({ close, feedback, isLoading, metric }) => {
   const { classes } = useCommentClasses();
   const comment = useRef<HTMLTextAreaElement>(null);
   const [rate, setrate] = useState<number>(0);
@@ -74,7 +78,7 @@ const Feedback: React.FC<{
             <Group position={"apart"} align="flex-start" noWrap>
               <Stack spacing={"xs"}>
                 <Text size={"xs"} weight="400">
-                  Насколько полезны и ясны данные из отчётов?
+                  {metric}
                 </Text>
                 <Text size="xs">Оцените от 1 до 5</Text>
               </Stack>
@@ -111,7 +115,7 @@ const Feedback: React.FC<{
   );
 };
 
-const Success = () => {
+export const Success = () => {
   const theme = useMantineTheme();
   return (
     <AnimatePresence>
@@ -153,10 +157,15 @@ export const GeneralModelFeedback = () => {
       return <Success />;
     } else {
       return (
-        <Feedback close={close} feedback={feedback} isLoading={isLoading} />
+        <Feedback
+          metric="Насколько полезны и ясны данные из отчётов?"
+          close={close}
+          feedback={feedback}
+          isLoading={isLoading}
+        />
       );
     }
   } else {
-    return <Front open={open} />;
+    return <Front text="Нажмите, чтобы оценить полноту данных" open={open} />;
   }
 };

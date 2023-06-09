@@ -18,7 +18,6 @@ import {
   Container,
   LoadingOverlay,
   SimpleGrid,
-  Stack,
   Text,
   Title,
 } from "@mantine/core";
@@ -95,18 +94,34 @@ export const Reports = () => {
                         />
                       ))}
                   {(!reports || reports.length === 0) && (
-                    <Stack maw="220px">
-                      <Text mt="xl" size={"sm"}>
-                        У вас нет новых расчётов
-                      </Text>
-                      <Button
-                        size={"sm"}
-                        variant="outline"
-                        onClick={() => navigate("/calculation")}
-                      >
-                        Создать расчёт
-                      </Button>
-                    </Stack>
+                    // <Stack maw="220px">
+                    //   <Text mt="xl" size={"sm"}>
+                    //     У вас нет новых расчётов
+                    //   </Text>
+                    //   <Button
+                    //     size={"sm"}
+                    //     variant="outline"
+                    //     onClick={() => navigate("/calculation")}
+                    //   >
+                    //     Создать расчёт
+                    //   </Button>
+                    // </Stack>
+                    <Accordion defaultValue={"invitation"}>
+                      <Accordion.Item value="invitation">
+                        <Accordion.Control>
+                          <Text>У вас нет расчётов</Text>
+                        </Accordion.Control>
+                        <Accordion.Panel>
+                          <Button
+                            onClick={() => navigate("/calculation")}
+                            size={"xs"}
+                            variant="outline"
+                          >
+                            Создать расчёт
+                          </Button>
+                        </Accordion.Panel>
+                      </Accordion.Item>
+                    </Accordion>
                   )}
                 </Accordion>
                 <GeneralModelFeedback />

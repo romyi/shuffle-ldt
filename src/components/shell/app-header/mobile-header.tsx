@@ -1,6 +1,6 @@
 import { Logo } from "@components/ui-containers";
 import { Header, Image, Container, Group, createStyles } from "@mantine/core";
-import Moscow from "/moscow.svg";
+import Moscow from "/coat.png";
 
 const headerClasses = createStyles({
   root: {
