@@ -43,7 +43,6 @@ export const Dashboard = () => {
           mt="46px"
           size={"sm"}
           onChange={(page) => {
-            console.log(page);
             setpage(page);
           }}
           total={Math.ceil(targetlist.length / 5)}
@@ -70,9 +69,23 @@ export const Dashboard = () => {
                     );
                   }
                   if (isQuestion(item)) {
-                    return <QuestionItem key={item.id} {...item} />;
+                    return (
+                      <QuestionItem
+                        key={item.id}
+                        question={item}
+                        remove={remove}
+                        isLoading={isLoading}
+                      />
+                    );
                   }
-                  return <UniversalItem key={item.id} {...item} />;
+                  return (
+                    <UniversalItem
+                      key={item.id}
+                      item={item}
+                      remove={remove}
+                      isLoading={isLoading}
+                    />
+                  );
                 })}
           </Accordion>
         </Stack>

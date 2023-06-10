@@ -40,9 +40,10 @@ export const DesktopContent = () => {
                       if (link.label === "Выйти") {
                         localStorage.clear();
                         navigate(link.path);
-                        client.invalidateQueries({
-                          queryKey: keys.user.me().queryKey,
-                        });
+                        // client.invalidateQueries({
+                        //   queryKey: keys.user.me().queryKey,
+                        // });
+                        window.location.reload();
                       }
                       setuistate({ ...uistate, drawer: null });
                       navigate(link.path);
