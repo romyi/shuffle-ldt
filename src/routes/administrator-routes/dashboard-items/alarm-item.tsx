@@ -60,8 +60,8 @@ export const AlarmItem: React.FC<{
             <Text color="dimmed"> постройки</Text>
           </ReportInfo>
           <Button
-            variant={"outline"}
-            color="dark"
+            variant={"subtle"}
+            color="pink"
             size="xs"
             onClick={() => remove(alarm.id)}
           >

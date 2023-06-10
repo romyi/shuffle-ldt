@@ -1,4 +1,4 @@
-import { Container, Footer, Group, Loader, Text } from "@mantine/core";
+import { Container, Divider, Footer, Group, Loader, Text } from "@mantine/core";
 import { useRecoilState } from "recoil";
 import { ui } from "@states/ui";
 import { IconListDetails, IconTablePlus } from "@tabler/icons-react";
@@ -24,9 +24,20 @@ export const MobileFooter = () => {
         <Group position="apart" noWrap={true}>
           {state?.status === "loading" && <Loader size={"xs"} />}
           <Text color="dimmed" size="sm" truncate>
-            {state?.status === "error"
-              ? "Гость"
-              : state?.data && state.data?.email}
+            {state?.status === "error" ? (
+              <Group noWrap spacing={"md"}>
+                Гость
+                <Divider orientation="vertical" />
+                <Text
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => navigate("/user")}
+                >
+                  Войти
+                </Text>
+              </Group>
+            ) : (
+              state?.data && state.data?.email
+            )}
             {state?.data?.role === 999 && " - Администратор"}
           </Text>
           <Group grow={true} position="apart" spacing={"xl"} noWrap={true}>
