@@ -47,7 +47,7 @@ export const UserQuestion = () => {
         onChange={(event) => setques(event.target.value)}
         label="Спросите нас"
         maxLength={140}
-        minLength={20}
+        minLength={1}
         autoFocus
         classNames={{
           root: classes.root,
@@ -56,7 +56,7 @@ export const UserQuestion = () => {
         required
         autosize
         size="sm"
-        placeholder="от 20 до 140 знаков"
+        placeholder="от 1 до 140 знаков"
       />
       <Button disabled={ques.length < 20} size="sm" onClick={onConfirm}>
         Отправить
