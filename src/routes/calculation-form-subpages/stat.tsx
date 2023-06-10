@@ -1,13 +1,16 @@
 import { SMALL_SCREEN_EXTENT } from "@const";
 import { SquareInputsHint } from "@features/user-ux-hints";
-import { NumberInput, SimpleGrid, Stack, Switch } from "@mantine/core";
+import { NumberInput, SimpleGrid, Stack, Switch, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { calculation_state } from "@states/calculation";
+import { ui } from "@states/ui";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export const Stat = () => {
   const small = useMediaQuery(SMALL_SCREEN_EXTENT);
+  const [uistate, setuistate] = useRecoilState(ui);
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   useEffect(() => {
     setcalculation({
@@ -18,9 +21,26 @@ export const Stat = () => {
       },
     });
   }, []);
+  const navigate = useNavigate();
+
   return (
     <SimpleGrid spacing={"32px"} cols={small ? 1 : 2}>
-      <SquareInputsHint initialOpen={false} />
+      <SquareInputsHint
+        initialOpen={false}
+        link={
+          <Text
+            sx={{ cursor: "pointer" }}
+            underline
+            size={"xs"}
+            onClick={() => {
+              navigate("/question");
+              setuistate({ ...uistate, drawer: null });
+            }}
+          >
+            Остались вопросы? Вы можете задать из здесь.
+          </Text>
+        }
+      />
       <Stack mt="xl" spacing={"48px"}>
         <Stack spacing={"md"}>
           <NumberInput

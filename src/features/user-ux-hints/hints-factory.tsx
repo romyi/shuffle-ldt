@@ -8,7 +8,15 @@ export const createHint = (
   content: ReactNode,
   icon?: ReactNode
 ) => {
-  return ({ cols, initialOpen }: { cols?: string; initialOpen?: boolean }) => {
+  return ({
+    cols,
+    initialOpen,
+    link,
+  }: {
+    cols?: string;
+    initialOpen?: boolean;
+    link?: ReactNode;
+  }) => {
     const [opened, { open, close }] = useDisclosure(
       typeof initialOpen === "boolean" ? initialOpen : true
     );
@@ -39,6 +47,7 @@ export const createHint = (
                 )}
               </Card.Section>
               <Card.Section p="sm">{content}</Card.Section>
+              <Card.Section p="sm">{link}</Card.Section>
             </Card>
           </motion.div>
         </AnimatePresence>

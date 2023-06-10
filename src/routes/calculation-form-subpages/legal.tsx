@@ -1,16 +1,28 @@
 import { SMALL_SCREEN_EXTENT } from "@const";
 import { StatsInputsHint } from "@features/user-ux-hints";
-import { NumberInput, Select, SimpleGrid, Stack, Switch } from "@mantine/core";
+import {
+  NumberInput,
+  Select,
+  SimpleGrid,
+  Stack,
+  Switch,
+  Text,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { keys } from "@network/keystore";
 import { calculation_state } from "@states/calculation";
+import { ui } from "@states/ui";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export const Legal = () => {
   const [calculation, setcalculation] = useRecoilState(calculation_state);
   const { data, isFetching } = useQuery(keys.static.industries());
+  const [uistate, setuistate] = useRecoilState(ui);
+
+  const navigate = useNavigate();
   const small = useMediaQuery(SMALL_SCREEN_EXTENT);
   useEffect(() => {
     setcalculation({
@@ -23,7 +35,22 @@ export const Legal = () => {
   }, []);
   return (
     <SimpleGrid spacing={"32px"} cols={small ? 1 : 2}>
-      <StatsInputsHint initialOpen={false} />
+      <StatsInputsHint
+        initialOpen={false}
+        link={
+          <Text
+            sx={{ cursor: "pointer" }}
+            underline
+            size={"xs"}
+            onClick={() => {
+              navigate("/question");
+              setuistate({ ...uistate, drawer: null });
+            }}
+          >
+            Остались вопросы? Вы можете задать из здесь.
+          </Text>
+        }
+      />
       <Stack mt="xl" spacing={"48px"}>
         <Select
           required
@@ -70,12 +97,12 @@ export const Legal = () => {
             })
           }
           label="Количество сотрудников"
-          description="от 1 до 5000"
+          description="от 2 до 5000"
           placeholder="200"
           stepHoldDelay={500}
           stepHoldInterval={100}
           max={5000}
-          min={1}
+          min={2}
         />
         <NumberInput
           required

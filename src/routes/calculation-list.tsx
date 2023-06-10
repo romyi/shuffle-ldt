@@ -15,7 +15,9 @@ import {
 import {
   Accordion,
   Button,
+  Card,
   Container,
+  Image,
   LoadingOverlay,
   SimpleGrid,
   Text,
@@ -50,10 +52,39 @@ export const Reports = () => {
                 {!storaged && (
                   <>
                     <InvitationToCalculation />
-                    <Text size={"xs"}>
-                      В 2021 году Москва экспортировала продукцию в 186 стран
-                      мира. Более 30 процентов всего экспорта приходится на
-                      Казахстан, Белоруссию, Китай, Индию, Турцию.
+                    <Card sx={{ gridColumnStart: 1 }}>
+                      <Card.Section p="sm">
+                        <Image src="indmos1.jpg" />
+                      </Card.Section>
+
+                      <Card.Section p="sm">
+                        <Text size={"sm"}>
+                          Москва – крупнейший промышленный регион России. В
+                          нашем городе свою продукцию выпускают более 3500
+                          промышленных предприятий, на которых трудятся свыше
+                          700 тысяч москвичей.
+                        </Text>
+                      </Card.Section>
+                    </Card>
+                    <Card>
+                      <Card.Section p="sm">
+                        <Image src="indmos2.jpg" />
+                      </Card.Section>
+                      <Card.Section p="sm">
+                        <Text size={"sm"}>
+                          Столица следует всем ведущим мировым трендам в области
+                          промышленности. Программа поддержки инвесторов в
+                          реальном секторе экономики действует в Москве с 2016
+                          года.
+                        </Text>
+                      </Card.Section>
+                    </Card>
+                    <Text
+                      sx={{ gridColumnStart: 1 }}
+                      size={"xs"}
+                      color="dimmed"
+                    >
+                      Использованы изображения с портала www.mos.ru
                     </Text>
                   </>
                 )}
@@ -94,18 +125,6 @@ export const Reports = () => {
                         />
                       ))}
                   {(!reports || reports.length === 0) && (
-                    // <Stack maw="220px">
-                    //   <Text mt="xl" size={"sm"}>
-                    //     У вас нет новых расчётов
-                    //   </Text>
-                    //   <Button
-                    //     size={"sm"}
-                    //     variant="outline"
-                    //     onClick={() => navigate("/calculation")}
-                    //   >
-                    //     Создать расчёт
-                    //   </Button>
-                    // </Stack>
                     <Accordion defaultValue={"invitation"}>
                       <Accordion.Item value="invitation">
                         <Accordion.Control>
