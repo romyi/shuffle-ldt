@@ -1,15 +1,23 @@
 import { ControlContent, ReportInfo } from "@components/report-item";
+import { ReportFeedback } from "@features/gather-user-feedback";
 import {
   Accordion,
   Button,
   createStyles,
   Group,
   Indicator,
+  LoadingOverlay,
   Text,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
+import { alarmReport } from "@network/mutations";
+import { calculation_state } from "@states/calculation";
+import { IconAlarm } from "@tabler/icons-react";
+import { useMutation } from "@tanstack/react-query";
 import { Calculation } from "@tyles/calculation";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import { LARGE_SCREEN_EXTENT } from "../../../consts";
 
 const useClasses = createStyles({
@@ -29,6 +37,18 @@ export const CalculationItemDemo: React.FC<{
   const { classes } = useClasses();
   const navigate = useNavigate();
   const handleClick = () => navigate("/user");
+  const calculation = useRecoilValue(calculation_state);
+  const { mutate: report, isLoading: isReporting } = useMutation(alarmReport, {
+    onSuccess: () =>
+      notifications.show({
+        sx: { marginTop: "48px" },
+        title: "Сообщение отправлено",
+        message: "Рассмотрим как можно скорее",
+        color: "pink",
+        icon: <IconAlarm size={16} stroke={1.5} />,
+        autoClose: 4000,
+      }),
+  });
   return (
     <Accordion
       classNames={{ item: classes.item, chevron: classes.chevron }}
@@ -36,7 +56,7 @@ export const CalculationItemDemo: React.FC<{
       variant="separated"
       sx={{ gridColumn: large ? "1/3" : "1/2" }}
     >
-      <Accordion.Item value="demo">
+      <Accordion.Item value="demo" sx={{ position: "relative" }}>
         <Indicator processing>
           <ControlContent
             from={item.from}
@@ -45,6 +65,7 @@ export const CalculationItemDemo: React.FC<{
             date={item.time}
           />
         </Indicator>
+        <LoadingOverlay visible={isReporting} />
         <Accordion.Panel>
           <Group m="4px" fz={"xs"} spacing={"xl"}>
             <ReportInfo>
@@ -69,6 +90,7 @@ export const CalculationItemDemo: React.FC<{
             >
               Подтвердить e-mail и загрузить PDF отчет
             </Button>
+            <ReportFeedback report={report} item={calculation.snapshot} />
           </Group>
         </Accordion.Panel>
       </Accordion.Item>
